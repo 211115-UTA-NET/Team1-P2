@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BANKED!</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="BankedBase.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:ital,wght@1,500&display=swap');
+    </style>
+</head>
+
+<body>
+    <p id ="TitleBar">BANKED</p>
+
+    <div id="FormDisplay">
+        <p>
+            Welcome to Banked<br>
+            savings planner!
+        </p>
+
+        <form id="FormItems">
+            <input type="text" id="username" name="username" placeholder="Username" minlength="5">
+            <br>
+            <input type="password" id="password" name="password" placeholder="Password" minlength="8">
+            <br>
+            <input type="submit" id="login" value="Login">
+        </form>
+
+        <p id="NewAccount">First Time? <a href="SOMEWHERE">Sign-up</a></p>
+    </div>
+
+    <div id="FormDisplay">
+        <p>
+            Fill out the<br>
+            information below!
+        </p>
+
+        <form id="FormItems">
+            <input type="text" id="fname" name="fname" placeholder="First Name" minlength="1">
+            <br>
+            <input type="text" id="lname" name="lname" placeholder="Last Name" minlength="1">
+            <br>
+            <input type="text" id="username" name="username" placeholder="Username" minlength="5">
+            <br>
+            <input type="password" id="password" name="password" placeholder="Password (8+ Length)" minlength="8">
+            <br>
+            <input type="submit" id="newaccount" value="Create Account">
+        </form>
+    </div>
+</body>
+</html>
