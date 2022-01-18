@@ -1,0 +1,9 @@
+How to get Typescript working:
+
+1. node -v //get node Version
+2. npm -v //get npm version
+3. Go to working directory
+4. npm init //Create a package of the directory
+5. npm install typescript --save-dev //Installs the typescript
+6. create your file.ts
+7. npx tsc (filename).ts //Creates JavaScript of your file
