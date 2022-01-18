@@ -25,3 +25,9 @@ C:\Users\schwe\Revature\Team1-P2\WebAPI\obj\Debug\net6.0\WebAPI.dll
 C:\Users\schwe\Revature\Team1-P2\WebAPI\obj\Debug\net6.0\ref\WebAPI.dll
 C:\Users\schwe\Revature\Team1-P2\WebAPI\obj\Debug\net6.0\WebAPI.pdb
 C:\Users\schwe\Revature\Team1-P2\WebAPI\obj\Debug\net6.0\WebAPI.genruntimeconfig.cache
+C:\Users\schwe\Revature\Team1-P2\WebAPI\bin\Debug\net6.0\System.Data.SqlClient.dll
+C:\Users\schwe\Revature\Team1-P2\WebAPI\bin\Debug\net6.0\runtimes\win-arm64\native\sni.dll
+C:\Users\schwe\Revature\Team1-P2\WebAPI\bin\Debug\net6.0\runtimes\win-x64\native\sni.dll
+C:\Users\schwe\Revature\Team1-P2\WebAPI\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
+C:\Users\schwe\Revature\Team1-P2\WebAPI\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\schwe\Revature\Team1-P2\WebAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
