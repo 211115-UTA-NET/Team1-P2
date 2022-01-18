@@ -8,6 +8,5 @@
         double ExpenseAmount { get; set; }
         string? ExpenseFrequency { get; set; }
         DateTime? ExpenseEnding { get; set; }
-        int Priority { get; set; }
     }
 }
