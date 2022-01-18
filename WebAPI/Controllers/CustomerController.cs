@@ -18,13 +18,13 @@ namespace WebAPI.Controllers
 
         //Getting a specific customer from the database
         [HttpGet("{username}")]
-        public List<User_Dto> Get(string user)
+        public List<User_Dto> GetExpenses(string user)
         {
 
             string connect = _configuration.GetSection("ConnectionString").GetSection("BankedDB").Value;
             using SqlConnection connection = new(connect);
-            return LoginService.GetUser(user, connection);
-            -
+            //return LoginService.GetUser(user, connection); change method to proper service
+            
 
         }
     }
