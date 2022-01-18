@@ -21,10 +21,10 @@ namespace WebAPI.Controllers
         public List<User_Dto> Get(string user)
         {
 
-            string connect = _configuration.GetSection("ConnectionString").GetSection("PrintShopDB").Value;
+            string connect = _configuration.GetSection("ConnectionString").GetSection("BankedDB").Value;
             using SqlConnection connection = new(connect);
             return LoginService.GetUser(user, connection);
-
+            -
 
         }
     }
