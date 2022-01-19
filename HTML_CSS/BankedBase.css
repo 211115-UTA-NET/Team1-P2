@@ -8,7 +8,7 @@
     background-color: rgb(20, 75, 20);
 }
 
-#FormDisplay
+.Display
 {
     font-family: 'Heebo', sans-serif;
     font-weight: bolder;
@@ -16,15 +16,24 @@
     text-align: center;
     background-color: lightgreen;
     border-radius: 20px;
-    width: 350px;
+    width: 400px;
     padding: 25px;
     margin: 25px;
 }
 
-#FormItems input
+.FormItems input
 {
     width: 220px;
     height: 30px;
+    font-size: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.ManagerItems input
+{
+    width: 155px;
+    height: 35px;
     font-size: 20px;
     border-radius: 5px;
     text-align: center;
@@ -34,4 +43,23 @@
 {
     font-weight: lighter;
     font-size: 25px;
+}
+
+.FormSubtext
+{
+    font-weight: lighter;
+    font-size: 25px;
+}
+
+select
+{
+    text-align: center;
+    width: 200px;
+    font-size: 20px;
+}
+
+/* Toggle this on and off if user selected "Other" */
+#CreateOtherExpense
+{
+    display: none;
 }
