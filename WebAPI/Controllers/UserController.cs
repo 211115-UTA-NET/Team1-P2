@@ -8,22 +8,22 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomersController : ControllerBase
+    public class UserController : ControllerBase
     {
         private readonly IConfiguration _configuration;
-        public CustomersController(IConfiguration configuration)
+        public UserController(IConfiguration configuration)
         {
             _configuration = configuration;
         }
 
         //Getting a specific customer from the database
         [HttpGet("{username}")]
-        public List<User_Dto> GetExpenses(string user)
+        public List<User_Dto> GetUser(string user)
         {
 
             string connect = _configuration.GetSection("ConnectionString").GetSection("BankedDB").Value;
             using SqlConnection connection = new(connect);
-            //return LoginService.GetUser(user, connection); change method to proper service
+            return LoginService.GetUser(user, connection);
             
 
         }
