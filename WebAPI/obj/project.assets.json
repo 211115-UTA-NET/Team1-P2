@@ -738,19 +738,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\schwe\\.nuget\\packages\\": {}
+    "C:\\Users\\Kyler Dennis\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\schwe\\Revature\\Team1-P2\\WebAPI\\WebAPI.csproj",
+      "projectUniqueName": "D:\\Revature\\Team1-P2\\WebAPI\\WebAPI.csproj",
       "projectName": "WebAPI",
-      "projectPath": "C:\\Users\\schwe\\Revature\\Team1-P2\\WebAPI\\WebAPI.csproj",
-      "packagesPath": "C:\\Users\\schwe\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\schwe\\Revature\\Team1-P2\\WebAPI\\obj\\",
+      "projectPath": "D:\\Revature\\Team1-P2\\WebAPI\\WebAPI.csproj",
+      "packagesPath": "C:\\Users\\Kyler Dennis\\.nuget\\packages\\",
+      "outputPath": "D:\\Revature\\Team1-P2\\WebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\schwe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Kyler Dennis\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
