@@ -145,15 +145,15 @@ namespace WebAPI.Logic
         {
             List<WeeklySpendings_Dtos> monthlyExpenses = new();
 
-            List<Double> incomeSum = CategoryCalculator(income);
+            //List<Double> incomeSum = CategoryCalculator(income);
             List<Double> loansSum = CategoryCalculator(loans);
             List<Double> savingsSum = CategoryCalculator(savings);
             List<Double> expensesSum = CategoryCalculator(expenses);
 
-            double wk1Total = incomeSum[0] + loansSum[0] + savingsSum[0] + expensesSum[0];
-            double wk2Total = incomeSum[1] + loansSum[1] + savingsSum[1] + expensesSum[1];
-            double wk3Total = incomeSum[2] + loansSum[2] + savingsSum[2] + expensesSum[2];
-            double wk4Total = incomeSum[3] + loansSum[3] + savingsSum[3] + expensesSum[3];
+            double wk1Total = (loansSum[0] + savingsSum[0] + expensesSum[0]); // - incomeSum[0];
+            double wk2Total = (loansSum[1] + savingsSum[1] + expensesSum[1]); // - incomeSum[1];
+            double wk3Total = (loansSum[2] + savingsSum[2] + expensesSum[2]); // - incomeSum[2];
+            double wk4Total = (loansSum[3] + savingsSum[3] + expensesSum[3]); // - incomeSum[3];
 
             monthlyExpenses.Add(new(wk1Total, wk2Total, wk3Total, wk4Total));
 
