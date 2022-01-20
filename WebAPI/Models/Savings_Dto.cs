@@ -2,11 +2,11 @@
 {
     public class Savings_Dto
     {
-        int Id { get; set; }
-        int UserPassword { get; set; }
-        string? SavingsName { get; set; }
-        double SavingsAmount { get; set; }
-        double SavingsInterest { get; set; }
-        double SavingsAddedMonthly { get; set; }
+        public int Id { get; set; }
+        public int UserPassword { get; set; }
+        public string? SavingsName { get; set; }
+        public double SavingsAmount { get; set; }
+        public double SavingsInterest { get; set; }
+        public double SavingsAddedMonthly { get; set; }
     }
 }

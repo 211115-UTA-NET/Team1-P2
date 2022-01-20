@@ -2,10 +2,10 @@
 {
     public class Income_Dto
     {
-        int Id { get; set; }
-        int UserPasswordsId { get; set; }
-        int IncomeOptions { get; set; }
-        double IncomeAmount { get; set; }
-        string? PaySchedule { get; set; }
+        public int Id { get; set; }
+        public int UserPasswordsId { get; set; }
+        public int IncomeOptions { get; set; }
+        public double IncomeAmount { get; set; }
+        public int PaySchedule { get; set; }
     }
 }
