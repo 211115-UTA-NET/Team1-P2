@@ -151,9 +151,9 @@ namespace WebAPI.Logic
             List<Double> expensesSum = CategoryCalculator(expenses);
 
             double wk1Total = (loansSum[0] + savingsSum[0] + expensesSum[0]); // - incomeSum[0];
-            double wk2Total = (loansSum[1] + savingsSum[1] + expensesSum[1]); // - incomeSum[1];
-            double wk3Total = (loansSum[2] + savingsSum[2] + expensesSum[2]); // - incomeSum[2];
-            double wk4Total = (loansSum[3] + savingsSum[3] + expensesSum[3]); // - incomeSum[3];
+            double wk2Total = (loansSum[1] + savingsSum[1] + expensesSum[1]) + wk1Total; // - incomeSum[1];
+            double wk3Total = (loansSum[2] + savingsSum[2] + expensesSum[2]) + wk2Total; // - incomeSum[2];
+            double wk4Total = (loansSum[3] + savingsSum[3] + expensesSum[3]) + wk3Total; // - incomeSum[3];
 
             monthlyExpenses.Add(new(wk1Total, wk2Total, wk3Total, wk4Total));
 
