@@ -1,4 +1,4 @@
-﻿using WebAPI.Models;
+using WebAPI.Models;
 
 namespace WebAPI.Logic
 {
@@ -53,12 +53,12 @@ namespace WebAPI.Logic
             {
                 if (record.PaySchedule == 1)
                 {
-                    double incomeAmount = record.IncomeAmount;
+                    decimal incomeAmount = record.IncomeAmount;
                     monthlyIncome.Add(new(incomeAmount, incomeAmount, incomeAmount, incomeAmount));
                 }
                 else if (record.PaySchedule == 2)
                 {
-                    double incomeAmount = record.IncomeAmount;
+                    decimal incomeAmount = record.IncomeAmount;
                     monthlyIncome.Add(new(0, incomeAmount, 0, incomeAmount));
                 }
             }
@@ -73,11 +73,11 @@ namespace WebAPI.Logic
             foreach (var record in loans)
             {
                 //Final loan amount after interest added and monthly payment payed | Implement later
-                //double loanIncrease = record.LoanAmount * record.LoanInterest;
-                //double loanAmount = record.LoanAmount + loanIncrease;
-                //double finalAmount = loanAmount - record.MonthlyPayments;
+                //decimal loanIncrease = record.LoanAmount * record.LoanInterest;
+                //decimal loanAmount = record.LoanAmount + loanIncrease;
+                //decimal finalAmount = loanAmount - record.MonthlyPayments;
 
-                double monthlyPayment = record.MonthlyPayments;
+                decimal monthlyPayment = record.MonthlyPayments;
 
                 monthlyLoans.Add(new(monthlyPayment, 0, 0, 0));
             }
@@ -92,11 +92,11 @@ namespace WebAPI.Logic
             foreach (var record in savings)
             {
                 //Final savings amount after interest added and monthly addition | Implement later
-                //double savingsIncrease = record.SavingsAmount * record.SavingsInterest;
-                //double savingsAmount = record.SavingsAmount + savingsIncrease;
-                //double finalAmount = savingsAmount + record.SavingsAddedMonthly;
+                //decimal savingsIncrease = record.SavingsAmount * record.SavingsInterest;
+                //decimal savingsAmount = record.SavingsAmount + savingsIncrease;
+                //decimal finalAmount = savingsAmount + record.SavingsAddedMonthly;
 
-                double monthlyAddition = record.SavingsAddedMonthly;
+                decimal monthlyAddition = record.SavingsAddedMonthly;
 
                 monthlySavings.Add(new(monthlyAddition, 0, 0, 0));
             }
@@ -112,28 +112,28 @@ namespace WebAPI.Logic
             {
                 if (record.ExpenseFrequency == 1)
                 {
-                    double expenseAmount = record.ExpenseAmount;
+                    decimal expenseAmount = record.ExpenseAmount;
                     monthlyExpenses.Add(new(expenseAmount, 0, 0, 0));
                 }
                 else if (record.ExpenseFrequency == 2)
                 {
-                    double expenseAmount = record.ExpenseAmount;
+                    decimal expenseAmount = record.ExpenseAmount;
                     monthlyExpenses.Add(new(expenseAmount, expenseAmount, 0, 0));
                 }
                 else if (record.ExpenseFrequency == 3)
                 {
-                    double expenseAmount = record.ExpenseAmount;
+                    decimal expenseAmount = record.ExpenseAmount;
                     monthlyExpenses.Add(new(expenseAmount, expenseAmount, expenseAmount, 0));
                 }
                 else if (record.ExpenseFrequency == 4)
                 {
-                    double expenseAmount = record.ExpenseAmount;
+                    decimal expenseAmount = record.ExpenseAmount;
                     monthlyExpenses.Add(new(expenseAmount, expenseAmount, expenseAmount, expenseAmount));
                 }
                 else
                 {
-                    double expenseTotal = record.ExpenseAmount * record.ExpenseFrequency;
-                    double expenseWeekly = expenseTotal / 4;
+                    decimal expenseTotal = record.ExpenseAmount * record.ExpenseFrequency;
+                    decimal expenseWeekly = expenseTotal / 4;
                     monthlyExpenses.Add(new(expenseWeekly, expenseWeekly, expenseWeekly, expenseWeekly));
                 }
             }
@@ -145,24 +145,24 @@ namespace WebAPI.Logic
         {
             List<WeeklySpendings_Dtos> monthlyExpenses = new();
 
-            //List<Double> incomeSum = CategoryCalculator(income);
-            List<Double> loansSum = CategoryCalculator(loans);
-            List<Double> savingsSum = CategoryCalculator(savings);
-            List<Double> expensesSum = CategoryCalculator(expenses);
+            //List<decimal> incomeSum = CategoryCalculator(income);
+            List<decimal> loansSum = CategoryCalculator(loans);
+            List<decimal> savingsSum = CategoryCalculator(savings);
+            List<decimal> expensesSum = CategoryCalculator(expenses);
 
-            double wk1Total = (loansSum[0] + savingsSum[0] + expensesSum[0]); // - incomeSum[0];
-            double wk2Total = (loansSum[1] + savingsSum[1] + expensesSum[1]) + wk1Total; // - incomeSum[1];
-            double wk3Total = (loansSum[2] + savingsSum[2] + expensesSum[2]) + wk2Total; // - incomeSum[2];
-            double wk4Total = (loansSum[3] + savingsSum[3] + expensesSum[3]) + wk3Total; // - incomeSum[3];
+            decimal wk1Total = (loansSum[0] + savingsSum[0] + expensesSum[0]); // - incomeSum[0];
+            decimal wk2Total = (loansSum[1] + savingsSum[1] + expensesSum[1]) + wk1Total; // - incomeSum[1];
+            decimal wk3Total = (loansSum[2] + savingsSum[2] + expensesSum[2]) + wk2Total; // - incomeSum[2];
+            decimal wk4Total = (loansSum[3] + savingsSum[3] + expensesSum[3]) + wk3Total; // - incomeSum[3];
 
             monthlyExpenses.Add(new(wk1Total, wk2Total, wk3Total, wk4Total));
 
             return monthlyExpenses;
         }
 
-        private List<Double> CategoryCalculator(List<WeeklySpendings_Dtos> category)
+        private List<decimal> CategoryCalculator(List<WeeklySpendings_Dtos> category)
         {
-            List<Double> monthlyTotals = new();
+            List<decimal> monthlyTotals = new();
 
             foreach (var record in category)
             {

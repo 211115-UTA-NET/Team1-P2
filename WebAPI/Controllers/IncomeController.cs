@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
 using WebAPI.Logic;
 using WebAPI.Models;
@@ -20,7 +20,7 @@ namespace WebAPI.Controllers
         public List<Income_Dto> GetIncome(int userId)
         {
 
-            string connect = _configuration.GetSection("ConnectionString").GetSection("BankedDB").Value;
+            string connect = _configuration.GetSection("ConnectionStrings").GetSection("BankedDB").Value;
             using SqlConnection connection = new(connect);
 
             return IncomeService.GetIncome(userId, connection);
@@ -30,7 +30,7 @@ namespace WebAPI.Controllers
         [HttpPost]
         public async void PostIncome(List<Income_Dto> income)
         {
-            string connect = _configuration.GetSection("ConnectionString").GetSection("PrintShopDB").Value;
+            string connect = _configuration.GetSection("ConnectionStrings").GetSection("PrintShopDB").Value;
             await using SqlConnection connection = new(connect);
             IncomeService.InputIncome(income, connection);
         }

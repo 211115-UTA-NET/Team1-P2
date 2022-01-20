@@ -65,3 +65,25 @@ MonthlyPayments Money default(0)
 )
 
 
+insert [dbo].[UserPasswords](	[UserName] ,	[UserPassword] ,	FirstName ,	LastName ) values ('shaul','1234','shaul','stavi')
+
+insert dbo.Priorities (priorityName) values ('Very Important'),
+                        ('Importent'),
+                        ('Less Importent')
+
+
+insert ExpenseOptions (ExpenseName,priorityId) values
+('Home Rent',(select id from Priorities where priorityName='Very Important')),
+('Cellular Bill',(select id from Priorities where priorityName='Important'))
+
+insert Expenses
+(UserPasswordsID ,ExpenseOptionsID  ,ExpenseAmount ,EspenseFrequency  )
+values
+((select id from [UserPasswords] where username='shaul'),
+(select ID from ExpenseOptions where ExpenseName='Home Rent'),250 ,1 ),
+((select id from [UserPasswords] where username='shaul'),
+(select ID from ExpenseOptions where ExpenseName='Cellular Bill'),25/4 ,1 )
+
+
+
+select * from Expenses where userId=1 
