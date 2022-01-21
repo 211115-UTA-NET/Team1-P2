@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { NgChartsModule } from 'ng2-charts';
 
 import { AppComponent } from './app.component';
@@ -20,6 +21,7 @@ import { TopBarComponent } from './top-bar/top-bar.component';
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     NgChartsModule,
     RouterModule.forRoot([
       { path: '', component: SigninPageComponent },
