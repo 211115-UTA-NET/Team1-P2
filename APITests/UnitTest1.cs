@@ -9,6 +9,14 @@ namespace APITests
     public class UnitTest1
     {
         [Fact]
+        public void workingTest()
+        {
+            bool a = true;
+
+            Assert.Equal(true, a);
+        }
+
+        [Fact]
         public void TestMethod1()
         {
             List<WeeklySpendings_Dtos> Test = new();
