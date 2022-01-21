@@ -19,6 +19,10 @@ builder.Services.AddSingleton<IExpensesRepository>
 builder.Services.AddSingleton<IIncomeRepository>
   (sp => new IncomeService(connectionString, sp.GetRequiredService<ILogger<IncomeService>>()));
 
+
+builder.Services.AddSingleton<ILoanRepository>
+  (sp => new LoanService(connectionString, sp.GetRequiredService<ILogger<LoanService>>()));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -88,13 +88,6 @@ values
 (select ID from ExpenseOptions where ExpenseName='Cellular Bill'),25/4 ,1 )
 
 
-SELECT TOP (1000) [ID]
-      ,[UserPasswordsID]
-      ,[IncomeOptionsID]
-      ,[IncomeAmount]
-      ,[PaySchedule]
-  FROM [dbo].[Income]
-
   insert IncomeOptions (IncomeName,priorityId) values
 ('Salary',(select id from Priorities where priorityName='Important')),
 ('Home Rent',(select id from Priorities where priorityName='Important'))
@@ -107,6 +100,15 @@ SELECT TOP (1000) [ID]
   (select ID from IncomeOptions where IncomeName='Home Rent'), 300,1 )
   
   
+  insert Loans (UserPasswordsID ,LoanName ,LoanAmount ,LoanInterest ,MonthlyPayments) values
+  ((select id from [UserPasswords] where username='shaul'),
+  'Mortgage',
+  100000,
+  0.04,
+  100000*0.04/12)
 
 
 
+
+
+--INSERT INTO dbo.Expenses (UserPasswordsID,ExpenseOptionsID,ExpenseAmount,EspenseFrequency,ExpenseEnding) Values (1,1,1000,1, '21/01/2022 01:53:00')
