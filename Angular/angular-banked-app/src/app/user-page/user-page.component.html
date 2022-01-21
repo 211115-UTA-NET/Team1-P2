@@ -1,0 +1,97 @@
+<!-- Income options (View or Create) -->
+<div class="Display" style="float: left">
+    <p>
+        Income Manager
+    </p>
+
+    <div class="ManagerItems">
+        <input type="button" id="viewIncome" value="My Income">
+        <input type="button" id="createIncome" value="New Income">
+    </div>
+</div>
+
+<!-- Loan options (View or Create) -->
+<div class="Display" style="float: right">
+    <p>
+        Loan Manager
+    </p>
+
+    <div class="ManagerItems">
+        <input type="button" id="viewLoan" value="My Loans">
+        <input type="button" id="createLoan" value="New Loan">
+    </div>
+</div>
+
+<!-- Savings options (View or Create) -->
+<div class="Display" style="float: left">
+    <p>
+        Savings Manager
+    </p>
+
+    <div class="ManagerItems">
+        <input type="button" id="viewSavings" value="My Savings">
+        <input type="button" id="createSavings" value="New Savings">
+    </div>
+</div>
+
+<!-- Expense options (View or Create) -->
+<div class="Display" style="float: left">
+    <p>
+        Expense Manager
+    </p>
+
+    <div class="ManagerItems">
+        <input type="button" id="viewExpense" value="My Expenses">
+        <input type="button" id="createExpense" value="New Expense">
+    </div>
+</div>
+
+<span style="float: right">
+    <div>
+        <title>JavaScript Line Chart</title>
+        <script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-base.min.js"></script>
+        <style type="text/css">
+            html, body, #container { 
+            width: 400px; height: 400px; margin: 0; padding: 0; 
+            } 
+        </style>
+    </div>
+    <div>
+        <div id="container"></div>
+        <script>
+            function getData() {
+                return [
+                    ['Week 1',50],
+                    ['Week 2',110],
+                    ['Week 3',20],
+                    ['Week 4',90]
+                ];
+            }
+
+            // create a data set on our data
+            var dataSet = anychart.data.set(getData());
+
+            // map data for the line chart,
+            // take x from the zero column and value from the first column
+            var seriesData = dataSet.mapAs({ x: 0, value: 1 });
+
+            // create a line chart
+            var chart = anychart.line();
+
+            // configure the chart title text settings
+            chart.title('Expected Monthly Spendings');
+
+            // set the y axis title
+            chart.yAxis().title('Summed Expenses');
+
+            // create a line series with the mapped data
+            var lineChart = chart.line(seriesData);
+
+            // set the container id for the line chart
+            chart.container('container');
+
+            // draw the line chart
+            chart.draw();
+        </script>
+    </div>
+</span>

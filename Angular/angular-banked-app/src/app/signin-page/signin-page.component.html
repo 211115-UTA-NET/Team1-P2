@@ -1,0 +1,40 @@
+<div class="Display" style="float: left" *ngIf="!show">
+    <p>
+        Welcome to Banked<br>
+        savings planner!
+    </p>
+  
+    <p><a [routerLink]="['/userpage']">UserPage</a></p>
+  
+    <form class="FormItems">
+        <input type="text" id="username" name="username" placeholder="Username" minlength="5">
+        <br>
+        <input type="password" id="password" name="password" placeholder="Password" minlength="8">
+        <br>
+        <input type="submit" id="login" value="Login">
+    </form>
+  
+    <p>First Time? <a class="clickableText" (click)="toggleForm()">Sign-up</a></p>
+  </div>
+  
+  <!-- Create new account -->
+  <div class="Display" style="Float: right" *ngIf="show">
+    <p>
+        Lets get your<br>
+        account setup!
+    </p>
+  
+    <form class="FormItems">
+        <input type="text" id="fname" name="fname" placeholder="First Name" minlength="1">
+        <br>
+        <input type="text" id="lname" name="lname" placeholder="Last Name" minlength="1">
+        <br>
+        <input type="text" id="username" name="username" placeholder="Username" minlength="5">
+        <br>
+        <input type="password" id="password" name="password" placeholder="Password (8+ Length)" minlength="8">
+        <br>
+        <input type="submit" id="newaccount" value="Create Account">
+    </form>
+  
+    <p>Return To <a class="clickableText" (click)="toggleForm()">Login Page</a></p>
+  </div>
