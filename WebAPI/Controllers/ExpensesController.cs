@@ -39,11 +39,11 @@ namespace WebAPI.Controllers
         }
         //Need to create list value to add as input parameter containing all data required for expense input
         [HttpPost]
-        public async void PostExpense(List<Expenses_Dto> expense)
+        public async Task PostExpense(List<Expenses_Dto> expense)
         {
-            string connect = _configuration.GetSection("ConnectionStrings").GetSection("PrintShopDB").Value;
-            await using SqlConnection connection = new(connect);
-            ExpensesService.InputExpense(expense, connection);
+      //string connect = _configuration.GetSection("ConnectionStrings").GetSection("PrintShopDB").Value;
+      //await using SqlConnection connection = new(connect);
+      await _repository.InputExpense(expense);
         }
     }
 }

@@ -21,7 +21,8 @@ unique (priorityName)
 CREATE TABLE [dbo].IncomeOptions(
 [ID] [int] Identity (1,1) Primary key,
 IncomeName nvarchar(50) ,
-priorityId int Foreign key references Priorities (ID) 
+priorityId int Foreign key references Priorities (ID),
+unique (IncomeName)
 )
 CREATE TABLE [dbo].Income(
 [ID] [int] Identity (1,1) Primary key,
@@ -34,7 +35,8 @@ PaySchedule int
 CREATE TABLE [dbo].ExpenseOptions(
 [ID] [int] Identity (1,1) Primary key,
 ExpenseName nvarchar(50) ,
-priorityId int Foreign key references Priorities (ID) 
+priorityId int Foreign key references Priorities (ID),
+unique (ExpenseName)
 )
 CREATE TABLE [dbo].Expenses(
 [ID] [int] Identity (1,1) Primary key,
@@ -76,6 +78,7 @@ insert ExpenseOptions (ExpenseName,priorityId) values
 ('Home Rent',(select id from Priorities where priorityName='Very Important')),
 ('Cellular Bill',(select id from Priorities where priorityName='Important'))
 
+
 insert Expenses
 (UserPasswordsID ,ExpenseOptionsID  ,ExpenseAmount ,EspenseFrequency  )
 values
@@ -85,5 +88,25 @@ values
 (select ID from ExpenseOptions where ExpenseName='Cellular Bill'),25/4 ,1 )
 
 
+SELECT TOP (1000) [ID]
+      ,[UserPasswordsID]
+      ,[IncomeOptionsID]
+      ,[IncomeAmount]
+      ,[PaySchedule]
+  FROM [dbo].[Income]
 
-select * from Expenses where userId=1 
+  insert IncomeOptions (IncomeName,priorityId) values
+('Salary',(select id from Priorities where priorityName='Important')),
+('Home Rent',(select id from Priorities where priorityName='Important'))
+
+
+  insert Income  ([UserPasswordsID],[IncomeOptionsID],[IncomeAmount],[PaySchedule])
+  values ((select id from [UserPasswords] where username='shaul'),
+  (select ID from IncomeOptions where IncomeName='Salary'), 400,1) ,
+  ((select id from [UserPasswords] where username='shaul'),
+  (select ID from IncomeOptions where IncomeName='Home Rent'), 300,1 )
+  
+  
+
+
+

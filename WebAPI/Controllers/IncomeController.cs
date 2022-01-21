@@ -25,7 +25,7 @@ namespace WebAPI.Controllers
 
 
     //Getting a specific customer from the database
-    [HttpGet("{id}")]
+    [HttpGet("{userId}")]
         public async Task<List<Income_Dto>> GetIncome(int userId)
         {
 
@@ -39,9 +39,10 @@ namespace WebAPI.Controllers
         [HttpPost]
         public async void PostIncome(List<Income_Dto> income)
         {
-            string connect = _configuration.GetSection("ConnectionStrings").GetSection("PrintShopDB").Value;
-            await using SqlConnection connection = new(connect);
-            IncomeService.InputIncome(income, connection);
+      //string connect = _configuration.GetSection("ConnectionStrings").GetSection("PrintShopDB").Value;
+      //await using SqlConnection connection = new(connect);
+        await _repository.InputIncome(income);
+      
         }
     }
 }
