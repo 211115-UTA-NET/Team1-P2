@@ -1,6 +1,7 @@
 using WebAPI.Interfaces;
 using WebAPI.Logic;
 using Microsoft.Extensions.Configuration;
+using WebAPI.DataStorage;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IExpensesRepository>
   (sp => new ExpensesService(connectionString, sp.GetRequiredService<ILogger<ExpensesService>>()));
 
+builder.Services.AddSingleton<IIncomeRepository>
+  (sp => new IncomeService(connectionString, sp.GetRequiredService<ILogger<IncomeService>>()));
 
 var app = builder.Build();
 

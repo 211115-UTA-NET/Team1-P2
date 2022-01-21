@@ -1,13 +1,24 @@
-﻿
+
 using System.Diagnostics.CodeAnalysis;
 using System.Data.SqlClient;
 using WebAPI.Models;
-
+using WebAPI.DataStorage;
+using Microsoft.Extensions.Logging;
 namespace WebAPI.Logic
 {
-    public class IncomeService
+    public class IncomeService: IIncomeRepository
+  {
+
+    private readonly string _connectionString;
+    private readonly ILogger<IIncomeRepository> _logger;
+
+    public IncomeService(string connectionString, ILogger<IncomeService> logger)
     {
-        static List<Income_Dto> expenses { get; }
+      _connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
+      _logger = logger;
+    }
+
+    static List<Income_Dto> expenses { get; }
         static IncomeService()
         {
             expenses = new List<Income_Dto>
@@ -18,14 +29,16 @@ namespace WebAPI.Logic
         }
 
         //Get Individual Userinfo based on username input
-        public static List<Income_Dto> GetIncome(int userId, SqlConnection connection)
+        public async Task<List<Income_Dto>> GetIncome(int userId)
         {
             List<Income_Dto> currentItem = new();
 
             string sql = $"--ENTER INSERT COMMAND--"; //use userId to query for expense items
 
-            connection.Open();
-            using SqlCommand command = new SqlCommand(sql, connection);
+      using SqlConnection connection = new(_connectionString);
+      await connection.OpenAsync();
+
+      using SqlCommand command = new SqlCommand(sql, connection);
             using SqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
