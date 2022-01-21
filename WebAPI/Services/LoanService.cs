@@ -34,7 +34,7 @@ namespace WebAPI.Logic
     public async Task<List<Loans_Dto>> GetLoans(int userId)
     {
       List<Loans_Dto> currentItem = new();
-      string sql = $"select * from Loans"; //use userId to query for expense items
+      string sql = $"select * from Loans where UserPasswordsID={userId}"; //use userId to query for expense items
       using SqlConnection connection = new(_connectionString);
       await connection.OpenAsync();
 
