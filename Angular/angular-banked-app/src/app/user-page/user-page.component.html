@@ -41,7 +41,7 @@
     </p>
 
     <div class="ManagerItems">
-        <input type="button" id="viewExpense" value="My Expenses">
+        <input type="button" id="viewExpense" value="My Expenses" (onClick)="getExpenses()">
         <input type="button" id="createExpense" value="New Expense">
     </div>
 </div>
@@ -95,3 +95,63 @@
         </script>
     </div>
 </span>
+
+<!-- Create new expense -->
+<div class="Display" style = "float: right">
+    <p>
+        Enter your new<br>
+        expense information!
+    </p>
+
+    <form class="FormItems">
+        <div class="FormSubtext">
+            <label for="expenseName">Choose an expense:</label>
+            <br>
+            <select id="expenseName" name="expenseName">
+                <option>[Expenses]</option>
+                <option value="Housing/Rent">Housing/Rent</option>
+                <option value="Gas/Travel">Gas/Travel</option>
+                <option value="Insurance">Insurance</option>
+                <option value="Groceries">Groceries</option>
+                <option value="Utility">Utility</option>
+                <option value="Phone">Phone</option>
+                <option value="Pets">Pets</option>
+                <option value="Personal">Personal</option>
+                <option value="Memberships/Subscriptions">Memberships/Subscriptions</option>
+                <option value="Internet">Internet</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <div id="CreateOtherExpense">
+                <br>Enter the name of<br>
+                your other expense:
+                <input type="text" id="otherExpense" name="otherExpense" placeholder="Expense Name" minlength="1">
+            </div>
+        </div>
+        <div class="FormSubtext">
+            <br>How frequent does<br>
+            this expense occur?
+        </div>
+        <input type="number" id="expenseFrequency" name="expenseFrequency" placeholder="(Monthy)" min="1">
+        <br>
+        <div class="FormSubtext">
+            <br>How important is<br>
+            this expense?<br>
+            [1<sub><small>Very</small></sub> - 5<sub><small>Slightly</small></sub>]
+        </div>
+        <input type="number" id="expenseSeverity" name="expenseSeverity" placeholder="[1 - 5]" min="1" max="5">
+        <br><br>
+        <input type="submit" id="newExpense" value="Create expense" type="reset">
+    </form>
+</div>
+
+<!-- Display list of user expenses -->
+<ul class="expenseList">
+    <li *ngFor="let expense of expenses">
+        <p>=========================</p>
+        <p>ID: {{expense.id}}</p>
+        <p>Name: {{expense.name}}</p>
+        <p>Frequency: {{expense.frequency}}</p>
+        <p>Priority: {{expense.priority}}</p>
+    </li>
+</ul>

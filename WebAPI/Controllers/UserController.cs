@@ -27,8 +27,20 @@ namespace WebAPI.Controllers
 
       //string connect = _configuration.GetSection("ConnectionString").GetSection("BankedDB").Value;
       //using SqlConnection connection = new(connect);
-            return await _repository.GetUser(username, password);
+
+
+      return await _repository.GetUser(username, password);
 
     }
+
+    
+    [HttpPost]
+    public async Task<ActionResult<int>> PostUser(User_Dto user)
+    {
+      return await _repository.PostUser(user);
+
     }
+
+
+  }
 }

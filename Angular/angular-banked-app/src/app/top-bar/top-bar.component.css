@@ -6,4 +6,6 @@
     -webkit-text-stroke: 1px lightgreen;
     -webkit-text-fill-color: rgb(20, 75, 20);
     background-color: rgb(20, 75, 20);
+    position: sticky;
+    top: 0px;
 }

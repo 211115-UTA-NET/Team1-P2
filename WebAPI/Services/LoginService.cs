@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using WebAPI.Models;
 using WebAPI.DataStorage;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Logic
 {
@@ -28,8 +29,35 @@ namespace WebAPI.Logic
             };
         }
 
-        //Get Individual Userinfo based on username input
-        public async Task<User_Dto> GetUser(string username, string password) 
+
+    public async Task<ActionResult<int>> PostUser(User_Dto user)
+    {
+
+      int id=0;
+      if (user is not null)
+      {
+        string sql = $"INSERT INTO dbo.UserPasswords " +
+          $"(username,UserPassword,FirstName,LastName) OUTPUT INSERTED.Id Values "; //income.Id(0) for single object id input
+          sql = sql + "(" +
+              "'" + user.Username + "'," +
+              "'" + user.Password + "'," +
+          "'" +  user.FirstName + "'," +
+          "'" + user.LastName + "'" + ") ";
+
+
+        using SqlConnection connection = new(_connectionString);
+        await connection.OpenAsync();
+        using SqlCommand command = new(sql, connection);
+        id = (int)command.ExecuteScalar();
+        //command.ExecuteNonQuery();
+        await connection.CloseAsync();
+      }
+      return id;
+    }
+
+
+    //Get Individual Userinfo based on username input
+    public async Task<User_Dto> GetUser(string username, string password) 
         {
         User_Dto user=new();
 

@@ -7,12 +7,12 @@
     <p><a [routerLink]="['/userpage']">UserPage</a></p>
   
     <form class="FormItems">
-        <input type="text" id="username" name="username" placeholder="Username" minlength="5"  [(ngModel)]="username">
+        <input type="text" id="username" name="username" placeholder="Username" minlength="5" [(ngModel)]="username">
         <br>
         <input type="password" id="password" name="password" placeholder="Password" minlength="8" [(ngModel)]="password">
         <br>
-        <input type="submit" id="login" value="Login" (click)="toggleForm()">
-        kljlklkj
+        <input type="submit" id="login" value="Login" (click)="CheckLogin()" >
+        <div  [innerHTML]="LoginMsg" ></div>    
     </form>
   
     <p>First Time? <a class="clickableText" (click)="toggleForm()">Sign-up</a></p>
@@ -26,15 +26,15 @@
     </p>
   
     <form class="FormItems">
-        <input type="text" id="fname" name="fname" placeholder="First Name" minlength="1">
+        <input type="text" id="fname" name="fname" placeholder="First Name" minlength="1" [(ngModel)]="fname">
         <br>
-        <input type="text" id="lname" name="lname" placeholder="Last Name" minlength="1">
+        <input type="text" id="lname" name="lname" placeholder="Last Name" minlength="1" [(ngModel)]="lname">
         <br>
-        <input type="text" id="username" name="username" placeholder="Username" minlength="5">
+        <input type="text" id="username" name="username" placeholder="Username" minlength="5" [(ngModel)]="username">
         <br>
-        <input type="password" id="password" name="password" placeholder="Password (8+ Length)" minlength="8">
+        <input type="password" id="password" name="password" placeholder="Password (8+ Length)" minlength="8" [(ngModel)]="password">
         <br>
-        <input type="submit" id="newaccount" value="Create Account">
+        <input type="submit" id="newaccount" value="Create Account"  (click)="AddNewUser()">
     </form>
   
     <p>Return To <a class="clickableText" (click)="toggleForm()">Login Page</a></p>
