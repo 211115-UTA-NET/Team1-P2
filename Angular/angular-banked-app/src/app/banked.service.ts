@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { Expense } from './expenseInfo';
+import { NewExpense } from './newExpense';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,7 @@ export class BankedService {
   }
 
   //POST user expense
-  addExpense(expense: Expense): Observable<Expense> {
-    return this.http.post<Expense>(this.expenseUrl, expense, this.httpOptions)
+  addExpense(newExpense: NewExpense): Observable<NewExpense> {
+    return this.http.post<NewExpense>(this.expenseUrl, newExpense, this.httpOptions)
   }
 }

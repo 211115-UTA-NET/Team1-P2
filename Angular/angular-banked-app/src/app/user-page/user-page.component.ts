@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 import { BankedService } from '../banked.service';
 import { EXPENSES } from '../test-expenses';
 import { Expense } from '../expenseInfo';
+import { NewExpense } from '../newExpense';
 
 @Component({
   selector: 'app-user-page',
@@ -14,6 +16,7 @@ export class UserPageComponent implements OnInit {
   //expenses = EXPENSES;
 
   expenses: Expense[] = [];
+  createExpense: NewExpense[] = [];
 
   @Input() expense?: Expense;
 
@@ -29,16 +32,18 @@ export class UserPageComponent implements OnInit {
       .subscribe(expenses => this.expenses = expenses);
   }
 
-  add(
-    id: number,
+  newExpense(
     name: string,
-    frequency: number,
-    priority: number,
+    frequency: string,
+    priority: string,
     ): void {
     if (!name || !frequency || !priority) { return; }
-    this.bankedService.addExpense({ name, frequency, priority } as Expense)
-      .subscribe(expense => {
-        this.expenses.push(expense);
+    this.bankedService.addExpense({ name, frequency, priority } as NewExpense)
+      .subscribe(newExpense => {
+        this.createExpense.push(newExpense);
       });
+  }
+
+  createNewExpense(): void {
   }
 }
