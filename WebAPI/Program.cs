@@ -26,6 +26,23 @@ builder.Services.AddSingleton<ILoanRepository>
 builder.Services.AddSingleton<ISavingsRepository>
   (sp => new SavingsService(connectionString, sp.GetRequiredService<ILogger<SavingsService>>()));
 
+builder.Services.AddSingleton<IUserRepository>
+  (sp => new LoginService(connectionString, sp.GetRequiredService<ILogger<LoginService>>()));
+
+
+
+builder.Services.AddCors(options =>
+{
+  // here you put all the origins that websites making requests to this API via JS are hosted at
+  options.AddDefaultPolicy(builder =>
+      builder
+          .WithOrigins("http://127.0.0.1:5500",
+                       "https://my-example-website.azurewebsites.net", "http://localhost:4200")
+          .AllowAnyMethod()
+          .AllowAnyHeader()
+          .AllowCredentials());
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -36,6 +53,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors();
 
 app.UseAuthorization();
 

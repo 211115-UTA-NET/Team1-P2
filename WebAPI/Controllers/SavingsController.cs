@@ -22,13 +22,12 @@ namespace WebAPI.Controllers
         _repository = repository;
       }
 
+
     //Getting a specific customer from the database
-    [HttpGet("{username}")]
+    [HttpGet("{userId}")]
         public async Task<List<Savings_Dto>> GetSavings(int userId)
         {
 
-//            string connect = _configuration.GetSection("ConnectionString").GetSection("BankedDB").Value;
-  //          using SqlConnection connection = new(connect);
 
             return await _repository.GetSavings(userId);
 
