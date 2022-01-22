@@ -28,4 +28,17 @@ export class UserPageComponent implements OnInit {
     this.bankedService.getExpenses()
       .subscribe(expenses => this.expenses = expenses);
   }
+
+  add(
+    id: number,
+    name: string,
+    frequency: number,
+    priority: number,
+    ): void {
+    if (!name || !frequency || !priority) { return; }
+    this.bankedService.addExpense({ name, frequency, priority } as Expense)
+      .subscribe(expense => {
+        this.expenses.push(expense);
+      });
+  }
 }

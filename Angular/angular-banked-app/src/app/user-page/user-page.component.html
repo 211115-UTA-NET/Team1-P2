@@ -41,7 +41,7 @@
     </p>
 
     <div class="ManagerItems">
-        <input type="button" id="viewExpense" value="My Expenses">
+        <input type="button" id="viewExpense" value="My Expenses" (onClick)="getExpenses()">
         <input type="button" id="createExpense" value="New Expense">
     </div>
 </div>
@@ -141,10 +141,11 @@
         </div>
         <input type="number" id="expenseSeverity" name="expenseSeverity" placeholder="[1 - 5]" min="1" max="5">
         <br><br>
-        <input type="submit" id="newExpense" value="Create expense">
+        <input type="submit" id="newExpense" value="Create expense" type="reset">
     </form>
 </div>
 
+<!-- Display list of user expenses -->
 <ul class="expenseList">
     <li *ngFor="let expense of expenses">
         <p>=========================</p>

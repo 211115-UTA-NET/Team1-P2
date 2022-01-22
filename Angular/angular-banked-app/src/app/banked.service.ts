@@ -19,7 +19,13 @@ export class BankedService {
 
   constructor(private http: HttpClient) { }
 
+  //GET user expenses
   getExpenses(): Observable<Expense[]> {
     return this.http.get<Expense[]>(this.expenseUrl)
+  }
+
+  //POST user expense
+  addExpense(expense: Expense): Observable<Expense> {
+    return this.http.post<Expense>(this.expenseUrl, expense, this.httpOptions)
   }
 }
