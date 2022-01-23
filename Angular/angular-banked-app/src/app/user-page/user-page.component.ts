@@ -5,6 +5,8 @@ import { BankedService } from '../banked.service';
 import { EXPENSES } from '../test-expenses';
 import { Expense } from '../expenseInfo';
 import { NewExpense } from '../newExpense';
+import { UserInfo } from '../userInfo';
+import { userInfo } from 'os';
 
 @Component({
   selector: 'app-user-page',
