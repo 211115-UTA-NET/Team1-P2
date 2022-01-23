@@ -56,7 +56,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-           .\.sonar\scanner\dotnet-sonarscanner begin /k:"211115-UTA-NET_Team1-P2" /o:"211115-uta-net" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="'D:\a\Team1-P2\Team1-P2\APITests\coverage.opencover.xml"
+           .\.sonar\scanner\dotnet-sonarscanner begin /k:"211115-UTA-NET_Team1-P2" /o:"211115-uta-net" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:"sonar.cs.opencover.reportsPaths=**/coverage.opencover.xml"
            dotnet build ./WebAPI/WebAPI.sln
            dotnet test ./WebAPI/WebAPI.sln /p:CollectCoverage=true /p:CoverletOutputFormat=opencover 
            .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
