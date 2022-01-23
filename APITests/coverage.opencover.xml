@@ -2,9 +2,9 @@
 <CoverageSession>
   <Summary numSequencePoints="469" visitedSequencePoints="0" numBranchPoints="54" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="125" minCyclomaticComplexity="125" visitedClasses="0" numClasses="27" visitedMethods="0" numMethods="85" />
   <Modules>
-    <Module hash="C6DBBE2C-8D14-4FD1-9D4F-E800FDEA8CC6">
+    <Module hash="88A0EC76-CBCA-4332-8BAE-8D968C137FCF">
       <ModulePath>WebAPI.dll</ModulePath>
-      <ModuleTime>2022-01-23T04:51:25</ModuleTime>
+      <ModuleTime>2022-01-23T05:11:18</ModuleTime>
       <ModuleName>WebAPI</ModuleName>
       <Files>
         <File uid="1" fullPath="C:\Users\schwe\Revature\Team1-P2\WebAPI\Program.cs" />
