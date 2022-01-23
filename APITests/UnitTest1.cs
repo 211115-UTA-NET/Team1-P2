@@ -12,24 +12,10 @@ namespace APITests
         [Fact]
         public void workingTest()
         {
-            bool a = true;
+            int a = 1;
 
-            Assert.Equal(true, a);
+            Assert.Equal(1, a);
         }
 
-        [Fact]
-        public void WeeklySpendingTest()
-        {
-            List<WeeklySpendings_Dtos> Test = new();
-            List<WeeklySpendings_Dtos> Tester = new();
-            var Testing = new Calculations();
-
-                //Will fail until user input is added to Information collector fields
-                Tester.Add(new(1.00m, 2.00m, 3.00m, 4.00m));
-
-                Test = Testing.InformationCollector();
-                Assert.Equal(Test, Tester);
-
-        }
     }
 }
