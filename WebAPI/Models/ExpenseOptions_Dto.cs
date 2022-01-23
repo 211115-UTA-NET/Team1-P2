@@ -1,9 +1,9 @@
-﻿namespace WebAPI.Models
+namespace WebAPI.Models
 {
     public class ExpenseOptions_Dto
     {
-        int id { get; set; }
-        string? ExpenseName { get; set; }
-        int Priority { get; set; }
+       public int id { get; set; }
+       public string? ExpenseName { get; set; }
+       public int Priority { get; set; }
     }
 }

@@ -55,9 +55,17 @@ export class SigninPageComponent implements OnInit {
     this.user.firstName=this.fname;
     this.user.lastName=this.lname;
     //debugger;
-    var x= await this.uesrServiceService.SaveUser(this.user);    
-    this.user.id=x;
-    alert(this.user.id);
+    this.user.id= await this.uesrServiceService.SaveUser(this.user);    
+    if (this.user.id>0)
+    {
+      localStorage.setItem('userid', this.user.id.toString());
+      this.router.navigateByUrl("/userpage");           
+    }
+    else
+    {
+      this.LoginMsg="User Already exists<br>try again."
+      alert("User Already exists");
+    }    
   }
   toggleForm()
   {

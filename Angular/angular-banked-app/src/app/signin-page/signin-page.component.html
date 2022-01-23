@@ -35,6 +35,7 @@
         <input type="password" id="password" name="password" placeholder="Password (8+ Length)" minlength="8" [(ngModel)]="password">
         <br>
         <input type="submit" id="newaccount" value="Create Account"  (click)="AddNewUser()">
+        <div  [innerHTML]="LoginMsg" ></div>    
     </form>
   
     <p>Return To <a class="clickableText" (click)="toggleForm()">Login Page</a></p>

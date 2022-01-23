@@ -70,8 +70,11 @@ MonthlyPayments Money default(0)
 insert [dbo].[UserPasswords](	[UserName] ,	[UserPassword] ,	FirstName ,	LastName ) values ('shaul','1234','shaul','stavi')
 
 insert dbo.Priorities (priorityName) values ('Very Important'),
-                        ('Importent'),
-                        ('Less Importent')
+                        ('Important'),
+                        ('Less Important'),
+                        ('slight Important'),
+                        ('not Important')
+
 
 
 insert ExpenseOptions (ExpenseName,priorityId) values

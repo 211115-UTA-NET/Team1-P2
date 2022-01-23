@@ -23,6 +23,19 @@ namespace WebAPI.Controllers
               _repository = repository;
             }
 
+    [Route("Options")]
+    [HttpGet]
+    public async Task<List<ExpenseOptions_Dto>> GetExpenseOptions()
+    {
+
+      //            string connect = _configuration.GetSection("ConnectionStrings").GetSection("BankedDB").Value;
+      //            using SqlConnection connection = new(connect);
+
+      return await _repository.GetExpenseOptions();
+      //  return ExpensesService.GetExpense(userId, connection);
+
+    }
+
 
     //Getting a specific customer from the database
     //[HttpGet("{username}")] Delete by Shaul
@@ -37,7 +50,11 @@ namespace WebAPI.Controllers
         //  return ExpensesService.GetExpense(userId, connection);
 
         }
-        //Need to create list value to add as input parameter containing all data required for expense input
+
+
+    
+
+    //Need to create list value to add as input parameter containing all data required for expense input
         [HttpPost]
         public async Task PostExpense(List<Expenses_Dto> expense)
         {
