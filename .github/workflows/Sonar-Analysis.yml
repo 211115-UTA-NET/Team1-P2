@@ -57,7 +57,7 @@ jobs:
       - name: Test API Coverage #runs coverlet as global
         run: |
           cd APITests
-          dotnet test //p:CollectCoverage=true //p:CoverletOutputFormat=opencover
+          dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
           
       - name: Build and analyze # added test files in the scanner function
         env:
