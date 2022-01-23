@@ -49,14 +49,19 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 6.0.x
-      
+        
+          
+      - name: Test API Coverage #runs coverlet as global
+        run: |
+          cd APITests
+          dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+          
       - name: Build and analyze # added test files in the scanner function
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-           .\.sonar\scanner\dotnet-sonarscanner begin /k:"211115-UTA-NET_Team1-P2" /o:"211115-uta-net" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+           .\.sonar\scanner\dotnet-sonarscanner begin /k:"211115-UTA-NET_Team1-P2" /o:"211115-uta-net" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="D:\a\Team1-P2\Team1-P2\APITests\coverage.opencover.xml"
            dotnet build ./WebAPI/WebAPI.sln
-           dotnet test ./WebAPI/WebAPI.sln
            .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
