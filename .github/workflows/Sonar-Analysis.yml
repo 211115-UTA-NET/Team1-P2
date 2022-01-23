@@ -52,14 +52,13 @@ jobs:
           
       - name: Install Coverlet Global #adds coverlet for testing and reporting
         run: |
-          dotnet tool install --global coverlet.console
+          dotnet add package coverlet.msbuild
           
       - name: Test API Coverage #runs coverlet as global
         run: |
           cd APITests
-          coverlet ./bin/Debug/net6.0/WebAPI.dll --target "dotnet" --targetargs "test --no-build" --format opencover
+          dotnet test //p:CollectCoverage=true //p:CoverletOutputFormat=opencover
           
-      
       - name: Build and analyze # added test files in the scanner function
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
