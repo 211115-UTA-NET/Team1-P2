@@ -67,15 +67,15 @@ namespace APITests
             X.UserPasswordId = 2;
             X.LoanName = "three";
             X.LoanAmount = 4.00m;
-            X.LoanInterest = 5.00m;
-            X.MonthlyPayments = 6;
+            X.LoanInterest = 5.00;
+            X.MonthlyPayments = 6.00m;
 
             Assert.Equal(1,X.Id);
             Assert.Equal(2,X.UserPasswordId);
             Assert.Equal("three",X.LoanName);
             Assert.Equal(4.00m,X.LoanAmount);
-            Assert.Equal(5.00m,X.LoanInterest);
-            Assert.Equal(6, X.MonthlyPayments);
+            Assert.Equal(5.00,X.LoanInterest);
+            Assert.Equal(6.00m, X.MonthlyPayments);
         }
 
         [Fact]
@@ -87,15 +87,15 @@ namespace APITests
             X.UserPassword = 2;
             X.SavingsName = "three";
             X.SavingsAmount = 4.00m;
-            X.SavingsInterest = 5.00m;
-            X.SavingsAddedMonthly = 6;
+            X.SavingsInterest = 5.00;
+            X.SavingsAddedMonthly = 6.00m;
 
             Assert.Equal(1, X.Id);
             Assert.Equal(2, X.UserPassword);
             Assert.Equal("three", X.SavingsName);
             Assert.Equal(4.00m, X.SavingsAmount);
-            Assert.Equal(5.00m, X.SavingsInterest);
-            Assert.Equal(6, X.SavingsAddedMonthly);
+            Assert.Equal(5.00, X.SavingsInterest);
+            Assert.Equal(6.00m, X.SavingsAddedMonthly);
         }
 
         [Fact]
