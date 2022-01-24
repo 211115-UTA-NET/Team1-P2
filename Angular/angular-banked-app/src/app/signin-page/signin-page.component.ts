@@ -60,6 +60,7 @@ export class SigninPageComponent implements OnInit {
     {
       localStorage.setItem('userid', this.user.id.toString());
       this.router.navigateByUrl("/userpage");           
+   //   var x = localStorage.getItem("userid");
     }
     else
     {
