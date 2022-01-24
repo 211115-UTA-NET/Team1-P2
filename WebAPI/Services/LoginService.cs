@@ -1,13 +1,25 @@
-﻿
+
 using System.Diagnostics.CodeAnalysis;
 using System.Data.SqlClient;
 using WebAPI.Models;
+using WebAPI.DataStorage;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Logic
 {
-    public class LoginService
+    public class LoginService : IUserRepository
+  {
+
+    private readonly string _connectionString;
+    private readonly ILogger<IUserRepository> _logger;
+
+    public LoginService(string connectionString, ILogger<LoginService> logger)
     {
-        static List<User_Dto> customers { get; }
+      _connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
+      _logger = logger;
+    }
+    static List<User_Dto> customers { get; }
         static LoginService()
         {
             customers = new List<User_Dto>
@@ -17,31 +29,73 @@ namespace WebAPI.Logic
             };
         }
 
-        //Get Individual Userinfo based on username input
-        public static List<User_Dto> GetUser(string username, SqlConnection connection)
+
+    public async Task<ActionResult<int>> PostUser(User_Dto user)
+    {
+
+      int id=0;
+      if (user is not null)
+      {
+
+
+        using SqlConnection connection = new(_connectionString);
+        await connection.OpenAsync();
+
+        string sql = $"select id from dbo.UserPasswords where username=" + "'" + user.Username + "'";
+        using SqlCommand command = new(sql, connection);
+        object result = command.ExecuteScalar(); // ExecuteScalar fails on null
+        if (result != null)
         {
-            List<User_Dto> currentUser = new();
+          id = (int)result;          
+        }        
+        if (id == 0)
+        {
+          sql = $"INSERT INTO dbo.UserPasswords " +
+        $"(username,UserPassword,FirstName,LastName) OUTPUT INSERTED.Id Values "; //income.Id(0) for single object id input
+          sql = sql + "(" +
+              "'" + user.Username + "'," +
+              "'" + user.Password + "'," +
+          "'" + user.FirstName + "'," +
+          "'" + user.LastName + "'" + ") ";
 
-            string sql = $"SELECT * FROM ExistingCustomers WHERE Username = '{username}'";
+          using SqlCommand command2 = new(sql, connection);
+          id = (int)command2.ExecuteScalar();
+        }
+        else
+        id = 0;
+        //command.ExecuteNonQuery();
+        await connection.CloseAsync();
+      }
+      return id;
+    }
 
-            connection.Open();
-            using SqlCommand command = new SqlCommand(sql, connection);
-            using SqlDataReader reader = command.ExecuteReader();
-            while (reader.Read())
+
+    //Get Individual Userinfo based on username input
+    public async Task<User_Dto> GetUser(string username, string password) 
+        {
+        User_Dto user=new();
+
+            string sql = $"SELECT * FROM UserPasswords WHERE Username = '{username}' and UserPassword='{password}'";
+
+      using SqlConnection connection = new(_connectionString);
+      await connection.OpenAsync();
+      using SqlCommand command = new SqlCommand(sql, connection);
+      using SqlDataReader reader = command.ExecuteReader();
+
+
+      if (reader.Read())
             {
-                var user = new User_Dto()
-                {
-                    Id = (int)reader[0],
-                    Username = username,
-                    Password = reader[2].ToString(),
-                    FirstName = reader[3].ToString(),
-                    LastName = reader[4].ToString(),
-                };
-                currentUser.Add(user);
+              user.Id = (int)reader["Id"];
+              user.Username = reader["username"].ToString();
+              user.Password = reader["UserPassword"].ToString();
+              user.FirstName = reader["FirstName"].ToString();
+              user.LastName = reader["LastName"].ToString();
+                //currentUser.Add(user);
             }
             reader.Close();
-            connection.Close();
-            return customers;
+      await connection.CloseAsync();
+      _logger.LogInformation("executed select statement for Income of user id {username}", username);
+      return user;
         }
     }
 }

@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
+using WebAPI.DataStorage;
 using WebAPI.Logic;
 using WebAPI.Models;
 
@@ -14,16 +15,21 @@ namespace WebAPI.Controllers
         {
             _configuration = configuration;
         }
+      private readonly ISavingsRepository _repository;
 
-        //Getting a specific customer from the database
-        [HttpGet("{username}")]
-        public List<Savings_Dto> GetSavings(int userId)
+      public SavingsController(ISavingsRepository repository)
+      {
+        _repository = repository;
+      }
+
+
+    //Getting a specific customer from the database
+    [HttpGet("{userId}")]
+        public async Task<List<Savings_Dto>> GetSavings(int userId)
         {
 
-            string connect = _configuration.GetSection("ConnectionString").GetSection("BankedDB").Value;
-            using SqlConnection connection = new(connect);
 
-            return SavingsService.GetSavings(userId, connection);
+            return await _repository.GetSavings(userId);
 
         }
         //Need to create list value to add as input parameter containing all data required for expense input

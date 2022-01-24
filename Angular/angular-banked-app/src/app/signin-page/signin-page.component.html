@@ -7,11 +7,20 @@
     <p><a [routerLink]="['/userpage']">UserPage</a></p>
   
     <form class="FormItems">
+<<<<<<< HEAD
         <input type="text" id="username" name="username" placeholder="Username" minlength="5">
         <br>
         <input type="password" id="password" name="password" placeholder="Password" minlength="8">
         <br>
         <input type="submit" id="login" value="Login">
+=======
+        <input type="text" id="username" name="username" placeholder="Username" minlength="5" [(ngModel)]="username">
+        <br>
+        <input type="password" id="password" name="password" placeholder="Password" minlength="8" [(ngModel)]="password">
+        <br>
+        <input type="submit" id="login" value="Login" (click)="CheckLogin()" >
+        <div  [innerHTML]="LoginMsg" ></div>    
+>>>>>>> ShaulTestNew
     </form>
   
     <p>First Time? <a class="clickableText" (click)="toggleForm()">Sign-up</a></p>
@@ -25,6 +34,7 @@
     </p>
   
     <form class="FormItems">
+<<<<<<< HEAD
         <input type="text" id="fname" name="fname" placeholder="First Name" minlength="1">
         <br>
         <input type="text" id="lname" name="lname" placeholder="Last Name" minlength="1">
@@ -34,6 +44,18 @@
         <input type="password" id="password" name="password" placeholder="Password (8+ Length)" minlength="8">
         <br>
         <input type="submit" id="newaccount" value="Create Account">
+=======
+        <input type="text" id="fname" name="fname" placeholder="First Name" minlength="1" [(ngModel)]="fname">
+        <br>
+        <input type="text" id="lname" name="lname" placeholder="Last Name" minlength="1" [(ngModel)]="lname">
+        <br>
+        <input type="text" id="username" name="username" placeholder="Username" minlength="5" [(ngModel)]="username">
+        <br>
+        <input type="password" id="password" name="password" placeholder="Password (8+ Length)" minlength="8" [(ngModel)]="password">
+        <br>
+        <input type="submit" id="newaccount" value="Create Account"  (click)="AddNewUser()">
+        <div  [innerHTML]="LoginMsg" ></div>    
+>>>>>>> ShaulTestNew
     </form>
   
     <p>Return To <a class="clickableText" (click)="toggleForm()">Login Page</a></p>

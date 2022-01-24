@@ -6,7 +6,7 @@ namespace WebAPI.Models
         public int UserPasswordId { get; set; }
         public string? LoanName { get; set; }
         public decimal LoanAmount { get; set; }
-        public decimal LoanInterest { get; set; }
+        public double LoanInterest { get; set; }
         public decimal MonthlyPayments { get; set; }
     }
 }

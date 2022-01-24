@@ -1,12 +1,25 @@
-﻿
+
 using System.Diagnostics.CodeAnalysis;
 using System.Data.SqlClient;
 using WebAPI.Models;
+using WebAPI.DataStorage;
+using Microsoft.Extensions.Logging;
 
 namespace WebAPI.Logic
 {
-    public class SavingsService
-    {
+    public class SavingsService: ISavingsRepository
+  {
+
+    private readonly string _connectionString;
+    private readonly ILogger<ISavingsRepository> _logger;
+
+      public SavingsService(string connectionString, ILogger<SavingsService> logger)
+      {
+        _connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
+        _logger = logger;
+      }
+
+
         static List<Savings_Dto> expenses { get; }
         static SavingsService()
         {
@@ -18,25 +31,29 @@ namespace WebAPI.Logic
         }
 
         //Get Individual Userinfo based on username input
-        public static List<Savings_Dto> GetSavings(int userId, SqlConnection connection)
+        public async Task<List<Savings_Dto>> GetSavings(int userId)
         {
             List<Savings_Dto> currentItem = new();
 
-            string sql = $"--ENTER GET COMMAND--"; //use userId to query for expense items
+            string sql = $"select * from Savings where UserPasswordsID={userId}"; //use userId to query for expense items
 
-            connection.Open();
+            using SqlConnection connection = new(_connectionString);
+            await connection.OpenAsync();
             using SqlCommand command = new SqlCommand(sql, connection);
             using SqlDataReader reader = command.ExecuteReader();
-            while (reader.Read())
+
+    
+      while (reader.Read())
             {
                 //set items in table to fields in the Dto to send back on the Get command
                 var item = new Savings_Dto()
                 {
-                    //Id = (int)reader[0],
-                    //UserPassId = username,
-                    //Password = reader[2].ToString(),
-                    //FirstName = reader[3].ToString(),
-                    //LastName = reader[4].ToString(),
+                  Id = (int)reader["Id"],
+                  UserPassword = (int)reader["UserPasswordsID"],
+                  SavingsName = reader["SavingsName"].ToString(),
+                  SavingsAmount = (decimal)reader["SavingsAmount"],
+                  SavingsInterest = (double)reader["SavingsInterest"],
+                  SavingsAddedMonthly = (decimal)reader["SavingsAddedMonthly"]
                 };
                 currentItem.Add(item);
             }

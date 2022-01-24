@@ -1,12 +1,18 @@
 import { Component, Input, OnInit } from '@angular/core';
+<<<<<<< HEAD
 import { FormControl } from '@angular/forms';
+=======
+>>>>>>> ShaulTestNew
 
 import { BankedService } from '../banked.service';
 import { EXPENSES } from '../test-expenses';
 import { Expense } from '../expenseInfo';
+<<<<<<< HEAD
 import { NewExpense } from '../newExpense';
 import { UserInfo } from '../userInfo';
 import { userInfo } from 'os';
+=======
+>>>>>>> ShaulTestNew
 
 @Component({
   selector: 'app-user-page',
@@ -18,7 +24,10 @@ export class UserPageComponent implements OnInit {
   //expenses = EXPENSES;
 
   expenses: Expense[] = [];
+<<<<<<< HEAD
   createExpense: NewExpense[] = [];
+=======
+>>>>>>> ShaulTestNew
 
   @Input() expense?: Expense;
 
@@ -30,6 +39,7 @@ export class UserPageComponent implements OnInit {
 
   getExpenses(): void
   {
+<<<<<<< HEAD
     this.bankedService.getExpenses()
       .subscribe(expenses => this.expenses = expenses);
   }
@@ -48,4 +58,26 @@ export class UserPageComponent implements OnInit {
 
   createNewExpense(): void {
   }
+=======
+      this.bankedService.getExpenses()
+      .subscribe(expenses => this.expenses = expenses);
+  }
+
+  add(
+    id: number,
+    name: string,
+    frequency: number,
+    priority: number,
+    ): void {
+
+
+      if (!name || !frequency || !priority) { return; }
+    this.bankedService.addExpense({ name, frequency, priority } as Expense)
+      .subscribe(expense => {
+        this.expenses.push(expense);
+      });
+
+
+    }
+>>>>>>> ShaulTestNew
 }

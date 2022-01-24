@@ -1,6 +1,7 @@
 using WebAPI.Interfaces;
 using WebAPI.Logic;
 using Microsoft.Extensions.Configuration;
+using WebAPI.DataStorage;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,32 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IExpensesRepository>
   (sp => new ExpensesService(connectionString, sp.GetRequiredService<ILogger<ExpensesService>>()));
 
+builder.Services.AddSingleton<IIncomeRepository>
+  (sp => new IncomeService(connectionString, sp.GetRequiredService<ILogger<IncomeService>>()));
+
+
+builder.Services.AddSingleton<ILoanRepository>
+  (sp => new LoanService(connectionString, sp.GetRequiredService<ILogger<LoanService>>()));
+
+builder.Services.AddSingleton<ISavingsRepository>
+  (sp => new SavingsService(connectionString, sp.GetRequiredService<ILogger<SavingsService>>()));
+
+builder.Services.AddSingleton<IUserRepository>
+  (sp => new LoginService(connectionString, sp.GetRequiredService<ILogger<LoginService>>()));
+
+
+
+builder.Services.AddCors(options =>
+{
+  // here you put all the origins that websites making requests to this API via JS are hosted at
+  options.AddDefaultPolicy(builder =>
+      builder
+          .WithOrigins("http://127.0.0.1:5500",
+                       "https://my-example-website.azurewebsites.net", "http://localhost:4200")
+          .AllowAnyMethod()
+          .AllowAnyHeader()
+          .AllowCredentials());
+});
 
 var app = builder.Build();
 
@@ -26,6 +53,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors();
 
 app.UseAuthorization();
 

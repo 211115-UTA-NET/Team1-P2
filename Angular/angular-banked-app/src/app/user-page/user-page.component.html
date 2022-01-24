@@ -103,7 +103,11 @@
         expense information!
     </p>
 
+<<<<<<< HEAD
     <form class="FormItems" id="ExpenseForm">
+=======
+    <form class="FormItems">
+>>>>>>> ShaulTestNew
         <div class="FormSubtext">
             <label for="expenseName">Choose an expense:</label>
             <br>
@@ -119,28 +123,46 @@
                 <option value="Personal">Personal</option>
                 <option value="Memberships/Subscriptions">Memberships/Subscriptions</option>
                 <option value="Internet">Internet</option>
+<<<<<<< HEAD
+=======
+                <option value="Other">Other</option>
+>>>>>>> ShaulTestNew
             </select>
 
             <div id="CreateOtherExpense">
                 <br>Enter the name of<br>
                 your other expense:
+<<<<<<< HEAD
                 <input type="text" id="otherExpense" #otherExpense name="otherExpense" placeholder="Expense Name" minlength="1">
+=======
+                <input type="text" id="otherExpense" name="otherExpense" placeholder="Expense Name" minlength="1">
+>>>>>>> ShaulTestNew
             </div>
         </div>
         <div class="FormSubtext">
             <br>How frequent does<br>
             this expense occur?
         </div>
+<<<<<<< HEAD
         <input type="number" id="expenseFrequency" #expenseFrequency name="expenseFrequency" placeholder="(Monthy)" min="1">
+=======
+        <input type="number" id="expenseFrequency" name="expenseFrequency" placeholder="(Monthy)" min="1">
+>>>>>>> ShaulTestNew
         <br>
         <div class="FormSubtext">
             <br>How important is<br>
             this expense?<br>
             [1<sub><small>Very</small></sub> - 5<sub><small>Slightly</small></sub>]
         </div>
+<<<<<<< HEAD
         <input type="number" id="expenseSeverity" #expenseSeverity name="expenseSeverity" placeholder="[1 - 5]" min="1" max="5">
         <br><br>
         <input type="submit" id="newExpense" value="Create expense" type="reset" (click)="newExpense(otherExpense.value, expenseFrequency.value, expenseSeverity.value)">
+=======
+        <input type="number" id="expenseSeverity" name="expenseSeverity" placeholder="[1 - 5]" min="1" max="5">
+        <br><br>
+        <input type="submit" id="newExpense" value="Create expense" type="reset">
+>>>>>>> ShaulTestNew
     </form>
 </div>
 

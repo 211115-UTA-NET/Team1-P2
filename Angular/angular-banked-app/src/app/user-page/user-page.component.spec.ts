@@ -22,4 +22,8 @@ describe('UserPageComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> ShaulTestNew

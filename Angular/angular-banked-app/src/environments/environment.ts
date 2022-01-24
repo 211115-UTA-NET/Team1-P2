@@ -3,7 +3,13 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+<<<<<<< HEAD
   production: false
+=======
+  production: false,
+  URLBase:`https://localhost:7106/api/`
+
+>>>>>>> ShaulTestNew
 };
 
 /*

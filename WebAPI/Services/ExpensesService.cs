@@ -28,42 +28,33 @@ namespace WebAPI.Logic
             };
         }
 
-        //Get Individual Userinfo based on username input
-        public static List<Expenses_Dto> GetExpense(int userId, SqlConnection connection)
-        {
-            List<Expenses_Dto> currentItem = new();
-
-            string sql = $"select * from Expenses where userId={{ userId }} "; //use userId to query for expense items
-
-            connection.Open();
-            using SqlCommand command = new SqlCommand(sql, connection);
-            using SqlDataReader reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                //set items in table to fields in the Dto to send back on the Get command
-                var item = new Expenses_Dto()
-                {
-                  Id=(int)reader["Id"],
-                  UserPassId= (int)reader["UserPassId"],
-                  UserOptionsId = (int)reader["UserOptionsId"],
-                  ExpenseAmount = (decimal)reader["ExpenseAmount"],
-                  ExpenseFrequency = (int)reader["ExpenseFrequency"],
-                  ExpenseEnding=  reader["ExpenseEnding"]== DBNull.Value?null: Convert.ToDateTime(reader["ExpenseEnding"])
-                  ,
-                  Priority = (int)reader["Priority"]
-                  
-                //Id = (int)reader[0],
-                //UserPassId = username,
-                //Password = reader[2].ToString(),
-                //FirstName = reader[3].ToString(),
     
-                };
-                currentItem.Add(item);
-            }
-            reader.Close();
-            connection.Close();
-            return currentItem;
-        }
+
+    public async Task<List<ExpenseOptions_Dto>> GetExpenseOptions()
+    {
+      List<ExpenseOptions_Dto> currentItem = new();
+
+      string sql = $"select * from ExpenseOptions"; //use userId to query for expense items
+      using SqlConnection connection = new(_connectionString);
+      await connection.OpenAsync();
+      using SqlCommand command = new SqlCommand(sql, connection);
+      using SqlDataReader reader = command.ExecuteReader();
+      while (reader.Read())
+      {
+        //set items in table to fields in the Dto to send back on the Get command
+        var item = new ExpenseOptions_Dto()
+        {
+          id = (int)reader["Id"],
+          ExpenseName = reader["ExpenseName"].ToString(),
+          Priority = (int)reader["priorityId"]
+        };
+        currentItem.Add(item);
+      }
+      await reader.ReadAsync();
+      await connection.CloseAsync();
+      _logger.LogInformation("executed select statement for Expense Options ");
+      return currentItem;
+    }
 
 
     public async Task<List<Expenses_Dto>> GetExpense(int userId)
@@ -87,30 +78,42 @@ namespace WebAPI.Logic
           ExpenseFrequency = (int)reader["EspenseFrequency"],
           ExpenseEnding = reader["ExpenseEnding"] == DBNull.Value ? null : Convert.ToDateTime(reader["ExpenseEnding"]),
           Priority = (int)reader["Priority"]
-
-          //Id = (int)reader[0],
-          //UserPassId = username,
-          //Password = reader[2].ToString(),
-          //FirstName = reader[3].ToString(),
-
         };
         currentItem.Add(item);
       }
       await reader.ReadAsync();      
       await connection.CloseAsync();
-      _logger.LogInformation("executed select statement for Expenses of user id {player}", userId);
+      _logger.LogInformation("executed select statement for Expenses of user id {userId}", userId);
       return currentItem;
     }
 
     //Insert Expense to Database
-    public static void InputExpense(List<Expenses_Dto> expense, SqlConnection connection)
+    public async Task InputExpense(List<Expenses_Dto> expense)
         {
-            string sql = $"--ENTER INSERT COMMAND--"; //expense.Id(0) for single object id input
-
-            connection.Open();
-            using SqlCommand command = new(sql, connection);
-            command.ExecuteNonQuery();
-            connection.Close();
+      //expense.Id(0) for single object id input
+      if (expense.Count > 0)
+      {
+        string sql = $"INSERT INTO dbo.Expenses (UserPasswordsID,ExpenseOptionsID,ExpenseAmount,EspenseFrequency,ExpenseEnding) Values ";
+        foreach (var record in expense)
+        {
+          sql = sql + "(" +
+            record.UserPassId + "," +
+            record.UserOptionsId + "," +
+            record.ExpenseAmount + "," +
+            record.ExpenseFrequency + "," +
+            (record.ExpenseEnding==null? "null" : " '" +
+            ((DateTime)record.ExpenseEnding).ToString("yyyy-MM-dd HH:mm:ss.fff") + "'") + 
+            ")";
+         
         }
+
+        using SqlConnection connection = new(_connectionString);
+        await connection.OpenAsync();
+        using SqlCommand command = new(sql, connection);
+        command.ExecuteNonQuery();
+        await connection.CloseAsync();
+
+      }
+    }
     }
 }

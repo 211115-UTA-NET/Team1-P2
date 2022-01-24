@@ -1,13 +1,24 @@
-﻿
+
 using System.Diagnostics.CodeAnalysis;
 using System.Data.SqlClient;
 using WebAPI.Models;
-
+using WebAPI.DataStorage;
+using Microsoft.Extensions.Logging;
 namespace WebAPI.Logic
 {
-    public class IncomeService
+    public class IncomeService: IIncomeRepository
+  {
+
+    private readonly string _connectionString;
+    private readonly ILogger<IIncomeRepository> _logger;
+
+    public IncomeService(string connectionString, ILogger<IncomeService> logger)
     {
-        static List<Income_Dto> expenses { get; }
+      _connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
+      _logger = logger;
+    }
+
+    static List<Income_Dto> expenses { get; }
         static IncomeService()
         {
             expenses = new List<Income_Dto>
@@ -18,43 +29,61 @@ namespace WebAPI.Logic
         }
 
         //Get Individual Userinfo based on username input
-        public static List<Income_Dto> GetIncome(int userId, SqlConnection connection)
+        public async Task<List<Income_Dto>> GetIncome(int userId)
         {
             List<Income_Dto> currentItem = new();
 
-            string sql = $"--ENTER INSERT COMMAND--"; //use userId to query for expense items
+            string sql = $"select * from Income where UserPasswordsID={userId} "; //use userId to query for expense items
 
-            connection.Open();
-            using SqlCommand command = new SqlCommand(sql, connection);
+      using SqlConnection connection = new(_connectionString);
+      await connection.OpenAsync();
+
+      using SqlCommand command = new SqlCommand(sql, connection);
             using SqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
                 //set items in table to fields in the Dto to send back on the Get command
                 var item = new Income_Dto()
                 {
-                    //Id = (int)reader[0],
-                    //UserPassId = username,
-                    //Password = reader[2].ToString(),
-                    //FirstName = reader[3].ToString(),
-                    //LastName = reader[4].ToString(),
+                  Id = (int)reader["Id"],
+                  UserPasswordsId = (int)reader["UserPasswordsID"],
+                  IncomeOptions = (int)reader["IncomeOptionsID"],
+                  IncomeAmount = (Decimal)reader["IncomeAmount"],
+                  PaySchedule = (int)reader["PaySchedule"]
                 };
                 currentItem.Add(item);
             }
             reader.Close();
-            connection.Close();
-            return currentItem;
+        await connection.CloseAsync();
+      _logger.LogInformation("executed select statement for Income of user id {userId}", userId);
+      return currentItem;
         }
 
 
         //Insert Expense to Database
-        public static void InputIncome(List<Income_Dto> income, SqlConnection connection)
+        public async  Task InputIncome(List<Income_Dto> income)
         {
-            string sql = $"--ENTER INSERT COMMAND--"; //income.Id(0) for single object id input
 
-            connection.Open();
-            using SqlCommand command = new(sql, connection);
-            command.ExecuteNonQuery();
-            connection.Close();
+      if (income.Count > 0)
+      {
+
+        string sql = $"INSERT INTO dbo.Income (UserPasswordsID,IncomeOptionsID,IncomeAmount,PaySchedule) Values"; //income.Id(0) for single object id input
+        foreach (var record in income)
+        {
+          sql = sql + "(" +
+            record.UserPasswordsId + "," +
+            record.IncomeOptions + "," +
+            record.IncomeAmount + "," +
+            record.PaySchedule + 
+            ")";
         }
+
+        using SqlConnection connection = new(_connectionString);
+        await connection.OpenAsync();
+        using SqlCommand command = new(sql, connection);
+        command.ExecuteNonQuery();
+        await connection.CloseAsync();
+      }
+    }
     }
 }
