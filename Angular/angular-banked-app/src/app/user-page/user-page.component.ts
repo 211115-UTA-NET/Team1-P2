@@ -25,7 +25,7 @@ export class UserPageComponent implements OnInit {
 
   getExpenses(): void
   {
-    this.bankedService.getExpenses()
+      this.bankedService.getExpenses()
       .subscribe(expenses => this.expenses = expenses);
   }
 
@@ -35,10 +35,14 @@ export class UserPageComponent implements OnInit {
     frequency: number,
     priority: number,
     ): void {
-    if (!name || !frequency || !priority) { return; }
+
+
+      if (!name || !frequency || !priority) { return; }
     this.bankedService.addExpense({ name, frequency, priority } as Expense)
       .subscribe(expense => {
         this.expenses.push(expense);
       });
-  }
+
+
+    }
 }
