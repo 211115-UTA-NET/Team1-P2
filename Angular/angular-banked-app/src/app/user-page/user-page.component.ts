@@ -1,18 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-<<<<<<< HEAD
-import { FormControl } from '@angular/forms';
-=======
->>>>>>> ShaulTestNew
 
 import { BankedService } from '../banked.service';
 import { EXPENSES } from '../test-expenses';
 import { Expense } from '../expenseInfo';
-<<<<<<< HEAD
 import { NewExpense } from '../newExpense';
-import { UserInfo } from '../userInfo';
-import { userInfo } from 'os';
-=======
->>>>>>> ShaulTestNew
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-user-page',
@@ -24,12 +16,16 @@ export class UserPageComponent implements OnInit {
   //expenses = EXPENSES;
 
   expenses: Expense[] = [];
-<<<<<<< HEAD
-  createExpense: NewExpense[] = [];
-=======
->>>>>>> ShaulTestNew
 
   @Input() expense?: Expense;
+
+  @Input() expenseName: string = '';
+  @Input() expenseFrequency: string = '';
+  @Input() expenseSeverity: string = '';
+
+  userId = localStorage.getItem("userid");
+
+  newExpense!: NewExpense;
 
   constructor(private bankedService: BankedService) { }
 
@@ -39,45 +35,22 @@ export class UserPageComponent implements OnInit {
 
   getExpenses(): void
   {
-<<<<<<< HEAD
-    this.bankedService.getExpenses()
-      .subscribe(expenses => this.expenses = expenses);
-  }
-
-  newExpense(
-    name: string,
-    frequency: string,
-    priority: string,
-    ): void {
-    if (!name || !frequency || !priority) { return; }
-    this.bankedService.addExpense({ name, frequency, priority } as NewExpense)
-      .subscribe(newExpense => {
-        this.createExpense.push(newExpense);
-      });
-  }
-
-  createNewExpense(): void {
-  }
-=======
       this.bankedService.getExpenses()
       .subscribe(expenses => this.expenses = expenses);
   }
 
   add(
-    id: number,
-    name: string,
-    frequency: number,
-    priority: number,
     ): void {
-
-
-      if (!name || !frequency || !priority) { return; }
-    this.bankedService.addExpense({ name, frequency, priority } as Expense)
+      this.newExpense = {} as NewExpense;
+      this.newExpense.id = this.userId;
+      this.newExpense.name = this.expenseName;
+      this.newExpense.frequency = this.expenseFrequency;
+      this.newExpense.priority = this.expenseSeverity;
+      if (!this.expenseName || !this.expenseFrequency || !this.expenseSeverity) { return; }
+    this.bankedService.addExpense(this.newExpense)
       .subscribe(expense => {
         this.expenses.push(expense);
       });
 
-
     }
->>>>>>> ShaulTestNew
 }

@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-import { Component, OnInit } from '@angular/core';
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
-
-=======
 import { Component, OnInit,Input } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpResponse } from '@angular/common/http';
@@ -15,25 +7,12 @@ import { BankedService } from '../banked.service';
 import { IUser_Dto } from '../userInfo';
 import { Router } from '@angular/router';
 import { UesrServiceService } from '../userservice.service';
->>>>>>> ShaulTestNew
 @Component({
   selector: 'app-signin-page',
   templateUrl: './signin-page.component.html',
   styleUrls: ['./signin-page.component.css']
 })
 
-<<<<<<< HEAD
-@Injectable()
-export class SigninPageComponent implements OnInit {
-
-  constructor(private http: HttpClient) { }
-
-  public show:boolean = false;
-
-  toggleForm()
-  {
-    this.show = !this.show;
-=======
 
 
 @Injectable()
@@ -93,14 +72,9 @@ export class SigninPageComponent implements OnInit {
   {
     this.show = !this.show;
 
->>>>>>> ShaulTestNew
   }
   
   ngOnInit(): void {
   }
 
-<<<<<<< HEAD
-=======
-  
->>>>>>> ShaulTestNew
 }
