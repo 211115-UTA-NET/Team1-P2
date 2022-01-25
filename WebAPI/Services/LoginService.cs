@@ -62,10 +62,6 @@ namespace WebAPI.Logic
       SavingsService SSrv = new(_connectionString, (ILogger<SavingsService>)_logger);
       List<Savings_Dto> LSave  = await SSrv.GetSavings(UserId);
 
-      while ()
-
-      //_repository.GetExpense(UserId);
-
 
       string sql = $"SELECT * FROM Expenses WHERE id = '{UserId}' ";
       using SqlCommand command = new SqlCommand(sql, connection);
