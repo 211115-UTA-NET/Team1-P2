@@ -3,9 +3,6 @@ export interface UserInfo
     id: number;
     fname: string;
     lname: string;
-<<<<<<< HEAD
-}
-=======
 }
 
 export interface IUser_Dto {
@@ -16,4 +13,3 @@ export interface IUser_Dto {
    lastName: string;   
 }
 
->>>>>>> ShaulTestNew

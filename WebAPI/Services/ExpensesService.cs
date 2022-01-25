@@ -13,7 +13,8 @@ namespace WebAPI.Logic
     private readonly string _connectionString;
     private readonly ILogger<IExpensesRepository> _logger;
 
-    public ExpensesService(string connectionString, ILogger<ExpensesService> logger)
+    
+public ExpensesService(string connectionString, ILogger<ExpensesService> logger)
     {
       _connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
       _logger = logger;

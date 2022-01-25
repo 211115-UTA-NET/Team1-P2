@@ -30,6 +30,64 @@ namespace WebAPI.Logic
         }
 
 
+    public async Task<BankedReport_Dto> InformationCollectorLoop(int UserId,int Period)
+    {
+      BankedReport_Dto calcReport = new();
+
+
+
+      string sql = $"SELECT * FROM UserPasswords WHERE id = '{UserId}' ";
+
+      using SqlConnection connection = new(_connectionString);
+      await connection.OpenAsync();
+      using SqlCommand command = new SqlCommand(sql, connection);
+      using SqlDataReader reader = command.ExecuteReader();
+
+
+      if (reader.Read())
+      {
+        calcReport.SavingsGoal= (int)reader["SavingsGoal"];
+        //currentUser.Add(user);
+      }
+      reader.Close();
+      ExpensesService ESrv = new(_connectionString, (ILogger<ExpensesService>)_logger);
+      List<Expenses_Dto> LExp = await ESrv.GetExpense(UserId);
+
+      IncomeService ISrv = new(_connectionString, (ILogger<IncomeService>)_logger);
+      List<Income_Dto> LIncome = await ISrv.GetIncome(UserId);
+
+      LoanService LSrv = new(_connectionString, (ILogger<LoanService>)_logger);
+      List<Loans_Dto> LLoan = await LSrv.GetLoans(UserId);
+
+      SavingsService SSrv = new(_connectionString, (ILogger<SavingsService>)_logger);
+      List<Savings_Dto> LSave  = await SSrv.GetSavings(UserId);
+
+      while ()
+
+      //_repository.GetExpense(UserId);
+
+
+      string sql = $"SELECT * FROM Expenses WHERE id = '{UserId}' ";
+      using SqlCommand command = new SqlCommand(sql, connection);
+      using SqlDataReader reader = command.ExecuteReader();
+
+
+      if (reader.Read())
+      {
+        calcReport.SavingsGoal = (int)reader["SavingsGoal"];
+        //currentUser.Add(user);
+      }
+      reader.Close();
+
+
+      await connection.CloseAsync();
+      _logger.LogInformation("executed select statement for Income of user id {username}");
+
+
+      return null;
+    }
+
+
     public async Task<ActionResult<int>> PostUser(User_Dto user)
     {
 
