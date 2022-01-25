@@ -24,11 +24,15 @@ namespace WebAPI.Logic
             int i = 0;
             foreach (var item in Expenses)
             {
-                while(i <= 104)
+                var day = DateTime.Now;
+                var endDate = item.ExpenseEnding;
+
+                while(i <= 104 || day < endDate)
                 {
                     int T = CalculateTime(item.ExpenseFrequency);
                     List[i] -= item.ExpenseAmount * T;
                     i++;
+                    day.AddDays(1);
                 }
                 i = 0;
             }
