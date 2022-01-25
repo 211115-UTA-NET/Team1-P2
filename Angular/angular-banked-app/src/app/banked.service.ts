@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 import { IUser_Dto } from './userInfo';
 import { Income } from './Income';
 import { Loan } from './Loans';
+import { Savings } from './Savings';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,7 @@ export class BankedService {
   private expenseUrl = 'Expenses'
   private incomeUrl = 'Income'
   private loanUrl = 'Loans'
+  private savingsUrl = 'Savings'
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -61,6 +63,20 @@ export class BankedService {
   //POST user loan
   postLoan(loan: Loan[]): Promise<any>{
     return lastValueFrom(this.http.post<any>(environment.URLBase + this.loanUrl, loan)
+//    .pipe(
+//      catchError(this.handleError)
+//      )
+    );    
+  }
+
+  //GET user savings
+  getSavings(userId: any): Observable<Savings[]> {
+    return this.http.get<Savings[]>(environment.URLBase + this.savingsUrl + "/" + userId)
+  }
+
+  //POST user savings
+  postSavings(savings: Savings[]): Promise<any>{
+    return lastValueFrom(this.http.post<any>(environment.URLBase + this.savingsUrl, savings)
 //    .pipe(
 //      catchError(this.handleError)
 //      )
