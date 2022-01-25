@@ -8,6 +8,7 @@ import { Expense } from './expenseInfo';
 import { environment } from 'src/environments/environment';
 import { IUser_Dto } from './userInfo';
 import { Income } from './Income';
+import { Loan } from './Loans';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,7 @@ export class BankedService {
 
   private expenseUrl = 'Expenses'
   private incomeUrl = 'Income'
+  private loanUrl = 'Loans'
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -51,10 +53,23 @@ export class BankedService {
     );    
   }
 
+  //GET user loans
+  getLoans(userId: any): Observable<Loan[]> {
+    return this.http.get<Loan[]>(environment.URLBase + this.loanUrl + "/" + userId)
+  }
 
-  //getUser(username: string,password: string): Observable<IUser_Dto> {
-  //  return this.http.get<IUser_Dto>(environment.URLBase + `User/${username}/${password}`)
-  //}
+  //POST user loan
+  postLoan(loan: Loan[]): Promise<any>{
+    return lastValueFrom(this.http.post<any>(environment.URLBase + this.loanUrl, loan)
+//    .pipe(
+//      catchError(this.handleError)
+//      )
+    );    
+  }
+
+  getUser(username: string,password: string): Observable<IUser_Dto> {
+    return this.http.get<IUser_Dto>(environment.URLBase + `User/${username}/${password}`)
+  }
 
 
 

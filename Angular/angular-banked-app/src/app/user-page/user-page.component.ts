@@ -4,6 +4,7 @@ import { BankedService } from '../banked.service';
 import { Expense } from '../expenseInfo';
 import { ThisReceiver } from '@angular/compiler';
 import { Income } from '../Income';
+import { Loan } from '../Loans';
 
 @Component({
   selector: 'app-user-page',
@@ -31,6 +32,14 @@ export class UserPageComponent implements OnInit {
   @Input() incomeAmount: number = -1;
   @Input() paySchedule: number = -1;
 
+  loans: Loan[] = [];
+  tempLoan: Loan[] = [];
+  newLoan!: Loan;
+  @Input() loanName: string = '';
+  @Input() loanAmount: number = -1;
+  @Input() loanInterest: number = -1;
+  @Input() monthlyPayments: number = -1;
+
   constructor(private bankedService: BankedService) { }
 
   ngOnInit(): void {
@@ -39,11 +48,11 @@ export class UserPageComponent implements OnInit {
   getExpenses(): void
   {
       this.bankedService.getExpenses(this.userId)
-      //.subscribe(expenses => this.expenses = expenses);
       .subscribe(retObject => this.CheckExpenseApi(retObject));
   }
   CheckExpenseApi(retObject: Expense[]): void {
     this.incomes = [];
+    this.loans = [];
     this.expenses = retObject;
   }
 
@@ -70,11 +79,11 @@ export class UserPageComponent implements OnInit {
     getIncomes(): void
   {
       this.bankedService.getIncomes(this.userId)
-      //.subscribe(expenses => this.expenses = expenses);
       .subscribe(retObject => this.CheckIncomeApi(retObject));
   }
   CheckIncomeApi(retObject: Income[]): void {
     this.expenses = [];
+    this.loans = [];
     this.incomes = retObject;
   }
 
@@ -94,5 +103,35 @@ export class UserPageComponent implements OnInit {
       this.tempIncome.push(this.newIncome);
 
       this.incomes = await this.bankedService.postIncome(this.tempIncome);
+    }
+
+    getLoans(): void
+  {
+      this.bankedService.getLoans(this.userId)
+        .subscribe(retObject => this.CheckLoanApi(retObject));
+  }
+  CheckLoanApi(retObject: Loan[]): void {
+    this.incomes = [];
+    this.expenses = [];
+    this.loans = retObject;
+  }
+
+  async postLoan(
+    ){
+      this.loans = [];
+      this.tempLoan = [];
+      this.newLoan = {} as Loan;
+      this.newLoan.id = 0;
+      this.newLoan.userPasswordId = this.userId;
+      this.newLoan.loanName = this.loanName;
+      this.newLoan.loanAmount = this.loanAmount;
+      this.newLoan.loanInterest = this.loanInterest;
+      this.newLoan.monthlyPayments = this.monthlyPayments;
+      if (!this.userId || !this.loanName || this.loanAmount == -1 || this.loanInterest == -1 || this.monthlyPayments == -1)
+      { return; }
+
+      this.tempLoan.push(this.newLoan);
+
+      this.loans = await this.bankedService.postLoan(this.tempLoan);
     }
 }
