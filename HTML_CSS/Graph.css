@@ -1,0 +1,33 @@
+body {
+    font-family: "Fira Sans", sans-serif;
+  }
+  #chart-out{
+    max-width:500px;
+    padding:15px 0;
+    margin: 0 auto;
+    background-color:gainsboro;
+    border-radius: 10px;
+    display: block;
+  }
+  #chart-in{
+    width:95%;
+    margin:0 auto;
+    padding-top:5px;
+    border-left:1px solid green;
+    border-bottom:1px solid green;
+    font-size: 80%;
+    text-align: right;
+    vertical-align: middle;
+
+  }
+  .bar-out{
+    height:30px;
+    margin:5px 0;
+    position:relative;
+  }
+  .bar-in{
+    height:100%;
+    background:#1493B2;
+    width:100%;
+    box-shadow: 2px 2px 2px grey;
+  }
