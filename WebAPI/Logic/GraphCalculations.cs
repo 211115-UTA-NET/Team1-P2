@@ -56,9 +56,9 @@ namespace WebAPI.Logic
                     {
                         decimal interest = ((item.LoanAmount * ((decimal)item.LoanInterest) / 100) - item.MonthlyPayments) / 4;
 
-                        List[i] -= interest;
+                        List[i] += interest;
 
-                        item.LoanAmount += interest;
+                        item.LoanAmount -= interest;
                         i += 4;
                     } 
                 }
