@@ -11,21 +11,11 @@
       "DisplayName": "Miscellaneous Files",
       "ColorIndex": -1
     },
-    "074399a8-28aa-4df3-85ff-435d6752ed7d": {
-      "ProjectGuid": "074399a8-28aa-4df3-85ff-435d6752ed7d",
-      "DisplayName": "APITests",
-      "ColorIndex": 1
-    },
-    "a0eebde1-a940-4a43-a627-49f98f5ac7ea": {
-      "ProjectGuid": "a0eebde1-a940-4a43-a627-49f98f5ac7ea",
-      "DisplayName": "APITests",
-      "ColorIndex": 2
-    },
     "33262ecd-269c-489f-b52c-686cbd4f1b7d": {
       "ProjectGuid": "33262ecd-269c-489f-b52c-686cbd4f1b7d",
       "DisplayName": "APITests",
-      "ColorIndex": 3
+      "ColorIndex": 1
     }
   },
-  "NextColorIndex": 4
+  "NextColorIndex": 2
 }

@@ -8,5 +8,6 @@ namespace WebAPI.Models
         public decimal LoanAmount { get; set; }
         public double LoanInterest { get; set; }
         public decimal MonthlyPayments { get; set; }
-    }
+        public Nullable<DateTime> ExpenseEnding { get; set; }
+  }
 }

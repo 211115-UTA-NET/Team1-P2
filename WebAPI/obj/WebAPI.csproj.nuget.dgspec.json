@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Revature\\Team1-P2\\WebAPI\\WebAPI.csproj": {}
+    "C:\\Users\\shaul\\Revature\\Team1-P2\\WebAPI\\WebAPI.csproj": {}
   },
   "projects": {
-    "D:\\Revature\\Team1-P2\\WebAPI\\WebAPI.csproj": {
+    "C:\\Users\\shaul\\Revature\\Team1-P2\\WebAPI\\WebAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Revature\\Team1-P2\\WebAPI\\WebAPI.csproj",
+        "projectUniqueName": "C:\\Users\\shaul\\Revature\\Team1-P2\\WebAPI\\WebAPI.csproj",
         "projectName": "WebAPI",
-        "projectPath": "D:\\Revature\\Team1-P2\\WebAPI\\WebAPI.csproj",
-        "packagesPath": "C:\\Users\\Kyler Dennis\\.nuget\\packages\\",
-        "outputPath": "D:\\Revature\\Team1-P2\\WebAPI\\obj\\",
+        "projectPath": "C:\\Users\\shaul\\Revature\\Team1-P2\\WebAPI\\WebAPI.csproj",
+        "packagesPath": "C:\\Users\\shaul\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\shaul\\Revature\\Team1-P2\\WebAPI\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "F:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Kyler Dennis\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\shaul\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -59,10 +63,6 @@
             "System.Data.SqlClient": {
               "target": "Package",
               "version": "[4.8.3, )"
-            },
-            "xunit": {
-              "target": "Package",
-              "version": "[2.4.1, )"
             }
           },
           "imports": [

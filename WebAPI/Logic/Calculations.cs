@@ -4,6 +4,13 @@ namespace WebAPI.Logic
 {
     public class Calculations
     {
+
+    public BankedReport_Dto InformationCollectorLoop()
+    {
+      return null;
+    }
+      
+
         public List<WeeklySpendings_Dtos> InformationCollector()
         {
             List<Income_Dto> income = new();
