@@ -1,7 +1,10 @@
 export interface Expense
 {
     id: number;
-    name: string;
-    frequency: number;
+    userPassId: number;
+    userOptionsId: number;
+    expenseAmount: number;
+    expenseFrequency: number;
+    expenseEnding: string;
     priority: number;
 }
