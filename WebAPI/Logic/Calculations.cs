@@ -144,7 +144,6 @@ namespace WebAPI.Logic
                     monthlyExpenses.Add(new(expenseWeekly, expenseWeekly, expenseWeekly, expenseWeekly));
                 }
             }
-
             return monthlyExpenses;
         }
 
@@ -178,7 +177,6 @@ namespace WebAPI.Logic
                 monthlyTotals[2] = record.Wk3Spendings;
                 monthlyTotals[3] = record.Wk4Spendings;
             }
-
             return monthlyTotals;
         }
     }

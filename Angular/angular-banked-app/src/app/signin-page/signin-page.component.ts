@@ -37,15 +37,18 @@ export class SigninPageComponent implements OnInit {
   async CheckLogin(){
     this.user= await this.uesrServiceService.getUser(this.username,this.password);
     //alert(this.user.id);
-    if (this.user.id >0)      
-      this.router.navigateByUrl("/userpage");           
+    if (this.user.id >0)
+    {
+      localStorage.setItem('userid', this.user.id.toString());
+      this.router.navigateByUrl("/userpage"); 
+    }          
     else
     {  
       this.LoginMsg="User does not exists<br>try again."
 //      this.show=false;  
       }
 //    this.bankedService.getUser(this.username,this.password)
-  //    .subscribe(retObject => this.CheckLoginApi(retObject));  
+      //.subscribe(retObject => this.CheckLoginApi(retObject));  
   }
 
   async AddNewUser(){
@@ -60,7 +63,7 @@ export class SigninPageComponent implements OnInit {
     {
       localStorage.setItem('userid', this.user.id.toString());
       this.router.navigateByUrl("/userpage");           
-   //   var x = localStorage.getItem("userid");
+      var x = localStorage.getItem("userid");
     }
     else
     {
@@ -72,12 +75,8 @@ export class SigninPageComponent implements OnInit {
   {
     this.show = !this.show;
 
-
   }
   
   ngOnInit(): void {
   }
-
-  
-
 }

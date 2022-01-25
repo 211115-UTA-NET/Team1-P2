@@ -44,9 +44,3 @@ select
     width: 200px;
     font-size: 20px;
 }
-
-/* Toggle this on and off if user selected "Other" */
-#CreateOtherExpense
-{
-    display: none;
-}
