@@ -16,7 +16,7 @@ export class SavingsGraphComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.data = [100, 200, 404, 350, 620, 760, 865, 765, 985, 1000];
+    this.data = [100, 200, 404, 350, 620, 760, 865, 765, 985, 1000, 500];
     this.goal = 1000;
     this.datetime = "DateTime"
     this.percents = [];
@@ -29,19 +29,27 @@ export class SavingsGraphComponent implements OnInit {
 
   addBar(data: string | number, percents: any): void {
     let barIn = document.createElement("div");
-    //barIn.className = "bar-in";
     barIn.classList.add('bar-in');
     barIn.style.width = `${percents}%`;
+    barIn.style.height = "100%";
+    barIn.style.background = "#3f9c47";
+    barIn.style.boxShadow = "2px 2px 2px grey";
     barIn.innerText = "$" + data;
 
     let barOut = document.createElement("div");
-    //barOut.className = "bar-out";
     barOut.classList.add('bar-out');
+    barOut.style.height = "30px";
+    barOut.style.margin = "5px 0";
+    barOut.style.width = "80%";
+    barOut.style.position = "relative";
+    barOut.style.float = "left";
     barOut.appendChild(barIn);
 
     let addTime = document.createElement("div");
-    //addTime.className = "add-time";
     addTime.classList.add('add-time');
+    addTime.style.width = "20%";
+    addTime.style.float = "right";
+    addTime.style.marginTop = "10px";
     addTime.innerText = this.datetime;
 
     document.getElementById("chart-in")!.appendChild(barOut);
