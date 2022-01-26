@@ -20,6 +20,9 @@ export class BankedService {
   private incomeUrl = 'Income'
   private loanUrl = 'Loans'
   private savingsUrl = 'Savings'
+  private graphUrl = '';
+
+  graphInfo: number[] = [];
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -81,6 +84,11 @@ export class BankedService {
 //      catchError(this.handleError)
 //      )
     );    
+  }
+
+  //GET graph array
+  getGraph(userId: any): Observable<Array<number>> {
+    return this.http.get<Array<number>>(environment.URLBase + this.graphUrl + "/" + userId)
   }
 
   getUser(username: string,password: string): Observable<IUser_Dto> {

@@ -46,6 +46,28 @@
     </div>
 </div>
 
+<!-- Graph path -->
+<div class="Display" style="float: left">
+    <p>
+        Savings graph!
+    </p>
+
+    <div class="ManagerItems">
+        <input type="button" id="viewGraph" value="View Graph" [routerLink]="['/savingsgraph']">
+    </div>
+</div>
+
+<!-- Sign out -->
+<div class="Display" style="float: left">
+    <p>
+        Sign-out
+    </p>
+
+    <div class="ManagerItems">
+        <input type="button" id="sign-out" value="Logout" [routerLink]="['']" (click)="clearUser()">
+    </div>
+</div>
+
 <!-- Create new income -->
 <div class="Display" style="float: right" *ngIf="createIncome">
     <p>
@@ -212,6 +234,7 @@
     </form>
 </div>
 
+<div class="Display">
 <!-- Display list of user expenses -->
 <ul class="expenseList">
     <li *ngFor="let expense of expenses">
@@ -255,3 +278,4 @@
         <p>Added Monthly: {{saving.savingsAddedMonthly}}</p>
     </li>
 </ul>
+</div>

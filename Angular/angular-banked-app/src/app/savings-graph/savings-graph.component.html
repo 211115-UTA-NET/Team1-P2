@@ -1,10 +1,12 @@
 <body>
     <!--<div *ngIf="this.isButtonVisible" (click)="this.isButtonVisible = false">-->
-        <button id="creationButton" (click)="displayBars()">Create Chart</button><br>
+        <button id="creationButton" (click)="displayBars()">Generate!</button><br>
     <!--</div>-->
 
     <div id="chart-out">
         <div id="chart-in">
         </div>
     </div>
+
+    <br><button id="creationButton" [routerLink]="['/userpage']">Return</button><br>
 </body>

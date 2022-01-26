@@ -6,6 +6,7 @@ import { ThisReceiver } from '@angular/compiler';
 import { Income } from '../Income';
 import { Loan } from '../Loans';
 import { Savings } from '../Savings';
+import { SigninPageComponent } from '../signin-page/signin-page.component';
 
 @Component({
   selector: 'app-user-page',
@@ -20,6 +21,8 @@ export class UserPageComponent implements OnInit {
   createLoan: boolean = false;
   createSavings: boolean = false;
   createIncome: boolean = false;
+
+  graphData: number[] = [];
 
   expenses: Expense[] = [];
   tempExpense: Expense[] = [];
@@ -56,6 +59,10 @@ export class UserPageComponent implements OnInit {
   constructor(private bankedService: BankedService) { }
 
   ngOnInit(): void {
+  }
+
+  clearUser(): void {
+    localStorage.clear();
   }
 
   showIncome(): void{
@@ -209,4 +216,13 @@ export class UserPageComponent implements OnInit {
 
       this.savings = await this.bankedService.postSavings(this.tempSavings);
     }
+
+    getGraphData(): void
+  {
+      this.bankedService.getGraph(this.userId)
+      .subscribe(retObject => this.CheckGraphApi(retObject));
+  }
+  CheckGraphApi(retObject: Array<number>): void {
+    this.graphData = retObject;
+  }
 }
