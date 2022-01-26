@@ -1,4 +1,4 @@
-﻿using WebAPI.Models;
+using WebAPI.Models;
 using System;
 using System.Collections.Generic;
 
@@ -8,16 +8,17 @@ namespace WebAPI.Logic
     public class GraphCalculations
     {
 
-        public int CalculateTime(int N)
+        public static int CalculateTime(int N)
         {
-            int timeline = N / 4; //4weeks is 1 month
-            return timeline;
+            int timeline = N /4;//4weeks is 1 month
+
+      return timeline;
         }
 
-        public decimal[] CalculateTotal(List<Expenses_Dto> Expenses, List<Income_Dto> Income, List<Loans_Dto> Loans, List<Savings_Dto> Savings)
+        public static decimal[] CalculateTotal(List<Expenses_Dto> Expenses, List<Income_Dto> Income, List<Loans_Dto> Loans, List<Savings_Dto> Savings)
         {
             //Array to collect data. Savings goal and Dates calculated in client. 104 Values is 2 years
-            decimal[] List = new decimal[104];
+            decimal[] List = new decimal[105];
 
             //Foreach loops to collect info, adding and subtracting from total as needed.
             //while loops to iterate through each array item
@@ -32,7 +33,7 @@ namespace WebAPI.Logic
                     int T = CalculateTime(item.ExpenseFrequency);
                     List[i] -= item.ExpenseAmount * T;
                     i++;
-                    day.AddDays(1);
+                    day=day.AddDays(7);
                 }
                 i = 0;
             }
@@ -54,18 +55,18 @@ namespace WebAPI.Logic
             i = 3;
             foreach (var item in Loans)
             {
-                while(i <= 104)
-                {
-                    while(item.LoanAmount > 0 || i >= 104)
+            //    while(i <= 104)
+              //  {
+                    while(item.LoanAmount > 0 && i <= 104)
                     {
                         decimal interest = ((item.LoanAmount * ((decimal)item.LoanInterest) / 100) - item.MonthlyPayments) / 4;
 
                         List[i] += interest;
 
                         item.LoanAmount -= interest;
-                        i += 4;
+                        i++;//i += 4;
                     } 
-                }
+//                }
                 i = 0;
             }
 
@@ -80,10 +81,13 @@ namespace WebAPI.Logic
                     List[i] += interest;
 
                     item.SavingsAmount += interest;
-                    i += 4;
+                    i++;//i += 4;
                 }
 
             }
+
+      for (i = 0; i < List.Length; i++)
+        List[i] = Math.Round(List[i]);
 
             return List;
             

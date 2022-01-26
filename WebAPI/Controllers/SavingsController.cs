@@ -11,10 +11,10 @@ namespace WebAPI.Controllers
     public class SavingsController : ControllerBase
     {
         private readonly IConfiguration _configuration;
-        public SavingsController(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
+        //public SavingsController(IConfiguration configuration)
+        //{
+        //    _configuration = configuration;
+        //}
       private readonly ISavingsRepository _repository;
 
       public SavingsController(ISavingsRepository repository)
@@ -36,9 +36,10 @@ namespace WebAPI.Controllers
         [HttpPost]
         public async void PostSavings(List<Savings_Dto> savings)
         {
-            string connect = _configuration.GetSection("ConnectionString").GetSection("PrintShopDB").Value;
-            await using SqlConnection connection = new(connect);
-            SavingsService.InputSavings(savings, connection);
-        }
+      //      string connect = _configuration.GetSection("ConnectionString").GetSection("PrintShopDB").Value;
+      // await using SqlConnection connection = new(connect);
+
+      await _repository.InputSavings(savings);
+    }
     }
 }
