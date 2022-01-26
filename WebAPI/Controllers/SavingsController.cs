@@ -34,7 +34,7 @@ namespace WebAPI.Controllers
         }
         //Need to create list value to add as input parameter containing all data required for expense input
         [HttpPost]
-        public async void PostSavings(List<Savings_Dto> savings)
+        public async Task PostSavings(List<Savings_Dto> savings)
         {
       //      string connect = _configuration.GetSection("ConnectionString").GetSection("PrintShopDB").Value;
       // await using SqlConnection connection = new(connect);
