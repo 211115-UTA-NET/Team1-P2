@@ -16,6 +16,10 @@ import { Savings } from '../Savings';
 export class UserPageComponent implements OnInit {
 
   userId: string | any = localStorage.getItem("userid");
+  createExpense: boolean = false;
+  createLoan: boolean = false;
+  createSavings: boolean = false;
+  createIncome: boolean = false;
 
   expenses: Expense[] = [];
   tempExpense: Expense[] = [];
@@ -52,6 +56,34 @@ export class UserPageComponent implements OnInit {
   constructor(private bankedService: BankedService) { }
 
   ngOnInit(): void {
+  }
+
+  showIncome(): void{
+    this.createExpense = false;
+    this.createLoan = false;
+    this.createSavings = false;
+    this.createIncome = true;
+  }
+
+  showExpense(): void{
+    this.createExpense = true;
+    this.createLoan = false;
+    this.createSavings = false;
+    this.createIncome = false;
+  }
+
+  showSavings(): void{
+    this.createExpense = false;
+    this.createLoan = false;
+    this.createSavings = true;
+    this.createIncome = false;
+  }
+
+  showLoan(): void{
+    this.createExpense = false;
+    this.createLoan = true;
+    this.createSavings = false;
+    this.createIncome = false;
   }
 
   getExpenses(): void

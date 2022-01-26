@@ -6,12 +6,48 @@
 
     <div class="ManagerItems">
         <input type="button" id="viewIncome" value="My Income" (click)="getIncomes()">
-        <input type="button" id="createIncome" value="New Income">
+        <input type="button" id="createIncome" value="New Income" (click)="showIncome()">
+    </div>
+</div>
+
+<!-- Loan options (View or Create) -->
+<div class="Display" style="float: right">
+    <p>
+        Loan Manager
+    </p>
+
+    <div class="ManagerItems">
+        <input type="button" id="viewLoan" value="My Loans" (click)="getLoans()">
+        <input type="button" id="createLoan" value="New Loan" (click)="showLoan()">
+    </div>
+</div>
+
+<!-- Savings options (View or Create) -->
+<div class="Display" style="float: left">
+    <p>
+        Savings Manager
+    </p>
+
+    <div class="ManagerItems">
+        <input type="button" id="viewSavings" value="My Savings" (click)="getSavings()">
+        <input type="button" id="createSavings" value="New Savings" (click)="showSavings()">
+    </div>
+</div>
+
+<!-- Expense options (View or Create) -->
+<div class="Display" style="float: left">
+    <p>
+        Expense Manager
+    </p>
+
+    <div class="ManagerItems">
+        <input type="button" id="viewExpense" value="My Expenses" (click)="getExpenses()">
+        <input type="button" id="createExpense" value="New Expense" (click)="showExpense()">
     </div>
 </div>
 
 <!-- Create new income -->
-<div class="Display" style = "float: right">
+<div class="Display" style="float: right" *ngIf="createIncome">
     <p>
         Enter your new<br>
         income information!
@@ -53,20 +89,8 @@
     </form>
 </div>
 
-<!-- Loan options (View or Create) -->
-<div class="Display" style="float: right">
-    <p>
-        Loan Manager
-    </p>
-
-    <div class="ManagerItems">
-        <input type="button" id="viewLoan" value="My Loans" (click)="getLoans()">
-        <input type="button" id="createLoan" value="New Loan">
-    </div>
-</div>
-
 <!-- Create new loan -->
-<div class="Display" style = "float: right">
+<div class="Display" style="float: right" *ngIf="createLoan">
     <p>
         Enter your new<br>
         loan information!
@@ -100,20 +124,8 @@
     </form>
 </div>
 
-<!-- Savings options (View or Create) -->
-<div class="Display" style="float: left">
-    <p>
-        Savings Manager
-    </p>
-
-    <div class="ManagerItems">
-        <input type="button" id="viewSavings" value="My Savings" (click)="getSavings()">
-        <input type="button" id="createSavings" value="New Savings">
-    </div>
-</div>
-
 <!-- Create new savings -->
-<div class="Display" style = "float: right">
+<div class="Display" style="float: right" *ngIf="createSavings">
     <p>
         Enter your new<br>
         savings information!
@@ -147,20 +159,8 @@
     </form>
 </div>
 
-<!-- Expense options (View or Create) -->
-<div class="Display" style="float: left">
-    <p>
-        Expense Manager
-    </p>
-
-    <div class="ManagerItems">
-        <input type="button" id="viewExpense" value="My Expenses" (click)="getExpenses()">
-        <input type="button" id="createExpense" value="New Expense">
-    </div>
-</div>
-
 <!-- Create new expense -->
-<div class="Display" style = "float: right">
+<div class="Display" style="float: right" *ngIf="createExpense">
     <p>
         Enter your new<br>
         expense information!
