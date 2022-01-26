@@ -90,6 +90,8 @@ export class UserPageComponent implements OnInit {
     this.createLoan = false;
     this.createSavings = false;
     this.createIncome = true;
+    this.incomePostErrorForm = false;
+    this.incomePostError = false;
   }
 
   showExpense(): void{
@@ -97,6 +99,8 @@ export class UserPageComponent implements OnInit {
     this.createLoan = false;
     this.createSavings = false;
     this.createIncome = false;
+    this.expensePostErrorForm = false;
+    this.expensePostError = false;
   }
 
   showSavings(): void{
@@ -104,6 +108,8 @@ export class UserPageComponent implements OnInit {
     this.createLoan = false;
     this.createSavings = true;
     this.createIncome = false;
+    this.savingsPostErrorForm = false;
+    this.savingsPostError = false;
   }
 
   showLoan(): void{
