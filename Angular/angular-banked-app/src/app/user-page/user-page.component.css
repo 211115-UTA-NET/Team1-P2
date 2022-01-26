@@ -44,3 +44,9 @@ select
     width: 200px;
     font-size: 20px;
 }
+
+.Error
+{
+    font-size: 20px;
+    color: darkred;
+}

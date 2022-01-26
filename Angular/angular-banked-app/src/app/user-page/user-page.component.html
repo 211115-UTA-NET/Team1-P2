@@ -109,6 +109,17 @@
         <br><br>
         <input type="submit" id="newIncome" value="Create income" type="reset" (click)='postIncome()'>
     </form>
+    <p class="Error" *ngIf="incomePostError">
+        There was an issue<br>
+        creating your income.<br>
+        Please try again later.
+    </p>
+    <p class="Error" *ngIf="incomePostErrorForm">
+        You didn't fill out<br>
+        some sections of the form.<br>
+        Please ensure all sections<br>
+        are filled out before submission.
+    </p>
 </div>
 
 <!-- Create new loan -->
@@ -144,6 +155,17 @@
         <br><br>
         <input type="submit" id="newLoan" value="Create loan" type="reset" (click)='postLoan()'>
     </form>
+    <p class="Error" *ngIf="loanPostError">
+        There was an issue<br>
+        creating your loan.<br>
+        Please try again later.
+    </p>
+    <p class="Error" *ngIf="loanPostErrorForm">
+        You didn't fill out<br>
+        some sections of the form.<br>
+        Please ensure all sections<br>
+        are filled out before submission.
+    </p>
 </div>
 
 <!-- Create new savings -->
@@ -179,6 +201,17 @@
         <br><br>
         <input type="submit" id="newSavings" value="Create savings" type="reset" (click)='postSavings()'>
     </form>
+    <p class="Error" *ngIf="savingsPostError">
+        There was an issue<br>
+        creating your savings.<br>
+        Please try again later.
+    </p>
+    <p class="Error" *ngIf="savingsPostErrorForm">
+        You didn't fill out<br>
+        some sections of the form.<br>
+        Please ensure all sections<br>
+        are filled out before submission.
+    </p>
 </div>
 
 <!-- Create new expense -->
@@ -232,6 +265,17 @@
         <br><br>
         <input type="submit" id="newExpense" value="Create expense" type="reset" (click)='postExpense()'>
     </form>
+    <p class="Error" *ngIf="expensePostError">
+        There was an issue<br>
+        creating your expense.<br>
+        Please try again later.
+    </p>
+    <p class="Error" *ngIf="expensePostErrorForm">
+        You didn't fill out<br>
+        some sections of the form.<br>
+        Please ensure all sections<br>
+        are filled out before submission.
+    </p>
 </div>
 
 <div class="Display">
@@ -247,6 +291,12 @@
     </li>
 </ul>
 
+<p class="Error" *ngIf="expenseGetError">
+    There was an error<br>
+    retrieving your expenses.<br>
+    Please try again later.
+</p>
+
 <!-- Display list of user Incomes -->
 <ul class="incomeList">
     <li *ngFor="let income of incomes">
@@ -256,6 +306,12 @@
         <p>Pay Schedule: {{income.paySchedule}}</p>
     </li>
 </ul>
+
+<p class="Error" *ngIf="incomeGetError">
+    There was an error<br>
+    retrieving your incomes.<br>
+    Please try again later.
+</p>
 
 <!-- Display list of user Loans -->
 <ul class="loanList">
@@ -268,6 +324,12 @@
     </li>
 </ul>
 
+<p class="Error" *ngIf="loanGetError">
+    There was an error<br>
+    retrieving your loans.<br>
+    Please try again later.
+</p>
+
 <!-- Display list of user Savings -->
 <ul class="savingsList">
     <li *ngFor="let saving of savings">
@@ -278,4 +340,10 @@
         <p>Added Monthly: {{saving.savingsAddedMonthly}}</p>
     </li>
 </ul>
+
+<p class="Error" *ngIf="savingsGetError">
+    There was an error<br>
+    retrieving your savings.<br>
+    Please try again later.
+</p>
 </div>
