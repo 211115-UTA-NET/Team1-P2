@@ -1,12 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup, NgForm } from '@angular/forms';
 
 import { BankedService } from '../banked.service';
 import { Expense } from '../expenseInfo';
-import { ThisReceiver } from '@angular/compiler';
 import { Income } from '../Income';
 import { Loan } from '../Loans';
 import { Savings } from '../Savings';
-import { SigninPageComponent } from '../signin-page/signin-page.component';
 
 @Component({
   selector: 'app-user-page',
@@ -27,34 +26,34 @@ export class UserPageComponent implements OnInit {
   expenses: Expense[] = [];
   tempExpense: Expense[] = [];
   newExpense!: Expense;
-  @Input() expenseId: number = -1;
-  @Input() expenseAmount: number = -1;
-  @Input() expenseFrequency: number = -1;
-  @Input() expenseSeverity: number = -1;
-  @Input() expenseDate: string = '';
+  @Input() expenseId!: number;
+  @Input() expenseAmount!: number;
+  @Input() expenseFrequency!: number;
+  @Input() expenseSeverity!: number;
+  @Input() expenseDate!: string;
 
   incomes: Income[] = [];
   tempIncome: Income[] = [];
   newIncome!: Income;
-  @Input() incomeId: number = -1;
-  @Input() incomeAmount: number = -1;
-  @Input() paySchedule: number = -1;
+  @Input() incomeId!: number;
+  @Input() incomeAmount!: number;
+  @Input() paySchedule!: number;
 
   loans: Loan[] = [];
   tempLoan: Loan[] = [];
   newLoan!: Loan;
-  @Input() loanName: string = '';
-  @Input() loanAmount: number = -1;
-  @Input() loanInterest: number = -1;
-  @Input() monthlyPayments: number = -1;
+  @Input() loanName!: string;
+  @Input() loanAmount!: number;
+  @Input() loanInterest!: number;
+  @Input() monthlyPayments!: number;
 
   savings: Savings[] = [];
   tempSavings: Savings[] = [];
   newSavings!: Savings;
-  @Input() savingsName: string = '';
-  @Input() savingsAmount: number = -1;
-  @Input() savingsInterest: number = -1;
-  @Input() addedMonthly: number = -1;
+  @Input() savingsName!: string;
+  @Input() savingsAmount!: number;
+  @Input() savingsInterest!: number;
+  @Input() addedMonthly!: number;
 
   constructor(private bankedService: BankedService) { }
 
