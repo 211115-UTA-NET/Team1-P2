@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup, NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { BankedService } from '../banked.service';
 import { Expense } from '../expenseInfo';
@@ -15,9 +15,7 @@ import { Savings } from '../Savings';
 
 export class UserPageComponent implements OnInit {
 
-  userId: string | any = localStorage.getItem("userid"); //NEEDS TO BE RE-ADDED
-  fName: string | any = localStorage.getItem("FirstName");
-  lName: string | any = localStorage.getItem("firstName");                                   //NEEDS TO BE DELETED
+  userId: string | any = localStorage.getItem("userid");
 
   createExpense: boolean = false;
   createLoan: boolean = false;
@@ -75,13 +73,16 @@ export class UserPageComponent implements OnInit {
   @Input() savingsInterest!: number;
   @Input() addedMonthly!: number;
 
-  constructor(private bankedService: BankedService) { }
+  constructor(
+    private bankedService: BankedService,
+    private router: Router) { }
 
   ngOnInit(): void {
   }
 
   clearUser(): void {
-    localStorage.clear();
+    sessionStorage.clear();
+    this.router.navigateByUrl("");
   }
 
   clearGetErrors()

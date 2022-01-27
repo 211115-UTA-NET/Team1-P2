@@ -53,11 +53,11 @@
     <!-- Sign out -->
     <div class="Display">
         <p>
-            Welcome! {{fName}}
+            Welcome! {{userId}}
         </p>
 
         <div class="ManagerItems">
-            <input type="button" id="sign-out" value="Logout" [routerLink]="['']" (click)="clearUser()">
+            <input type="button" id="sign-out" value="Logout" (click)="clearUser()">
         </div>
     </div>
 
