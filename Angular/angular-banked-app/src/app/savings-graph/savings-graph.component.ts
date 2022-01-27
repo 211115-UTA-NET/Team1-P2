@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Goal } from '../Goal';
+import { BankedService } from '../banked.service';
+import { GraphData } from '../GraphData';
 
 
 @Component({
@@ -9,25 +11,25 @@ import { Goal } from '../Goal';
 })
 export class SavingsGraphComponent implements OnInit {
 
-  data: number[] = [];
-  graphData: number[] = []; //Remove once connection is complete
+  data: any[] = [];
+  //graphData: number[] = []; //Remove once connection is complete
   goal!: number;
   savingsGoal: Goal[] = [];
   datetime!: string;
   datetimeArr: any[] = [];
   percents: any[] = [];
-  bankedService: any;
   //isButtonVisible: any = true;
 
   userId: string | any = localStorage.getItem("userid");
 
-  constructor() { }
+  constructor(private bankedService: BankedService) { }
 
   ngOnInit(): void {
-    this.data = [100, 200, 404, 350, 620, 760, 865, 765, 985, 1000, 500];
+    //this.data = [100, 200, 404, 350, 620, 760, 865, 765, 985, 1000, 500];
     //this.goal = 1000;
     this.datetime = "DateTime"
     this.percents = [];
+    this.getGraphData();
   }
 
   addBar(data: string | number, percents: any, datetime: string): void {
@@ -65,7 +67,8 @@ export class SavingsGraphComponent implements OnInit {
     {
       var date = new Date();
       date.setDate(date.getDate() + (7 * i));
-      this.datetimeArr.push(date);
+      var newDate = date.toString().substring(0,11) + date.toString().substring(13, 16);
+      this.datetimeArr.push(newDate);
     }
 
     for(let i=0; i<this.data.length; i++){
@@ -81,22 +84,25 @@ export class SavingsGraphComponent implements OnInit {
     (<HTMLInputElement> document.getElementById("creationButton"))!.disabled = true;
   }};
 
-  getGoal(): void
-  {
-      this.bankedService.getGraph(this.userId)
-      .subscribe((retObject: Goal[]) => this.CheckGoalApi(retObject));
-  }
-  CheckGoalApi(retObject: Goal[]): void {
-    this.savingsGoal = retObject;
-  }
+  // getGoal(): void
+  // {
+  //     this.bankedService.getGraph(this.userId)
+  //     .subscribe((retObject: Goal[]) => this.CheckGoalApi(retObject));
+  // }
+  // CheckGoalApi(retObject: Goal[]): void {
+  //   this.savingsGoal = retObject;
+  // }
 
   getGraphData(): void
   {
       this.bankedService.getGraph(this.userId)
-      .subscribe((retObject: number[]) => this.CheckGraphApi(retObject));
+      .subscribe((retObject) => this.CheckGraphApi(retObject));
   }
-  CheckGraphApi(retObject: Array<number>): void {
-    this.graphData = retObject; //Change to this.data once connection is complete
+  CheckGraphApi(retObject: any): void {
+    for(let i=0; i<retObject.length; i++ )
+    {
+      this.data.push(retObject[i]);
+    }
   }
 
   exit()

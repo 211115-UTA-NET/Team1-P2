@@ -432,14 +432,4 @@ export class UserPageComponent implements OnInit {
     this.savings = [];
     this.getSavings();
   }
-
-    //IS THIS NEEDED???
-    getGraphData(): void
-  {
-      this.bankedService.getGraph(this.userId)
-      .subscribe(retObject => this.CheckGraphApi(retObject));
-  }
-  CheckGraphApi(retObject: Array<number>): void {
-    this.graphData = retObject;
-  }
 }

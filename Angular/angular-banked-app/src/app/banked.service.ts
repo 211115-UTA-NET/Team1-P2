@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { lastValueFrom, Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -11,6 +11,7 @@ import { Income } from './Income';
 import { Loan } from './Loans';
 import { Savings } from './Savings';
 import { Goal } from './Goal';
+import { GraphData } from './GraphData';
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +22,8 @@ export class BankedService {
   private incomeUrl = 'Income'
   private loanUrl = 'Loans'
   private savingsUrl = 'Savings'
-  private graphUrl = '';
   private goalUrl = '';
+  private reportUrl = "User/Report";
 
   graphInfo: number[] = [];
 
@@ -89,8 +90,9 @@ export class BankedService {
   }
 
   //GET graph array
-  getGraph(userId: any): Observable<Array<number>> {
-    return this.http.get<Array<number>>(environment.URLBase + this.graphUrl + "/" + userId)
+  getGraph(userId: any): Observable<any> {
+    let params = new HttpParams().set('UserId', userId);
+    return this.http.get(environment.URLBase + this.reportUrl, {params})
   }
 
   //GET savings goal
