@@ -104,19 +104,19 @@ export class BankedService {
   }
 
     //DELETE income
-  deleteIncome(income: number): Promise<any> {
-    return lastValueFrom(this.http.delete<any>(environment.URLBase + this.incomeUrl + "/" + income)
-    );}
+  deleteIncome(income: number): Observable<any> {
+    return this.http.delete<any>(environment.URLBase + this.incomeUrl + "/" + income)
+    }
 
     //DELETE loan
-  deleteLoan(loan: number): Promise<any> {
-    return lastValueFrom(this.http.delete<any>(environment.URLBase + this.loanUrl + "/" + loan)
-    );}
+  deleteLoan(loan: number): Observable<any> {
+    return this.http.delete<any>(environment.URLBase + this.loanUrl + "/" + loan)
+    }
 
     //DELETE savings
-  deleteSavings(savings: number): Promise<any> {
-    return lastValueFrom(this.http.delete<any>(environment.URLBase + this.savingsUrl + "/" + savings)
-    );}
+  deleteSavings(savings: number): Observable<any> {
+    return this.http.delete<any>(environment.URLBase + this.savingsUrl + "/" + savings)
+    }
 
   getUser(username: string,password: string): Observable<IUser_Dto> {
     return this.http.get<IUser_Dto>(environment.URLBase + `User/${username}/${password}`)

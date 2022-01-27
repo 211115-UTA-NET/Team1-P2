@@ -26,7 +26,11 @@ export class SigninPageComponent implements OnInit {
   user!: IUser_Dto;
   LoginMsg!: string;
 
-  constructor(private bankedService: BankedService,private router: Router,private uesrServiceService: UesrServiceService) { }
+  constructor(
+    private bankedService: BankedService,
+    private router: Router,
+    private uesrServiceService: UesrServiceService
+    ) { }
 
   public show:boolean = false;
 

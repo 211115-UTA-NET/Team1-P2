@@ -14,6 +14,7 @@ export class SavingsGraphComponent implements OnInit {
   goal!: number;
   savingsGoal: Goal[] = [];
   datetime!: string;
+  datetimeArr: any[] = [];
   percents: any[] = [];
   bankedService: any;
   //isButtonVisible: any = true;
@@ -29,7 +30,7 @@ export class SavingsGraphComponent implements OnInit {
     this.percents = [];
   }
 
-  addBar(data: string | number, percents: any): void {
+  addBar(data: string | number, percents: any, datetime: string): void {
     let barIn = document.createElement("div");
     barIn.classList.add('bar-in');
     barIn.style.width = `${percents}%`;
@@ -52,7 +53,7 @@ export class SavingsGraphComponent implements OnInit {
     addTime.style.width = "20%";
     addTime.style.float = "right";
     addTime.style.marginTop = "10px";
-    addTime.innerText = this.datetime;
+    addTime.innerText = datetime;
 
     document.getElementById("chart-in")!.appendChild(barOut);
     document.getElementById("chart-in")!.appendChild(addTime);
@@ -60,14 +61,21 @@ export class SavingsGraphComponent implements OnInit {
 
   displayBars(): void { {
 
+    for(let i=0; i<this.data.length; i++)
+    {
+      var date = new Date();
+      date.setDate(date.getDate() + (7 * i));
+      this.datetimeArr.push(date);
+    }
+
     for(let i=0; i<this.data.length; i++){
       var x = (this.data[i]/this.goal) * 100;
       this.percents.push(x);
     }
 
     for(let i=0; i<this.data.length; i++){
-      this.addBar(this.data[i], this.percents[i]);
-    }
+      this.addBar(this.data[i], this.percents[i], this.datetimeArr[i]);
+  }
 
     (<HTMLInputElement> document.getElementById("inputGoal"))!.disabled = true;
     (<HTMLInputElement> document.getElementById("creationButton"))!.disabled = true;

@@ -391,10 +391,9 @@ export class UserPageComponent implements OnInit {
     async deleteExpense(expense: number)
     {
       this.bankedService.deleteExpense(expense)
-      .subscribe(retObject => this.CheckDeleteExpenseApi(retObject));
+      .subscribe(() => this.CheckDeleteExpenseApi());
     }
-    CheckDeleteExpenseApi(retObject: Array<number>): void {
-      this.graphData = retObject;
+    CheckDeleteExpenseApi(): void {
 
       this.expenses = [];
       this.getExpenses();
@@ -403,26 +402,36 @@ export class UserPageComponent implements OnInit {
     async deleteIncome(income: number)
     {
       this.bankedService.deleteIncome(income)
-              
+      .subscribe(() => this.CheckDeleteIncomeApi());
+    }
+    CheckDeleteIncomeApi(): void {
+
       this.incomes = [];
       this.getIncomes();
-    }
+    }        
 
     async deleteLoan(loan: number)
     {
       this.bankedService.deleteLoan(loan)
-              
+      .subscribe(() => this.CheckDeleteLoanApi());
+    }
+    CheckDeleteLoanApi(): void {
+
       this.loans = [];
       this.getLoans();
     }
 
+
     async deleteSavings(savings: number)
     {
       this.bankedService.deleteSavings(savings)
-              
-      this.savings = [];
-      this.getSavings();
-    }
+      .subscribe(() => this.CheckDeleteSavingsApi());
+  }
+  CheckDeleteSavingsApi(): void {
+
+    this.savings = [];
+    this.getSavings();
+  }
 
     //IS THIS NEEDED???
     getGraphData(): void
