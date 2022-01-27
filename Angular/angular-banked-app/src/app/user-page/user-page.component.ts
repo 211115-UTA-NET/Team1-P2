@@ -15,8 +15,9 @@ import { Savings } from '../Savings';
 
 export class UserPageComponent implements OnInit {
 
-  //userId: string | any = localStorage.getItem("userid");
-  userId: number = 1;
+  //userId: string | any = localStorage.getItem("userid"); //NEEDS TO BE RE-ADDED
+  userId: number = 1;                                      //NEEDS TO BE DELETED
+
   createExpense: boolean = false;
   createLoan: boolean = false;
   createSavings: boolean = false;
@@ -385,6 +386,7 @@ export class UserPageComponent implements OnInit {
       }
     }
 
+    //IS THIS NEEDED???
     getGraphData(): void
   {
       this.bankedService.getGraph(this.userId)

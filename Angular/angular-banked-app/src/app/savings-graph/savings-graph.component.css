@@ -14,6 +14,17 @@ button
     margin-left: 46%;
 }
 
+input
+{
+    text-align: center;
+    display: block;
+    height: 25px;
+    max-width: 160px;
+    width: 15%;
+    margin-left: 46%;
+    font-size: larger;
+}
+
 #chart-out
 {
     max-width:600px;

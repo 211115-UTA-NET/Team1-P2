@@ -1,7 +1,11 @@
 <body>
-    <!--<div *ngIf="this.isButtonVisible" (click)="this.isButtonVisible = false">-->
-        <button id="creationButton" (click)="displayBars()">Generate!</button><br>
-    <!--</div>-->
+    <form>
+        <input type="number" id="inputGoal" name="inputGoal" placeholder="Savings Goal" min="1" [(ngModel)]='goal'>
+        <br>
+        <!--<div *ngIf="this.isButtonVisible" (click)="this.isButtonVisible = false">-->
+            <input type="submit" id="creationButton" value="Generate!" (click)="displayBars()"><br>
+        <!--</div>-->
+    </form>
 
     <div id="chart-out">
         <div id="chart-in">
@@ -10,5 +14,7 @@
 
     <link rel="stylesheet" href="savings-graph.component.css">
 
-    <br><button id="creationButton" [routerLink]="['/userpage']">Return</button><br>
+    <br><button [routerLink]="['/savingsgraph']" (click)="exit()">Reset</button>
+
+    <br><button id="returnButton" [routerLink]="['/userpage']">Return</button><br>
 </body>
