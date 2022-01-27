@@ -53,7 +53,7 @@
     <!-- Sign out -->
     <div class="Display">
         <p>
-            Sign-out
+            Welcome! {{fName}}
         </p>
 
         <div class="ManagerItems">
@@ -81,10 +81,9 @@
 
         <form class="FormItems">
             <div class="FormSubtext">
-                <label for="expenseName">Choose an income:</label>
+                <label for="expenseName">Choose an income type:</label>
                 <br>
                 <select id="incomeName" name="incomeName" [(ngModel)]='incomeId'>
-                    <option>[Incomes]</option>
                     <option value="1">Wages</option>
                     <option value="2">Salary</option>
                     <option value="3">Commission</option>
@@ -99,14 +98,14 @@
 
             </div>
             <div class="FormSubtext">
-                <br>How much do<br>
+                <br>How much will<br>
                 you receive?
             </div>
             <input type="number" id="incomeAmount" name="incomeAmount" placeholder="$" min="1" [(ngModel)]='incomeAmount'>
             <br>
             <div class="FormSubtext">
                 <br>How frequent do you<br>
-                receive this income?<br>
+                receive this income monthly?<br>
                 (Enter '0' for one time pay)<br>
             </div>
             <input type="number" id="paySchedule" name="paySchedule" placeholder="(Monthly)" min="0" [(ngModel)]='paySchedule'>
@@ -141,8 +140,8 @@
             <input type="text" id="loanName" name="loanName" placeholder="Loan Name" minlength="1" [(ngModel)]='loanName'>
             <br>
             <div class="FormSubtext">
-                <br>How much is<br>
-                the loan?
+                <br>How much do<br>
+                you owe?
             </div>
             <input type="number" id="loanAmount" name="loanAmount" placeholder="$" min="1" [(ngModel)]='loanAmount'>
             <br>
@@ -153,7 +152,7 @@
             <input type="number" id="loanInterest" name="loanInterest" placeholder="%" min="0" [(ngModel)]='loanInterest'>
             <div class="FormSubtext">
                 <br>How much do you<br>
-                pay on this loan?<br>
+                pay on this loan monthly?<br>
             </div>
             <input type="number" id="monthlyPayments" name="monthlyPayments" placeholder="$" min="0" [(ngModel)]='monthlyPayments'>
             <br><br>
@@ -187,7 +186,7 @@
             <input type="text" id="savingsName" name="savingsName" placeholder="Savings Name" minlength="1" [(ngModel)]='savingsName'>
             <br>
             <div class="FormSubtext">
-                <br>How much is<br>
+                <br>How much is currently<br>
                 in your savings?
             </div>
             <input type="number" id="savingsAmount" name="savingsAmount" placeholder="$" min="1" [(ngModel)]='savingsAmount'>
@@ -199,7 +198,7 @@
             <input type="number" id="savingsInterest" name="savingsInterest" placeholder="%" min="0" [(ngModel)]='savingsInterest'>
             <div class="FormSubtext">
                 <br>How much do you<br>
-                add on your savings?<br>
+                add to your savings monthly?<br>
             </div>
             <input type="number" id="addedMonthly" name="addedMonthly" placeholder="$" min="0" [(ngModel)]='addedMonthly'>
             <br><br>
@@ -230,7 +229,6 @@
                 <label for="expenseName">Choose an expense:</label>
                 <br>
                 <select id="expenseName" name="expenseName" [(ngModel)]='expenseId'>
-                    <option>[Expenses]</option>
                     <option value="1">Housing/Rent</option>
                     <option value="2">Gas/Travel</option>
                     <option value="3">Insurance</option>
@@ -251,7 +249,7 @@
             <input type="number" id="expenseAmount" name="expenseAmount" placeholder="$" min="1" [(ngModel)]='expenseAmount'>
             <div class="FormSubtext">
                 <br>How frequent does<br>
-                this expense occur?
+                this expense occur monthly?
             </div>
             <input type="number" id="expenseFrequency" name="expenseFrequency" placeholder="(Monthy)" min="1" [(ngModel)]='expenseFrequency'>
             <br>
@@ -290,8 +288,8 @@
         <div *ngFor="let expense of expenses">
             <p>==============================</p>
             <p>Name: {{expense.userOptionsId}}</p>
-            <p>Amount: {{expense.expenseAmount}}</p>
-            <p>Frequency: {{expense.expenseFrequency}}</p>
+            <p>Amount: ${{expense.expenseAmount}}</p>
+            <p>Frequency (Monthly): {{expense.expenseFrequency}}</p>
             <p>Ending: {{expense.expenseEnding}}</p>
             <p>Priority: {{expense.priority}}</p>
             <button type="button" id="delete" (click)="deleteExpense(expense.userOptionsId)">DELETE EXPENSE</button>
@@ -310,8 +308,8 @@
         <div *ngFor="let income of incomes">
             <p>==============================</p>
             <p>Name: {{income.incomeOptions}}</p>
-            <p>Amount: {{income.incomeAmount}}</p>
-            <p>Pay Schedule: {{income.paySchedule}}</p>
+            <p>Amount${{income.incomeAmount}}</p>
+            <p>Paid Every {{income.paySchedule}} Week(s)</p>
             <button type="button" id="delete" (click)="deleteIncome(income.id)">DELETE INCOME</button>
         </div>
     </div>
@@ -328,7 +326,7 @@
         <div *ngFor="let loan of loans">
             <p>==============================</p>
             <p>Name: {{loan.loanName}}</p>
-            <p>Amount: {{loan.loanAmount}}</p>
+            <p>Amount: ${{loan.loanAmount}}</p>
             <p>Interest: {{loan.loanInterest}}</p>
             <p>Monthly Payments: {{loan.monthlyPayments}}</p>
             <button type="button" id="delete" (click)="deleteLoan(loan.id)">DELETE LOAN</button>
@@ -347,7 +345,7 @@
         <div *ngFor="let saving of savings">
             <p>==============================</p>
             <p>Name: {{saving.savingsName}}</p>
-            <p>Amount: {{saving.savingsAmount}}</p>
+            <p>Amount: ${{saving.savingsAmount}}</p>
             <p>Interest: {{saving.savingsInterest}}</p>
             <p>Added Monthly: {{saving.savingsAddedMonthly}}</p>
             <button type="button" id="delete" (click)="deleteSavings(saving.id)">DELETE SAVINGS</button>

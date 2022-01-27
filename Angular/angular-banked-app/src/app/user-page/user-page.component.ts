@@ -15,8 +15,10 @@ import { Savings } from '../Savings';
 
 export class UserPageComponent implements OnInit {
 
-  //userId: string | any = localStorage.getItem("userid"); //NEEDS TO BE RE-ADDED
-  userId: number = 1;                                      //NEEDS TO BE DELETED
+  userId: string | any = localStorage.getItem("userid"); //NEEDS TO BE RE-ADDED
+  fName: string | any = localStorage.getItem("FirstName");
+  lName: string | any = localStorage.getItem("firstName");
+  //userId: number = 1;                                      //NEEDS TO BE DELETED
 
   createExpense: boolean = false;
   createLoan: boolean = false;
