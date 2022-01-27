@@ -23,3 +23,4 @@ describe('SavingsGraphComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

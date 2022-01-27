@@ -34,7 +34,8 @@ import { SavingsGraphComponent } from './savings-graph/savings-graph.component';
     provide: HTTP_INTERCEPTORS,
     useClass: InterceptorService,
     multi: true
-    }
+    },
+    HttpClientModule
   ],
   bootstrap: [AppComponent]
 })
