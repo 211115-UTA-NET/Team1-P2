@@ -99,23 +99,23 @@ export class BankedService {
   }
 
   //DELETE expense
-  deleteExpense(userId: any, expense: number): Promise<any> {
-    return lastValueFrom(this.http.delete<any>(environment.URLBase + this.expenseUrl + "/" + userId + "/" + expense)
-    );}
+  deleteExpense(expense: number): Observable<any> {
+    return this.http.delete<any>(environment.URLBase + this.expenseUrl + "/" + expense)
+  }
 
     //DELETE income
-  deleteIncome(userId: any, income: number): Promise<any> {
-    return lastValueFrom(this.http.delete<any>(environment.URLBase + this.incomeUrl + "/" + userId + "/" + income)
+  deleteIncome(income: number): Promise<any> {
+    return lastValueFrom(this.http.delete<any>(environment.URLBase + this.incomeUrl + "/" + income)
     );}
 
     //DELETE loan
-  deleteLoan(userId: any, loan: number): Promise<any> {
-    return lastValueFrom(this.http.delete<any>(environment.URLBase + this.loanUrl + "/" + userId + "/" + loan)
+  deleteLoan(loan: number): Promise<any> {
+    return lastValueFrom(this.http.delete<any>(environment.URLBase + this.loanUrl + "/" + loan)
     );}
 
     //DELETE savings
-  deleteSavings(userId: any, savings: number): Promise<any> {
-    return lastValueFrom(this.http.delete<any>(environment.URLBase + this.savingsUrl + "/" + userId + "/" + savings)
+  deleteSavings(savings: number): Promise<any> {
+    return lastValueFrom(this.http.delete<any>(environment.URLBase + this.savingsUrl + "/" + savings)
     );}
 
   getUser(username: string,password: string): Observable<IUser_Dto> {
