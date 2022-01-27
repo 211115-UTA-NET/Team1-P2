@@ -1,3 +1,4 @@
+<body>
 <div style="float: left">
     <!-- Income options (View or Create) -->
     <div class="Display">
@@ -70,9 +71,7 @@
             <input type="button" id="viewGraph" value="View Graph" [routerLink]="['/savingsgraph']">
         </div>
     </div>
-</div>
 
-<div style="float: right">
     <!-- Create new income -->
     <div class="Display" *ngIf="createIncome">
         <p>
@@ -284,18 +283,19 @@
     </div>
 </div>
 
-<div class="Display">
+<div class="GetDisplay" *ngIf="getDisplay">
     <!-- Display list of user expenses -->
-    <ul class="expenseList">
-        <li *ngFor="let expense of expenses">
-            <p>=========================</p>
+    <div class="expenseList" *ngIf="myExpense">
+        <p><strong>Expenses:</strong></p>
+        <div *ngFor="let expense of expenses">
+            <p>==============================</p>
             <p>Name: {{expense.userOptionsId}}</p>
             <p>Amount: {{expense.expenseAmount}}</p>
             <p>Frequency: {{expense.expenseFrequency}}</p>
             <p>Ending: {{expense.expenseEnding}}</p>
             <p>Priority: {{expense.priority}}</p>
-        </li>
-    </ul>
+        </div>
+    </div>
 
     <p class="Error" *ngIf="expenseGetError">
         There was an error<br>
@@ -304,14 +304,15 @@
     </p>
 
     <!-- Display list of user Incomes -->
-    <ul class="incomeList">
-        <li *ngFor="let income of incomes">
-            <p>=========================</p>
+    <div class="incomeList" *ngIf="myIncome">
+        <p><strong>Incomes:</strong></p>
+        <div *ngFor="let income of incomes">
+            <p>==============================</p>
             <p>Name: {{income.incomeOptions}}</p>
             <p>Amount: {{income.incomeAmount}}</p>
             <p>Pay Schedule: {{income.paySchedule}}</p>
-        </li>
-    </ul>
+        </div>
+    </div>
 
     <p class="Error" *ngIf="incomeGetError">
         There was an error<br>
@@ -320,15 +321,16 @@
     </p>
 
     <!-- Display list of user Loans -->
-    <ul class="loanList">
-        <li *ngFor="let loan of loans">
-            <p>=========================</p>
+    <div class="loanList" *ngIf="myLoan">
+        <p><strong>Loans:</strong></p>
+        <div *ngFor="let loan of loans">
+            <p>==============================</p>
             <p>Name: {{loan.loanName}}</p>
             <p>Amount: {{loan.loanAmount}}</p>
             <p>Interest: {{loan.loanInterest}}</p>
             <p>Monthly Payments: {{loan.monthlyPayments}}</p>
-        </li>
-    </ul>
+        </div>
+    </div>
 
     <p class="Error" *ngIf="loanGetError">
         There was an error<br>
@@ -337,15 +339,16 @@
     </p>
 
     <!-- Display list of user Savings -->
-    <ul class="savingsList">
-        <li *ngFor="let saving of savings">
-            <p>=========================</p>
+    <div class="savingsList" *ngIf="mySavings">
+        <p><strong>Savings:</strong></p>
+        <div *ngFor="let saving of savings">
+            <p>==============================</p>
             <p>Name: {{saving.savingsName}}</p>
             <p>Amount: {{saving.savingsAmount}}</p>
             <p>Interest: {{saving.savingsInterest}}</p>
             <p>Added Monthly: {{saving.savingsAddedMonthly}}</p>
-        </li>
-    </ul>
+        </div>
+    </div>
 
     <p class="Error" *ngIf="savingsGetError">
         There was an error<br>
@@ -353,3 +356,4 @@
         Please try again later.
     </p>
 </div>
+</body>

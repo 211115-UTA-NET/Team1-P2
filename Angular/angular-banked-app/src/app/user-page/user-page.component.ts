@@ -21,6 +21,7 @@ export class UserPageComponent implements OnInit {
   createLoan: boolean = false;
   createSavings: boolean = false;
   createIncome: boolean = false;
+  getDisplay: boolean = false;
 
   graphData: number[] = [];
 
@@ -30,6 +31,7 @@ export class UserPageComponent implements OnInit {
   expenseGetError: boolean = false;
   expensePostError: boolean = false;
   expensePostErrorForm: boolean = false;
+  myExpense: boolean = false;
   @Input() expenseId!: number;
   @Input() expenseAmount!: number;
   @Input() expenseFrequency!: number;
@@ -42,6 +44,7 @@ export class UserPageComponent implements OnInit {
   incomeGetError: boolean = false;
   incomePostError: boolean = false;
   incomePostErrorForm: boolean = false;
+  myIncome: boolean = false;
   @Input() incomeId!: number;
   @Input() incomeAmount!: number;
   @Input() paySchedule!: number;
@@ -52,6 +55,7 @@ export class UserPageComponent implements OnInit {
   loanGetError: boolean = false;
   loanPostError: boolean = false;
   loanPostErrorForm: boolean = false;
+  myLoan: boolean = false;
   @Input() loanName!: string;
   @Input() loanAmount!: number;
   @Input() loanInterest!: number;
@@ -63,6 +67,7 @@ export class UserPageComponent implements OnInit {
   savingsGetError: boolean = false;
   savingsPostError: boolean = false;
   savingsPostErrorForm: boolean = false;
+  mySavings: boolean = false;
   @Input() savingsName!: string;
   @Input() savingsAmount!: number;
   @Input() savingsInterest!: number;
@@ -125,6 +130,13 @@ export class UserPageComponent implements OnInit {
   {
     this.clearGetErrors();
 
+    this.getDisplay = true;
+
+    this.myExpense = true;
+    this.myIncome = false;
+    this.myLoan = false;
+    this.mySavings = false;
+
     try
     {
       this.bankedService.getExpenses(this.userId)
@@ -134,17 +146,17 @@ export class UserPageComponent implements OnInit {
     {
       this.expenseGetError = true;
     }
-
-    if(this.expenses.length == 0)
-    {
-      this.expenseGetError = true;
-    }
   }
   CheckExpenseApi(retObject: Expense[]): void {
     this.incomes = [];
     this.loans = [];
     this.savings = [];
     this.expenses = retObject;
+
+    if(this.expenses.length == 0)
+    {
+      this.expenseGetError = true;
+    }
   }
 
   async postExpense(
@@ -183,17 +195,19 @@ export class UserPageComponent implements OnInit {
   {
     this.clearGetErrors();
 
+    this.getDisplay = true;
+
+    this.myExpense = false;
+    this.myIncome = true;
+    this.myLoan = false;
+    this.mySavings = false;
+
     try
     {
       this.bankedService.getIncomes(this.userId)
       .subscribe(retObject => this.CheckIncomeApi(retObject));
     }
     catch //not catching
-    {
-      this.incomeGetError = true;
-    }
-
-    if(this.incomes.length == 0)
     {
       this.incomeGetError = true;
     }
@@ -204,6 +218,11 @@ export class UserPageComponent implements OnInit {
     this.loans = [];
     this.savings = [];
     this.incomes = retObject;
+    
+    if(this.incomes.length == 0)
+    {
+      this.incomeGetError = true;
+    }
   }
 
   async postIncome(
@@ -240,17 +259,19 @@ export class UserPageComponent implements OnInit {
   {
     this.clearGetErrors();
 
+    this.getDisplay = true;
+
+    this.myExpense = false;
+    this.myIncome = false;
+    this.myLoan = true;
+    this.mySavings = false;
+
     try
     {
       this.bankedService.getLoans(this.userId)
       .subscribe(retObject => this.CheckLoanApi(retObject));
     }
     catch //not catching
-    {
-      this.loanGetError = true;
-    }
-
-    if(this.loans.length == 0)
     {
       this.loanGetError = true;
     }
@@ -261,6 +282,11 @@ export class UserPageComponent implements OnInit {
     this.expenses = [];
     this.savings = [];
     this.loans = retObject;
+    
+    if(this.loans.length == 0)
+    {
+      this.loanGetError = true;
+    }
   }
 
   async postLoan(
@@ -298,6 +324,13 @@ export class UserPageComponent implements OnInit {
   {
     this.clearGetErrors();
 
+    this.getDisplay = true;
+
+    this.myExpense = false;
+    this.myIncome = false;
+    this.myLoan = false;
+    this.mySavings = true;
+
     try
     {
       this.bankedService.getSavings(this.userId)
@@ -308,16 +341,17 @@ export class UserPageComponent implements OnInit {
       this.savingsGetError = true;
     }
 
-    if(this.savings.length == 0)
-    {
-      this.savingsGetError = true;
-    }
   }
   CheckSavingsApi(retObject: Savings[]): void {
     this.expenses = [];
     this.loans = [];
     this.incomes = [];
     this.savings = retObject;
+    
+    if(this.savings.length == 0)
+    {
+      this.savingsGetError = true;
+    }
   }
 
   async postSavings(
