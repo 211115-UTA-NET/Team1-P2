@@ -8,9 +8,9 @@ namespace WebAPI.Logic
     public class GraphCalculations
     {
 
-        public int CalculateTime(int N)
+        public decimal CalculateTime(int N)
         {
-            int timeline = N / 4; //4weeks is 1 month
+            decimal timeline = (decimal)N / 4.00m; //4weeks is 1 month
             return timeline;
         }
 
@@ -21,75 +21,73 @@ namespace WebAPI.Logic
 
             //Foreach loops to collect info, adding and subtracting from total as needed.
             //while loops to iterate through each array item
-            int i = 0;
+            int i;
+            decimal T;
+
+            for(i = 0; i < List.Length; i++)
+            {
+                List[i] = 0;
+            }
+
+
             foreach (var item in Expenses)
             {
                 var day = DateTime.Now;
                 var endDate = item.ExpenseEnding;
+                T = CalculateTime(item.ExpenseFrequency);
 
-                while(i <= 104 || day < endDate)
+               for(i = 0; i < List.Length; i++)
                 {
-                    int T = CalculateTime(item.ExpenseFrequency);
-                    List[i] -= item.ExpenseAmount * T;
-                    i++;
-                    day.AddDays(1);
-                }
-                i = 0;
-            }
 
+                    if(day < endDate)
+                    {
+                        List[i] -= (i+1) * (item.ExpenseAmount * T);
+                        day.AddDays(1);
+                    }
+                }
+            }
 
             foreach (var item in Income)
             {
-                while(i <= 104)
+                 T = CalculateTime(item.PaySchedule);
+
+                for(i = 0; i < List.Length; i++)
                 {
-                    int T = CalculateTime(item.PaySchedule);
-                    List[i] += item.IncomeAmount * T;
-                    i++;
+                    List[i] += (i+1) * (item.IncomeAmount * T);
                 }
-                i = 0;
             }
 
 
             //Savings and Loans only opperate monthly and have interest. Stopping loans at end of items or loan zero'd out
-            i = 3;
+            
             foreach (var item in Loans)
             {
-                while(i <= 104)
+                for(i = 3; i < List.Length; i += 4)
                 {
-                    while(item.LoanAmount > 0 || i >= 104)
+                    if(item.LoanAmount > 0)
                     {
                         decimal interest = ((item.LoanAmount * ((decimal)item.LoanInterest) / 100) - item.MonthlyPayments) / 4;
 
                         List[i] += interest;
 
                         item.LoanAmount -= interest;
-                        i += 4;
                     } 
                 }
-                i = 0;
             }
 
-
-            i = 3;
             foreach (var item in Savings)
             {
-                while(i <= 104)
+                for(i = 3; i < List.Length; i += 4)
                 {
                     decimal interest = ((item.SavingsAmount * ((decimal)item.SavingsInterest) / 100) + item.SavingsAddedMonthly) / 4;
 
                     List[i] += interest;
 
                     item.SavingsAmount += interest;
-                    i += 4;
                 }
-
             }
 
             return List;
-            
-
-
-           
 
         }
 
