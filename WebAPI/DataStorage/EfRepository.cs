@@ -295,7 +295,47 @@ public async Task DeleteExpense(int ID)
     }
 
 
+    public async Task<Decimal> GetUserInfo(int UserId)
+    {
+      UserInfo? userInfo = await _context.UserInfos
+    .Where(r => r.UserPasswordsId == UserId)
+    .FirstOrDefaultAsync();
 
+      _logger.LogInformation("function GetUserInfo {UserId}", UserId);
+      decimal total=0;
+      if (userInfo is not null) total = (Decimal)userInfo.SavingsGoal;
+      return total;
+      //return user;
 
+    }
+
+    public async Task PutUserInfo(int Id, Decimal SavingsGoal)
+    {
+      //string sql = $"select id from dbo.UserPasswords where username=" + "'" + user.Username + "'";
+
+      UserInfo? UserInfo = await _context.UserInfos
+    .Where(r => r.UserPasswordsId == Id)
+    .FirstOrDefaultAsync();
+
+      if (UserInfo == null)
+      {
+        var newUserInfo = new UserInfo
+        {
+          UserPasswordsId = Id,
+          SavingsGoal = SavingsGoal          
+        };
+        _context.UserInfos.Add(newUserInfo);
+        await _context.SaveChangesAsync();
+        //id = newUser.Id;
+        _logger.LogInformation("create User function PutUserInfo {Id}", Id);
+
+      }
+      else
+      {
+        UserInfo.SavingsGoal = SavingsGoal;
+        await _context.SaveChangesAsync();
+        _logger.LogInformation("Update User Info function PutUserInfo {Id}", Id);
+      }
+    }
   }
 }

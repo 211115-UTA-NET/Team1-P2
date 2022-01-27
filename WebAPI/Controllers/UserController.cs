@@ -48,6 +48,21 @@ namespace WebAPI.Controllers
 
     }
 
+    [Route("Info")]
+    [HttpGet]
+    public async Task<Decimal> GetUserInfo(int UserId)
+    {
+      return await _repository.GetUserInfo(UserId);
+    }
+
+    [Route("Info")]
+    [HttpPut]
+    public async Task PutUserInfo(int UserId,Decimal SavingsGoal)
+    {
+       await _repository.PutUserInfo(UserId, SavingsGoal);
+    }
+
+
 
   }
 }

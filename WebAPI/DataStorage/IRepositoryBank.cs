@@ -30,6 +30,9 @@ namespace WebAPI.DataStorage
 
     Task DeleteIncome(int ID);
     Task DeleteLoan(int ID);
+    Task<Decimal> GetUserInfo(int UserId);
 
-      }
+    Task PutUserInfo(int UserId, Decimal SavingsGoal);
+
+  }
 }
