@@ -11,7 +11,7 @@ export class SavingsGraphComponent implements OnInit {
 
   data: number[] = [];
   graphData: number[] = []; //Remove once connection is complete
-  goal: number = 1000;
+  goal!: number;
   savingsGoal: Goal[] = [];
   datetime!: string;
   percents: any[] = [];

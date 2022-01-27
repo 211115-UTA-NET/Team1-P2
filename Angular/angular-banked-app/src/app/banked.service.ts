@@ -98,6 +98,26 @@ export class BankedService {
     return this.http.get<Goal[]>(environment.URLBase + this.goalUrl + "/" + userId)
   }
 
+  //DELETE expense
+  deleteExpense(userId: any, expense: number): Promise<any> {
+    return lastValueFrom(this.http.delete<any>(environment.URLBase + this.expenseUrl + "/" + userId + "/" + expense)
+    );}
+
+    //DELETE income
+  deleteIncome(userId: any, income: number): Promise<any> {
+    return lastValueFrom(this.http.delete<any>(environment.URLBase + this.incomeUrl + "/" + userId + "/" + income)
+    );}
+
+    //DELETE loan
+  deleteLoan(userId: any, loan: number): Promise<any> {
+    return lastValueFrom(this.http.delete<any>(environment.URLBase + this.loanUrl + "/" + userId + "/" + loan)
+    );}
+
+    //DELETE savings
+  deleteSavings(userId: any, savings: number): Promise<any> {
+    return lastValueFrom(this.http.delete<any>(environment.URLBase + this.savingsUrl + "/" + userId + "/" + savings)
+    );}
+
   getUser(username: string,password: string): Observable<IUser_Dto> {
     return this.http.get<IUser_Dto>(environment.URLBase + `User/${username}/${password}`)
   }

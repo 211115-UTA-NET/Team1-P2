@@ -294,6 +294,7 @@
             <p>Frequency: {{expense.expenseFrequency}}</p>
             <p>Ending: {{expense.expenseEnding}}</p>
             <p>Priority: {{expense.priority}}</p>
+            <button type="button" id="delete" (click)="deleteExpense(expense.userOptionsId)">DELETE EXPENSE</button>
         </div>
     </div>
 
@@ -311,6 +312,7 @@
             <p>Name: {{income.incomeOptions}}</p>
             <p>Amount: {{income.incomeAmount}}</p>
             <p>Pay Schedule: {{income.paySchedule}}</p>
+            <button type="button" id="delete" (click)="deleteIncome(income.id)">DELETE INCOME</button>
         </div>
     </div>
 
@@ -329,6 +331,7 @@
             <p>Amount: {{loan.loanAmount}}</p>
             <p>Interest: {{loan.loanInterest}}</p>
             <p>Monthly Payments: {{loan.monthlyPayments}}</p>
+            <button type="button" id="delete" (click)="deleteLoan(loan.id)">DELETE LOAN</button>
         </div>
     </div>
 
@@ -347,6 +350,7 @@
             <p>Amount: {{saving.savingsAmount}}</p>
             <p>Interest: {{saving.savingsInterest}}</p>
             <p>Added Monthly: {{saving.savingsAddedMonthly}}</p>
+            <button type="button" id="delete" (click)="deleteSavings(saving.id)">DELETE SAVINGS</button>
         </div>
     </div>
 
