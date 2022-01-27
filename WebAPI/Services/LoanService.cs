@@ -63,8 +63,9 @@ namespace WebAPI.Logic
       reader.Close();
       await connection.CloseAsync();
       if (_logger is not null)
-      _logger.LogInformation("executed select statement for Income of user id {userId}", userId);
-
+      {
+        _logger.LogInformation("executed select statement for Income of user id {userId}", userId);
+      }
       return currentItem;
     }
 

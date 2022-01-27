@@ -7,8 +7,14 @@ namespace WebAPI.Logic
 
     public class GraphCalculations
     {
-        public decimal[] List = new decimal[104];
+        private decimal[] List = new decimal[104];
 
+        public decimal[] list
+        {
+            get { return List; }
+            set { List = value; }
+        }
+        
         public decimal CalculateTime(int N)
         {
             decimal timeline = (decimal)N / 4.00m; //4weeks is 1 month

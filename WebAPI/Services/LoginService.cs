@@ -83,9 +83,12 @@ namespace WebAPI.Logic
           id = (int)command2.ExecuteScalar();
         }
         else
+        {
+          //command.ExecuteNonQuery();
+          await connection.CloseAsync();
+        }
         id = 0;
-        //command.ExecuteNonQuery();
-        await connection.CloseAsync();
+
       }
       return id;
     }
