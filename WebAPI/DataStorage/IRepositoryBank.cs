@@ -11,6 +11,9 @@ namespace WebAPI.DataStorage
     Task<IEnumerable<Expenses_Dto>> GetExpense(int userId);
 
     Task InputExpense(List<Expenses_Dto> expense);
+
+    Task PutExpense(List<Expenses_Dto> expense);
+    
     Task<IEnumerable<ExpenseOptions_Dto>> GetExpenseOptions();
 
     Task<IEnumerable<Income_Dto>> GetIncome(int userId);

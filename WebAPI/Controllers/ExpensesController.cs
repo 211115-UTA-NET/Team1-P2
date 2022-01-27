@@ -60,5 +60,12 @@ namespace WebAPI.Controllers
       await _repository.InputExpense(expense);
     }
 
+    [HttpPut]
+    public async Task PutExpense(List<Expenses_Dto> expense)
+    {
+      await _repository.PutExpense(expense);
+    }
+
+
   }
 }

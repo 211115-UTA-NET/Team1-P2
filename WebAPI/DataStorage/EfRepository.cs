@@ -259,6 +259,33 @@ public async Task DeleteExpense(int ID)
 
     }
 
+
+    public async Task PutExpense(List<Expenses_Dto> expense)
+    {
+
+      Expense? Expense = await _context.Expenses
+      .Where(r => r.Id== expense[0].Id)
+      .FirstOrDefaultAsync();
+
+      if (Expense is not null)
+      {
+        Expense.UserPasswordsId = expense[0].UserPassId;
+        Expense.ExpenseOptionsId = expense[0].UserOptionsId;
+        Expense.ExpenseAmount = expense[0].ExpenseAmount;
+        Expense.EspenseFrequency = expense[0].ExpenseFrequency;
+        Expense.ExpenseEnding = expense[0].ExpenseEnding;
+        Expense.SeverityOfNeed = expense[0].Priority;
+        _context.Expenses.Add(Expense);
+        await _context.SaveChangesAsync();
+        _logger.LogInformation("function PutExpense user id {userId}", expense[0].Id);
+      }
+      else
+      {
+        _logger.LogInformation("id not exists function PutExpense user id {userId}", expense[0].Id);
+      }
+    }
+
+
     public async Task InputExpense(List<Expenses_Dto> expense)
   {
       var newExpense = new Expense
