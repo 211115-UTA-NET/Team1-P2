@@ -92,9 +92,8 @@ namespace WebAPI.Logic
       if (_logger is  not null)
       {
         _logger.LogInformation("executed select statement for Expenses of user id {userId}", userId);
-        return currentItem;
       }
-
+       return currentItem;
     }
 
     //Insert Expense to Database
