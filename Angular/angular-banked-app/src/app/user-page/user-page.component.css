@@ -71,3 +71,8 @@ select
     margin-top: 25px;
     float:right;
 }
+
+.getTitle
+{
+    font-size: 25px;
+}

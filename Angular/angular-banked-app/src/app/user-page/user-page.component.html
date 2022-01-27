@@ -64,7 +64,7 @@
     <!-- Graph path -->
     <div class="Display">
         <p>
-            Savings graph!
+            Check your savings graph!
         </p>
 
         <div class="ManagerItems">
@@ -284,14 +284,14 @@
 <div class="GetDisplay" *ngIf="getDisplay">
     <!-- Display list of user expenses -->
     <div class="expenseList" *ngIf="myExpense">
-        <p><strong>Expenses:</strong></p>
+        <p class="getTitle"><strong>Expenses:</strong></p>
         <div *ngFor="let expense of expenses">
-            <p>==============================</p>
-            <p>Name: {{expense.userOptionsId}}</p>
-            <p>Amount: ${{expense.expenseAmount}}</p>
-            <p>Frequency (Monthly): {{expense.expenseFrequency}}</p>
-            <p>Ending: {{expense.expenseEnding}}</p>
-            <p>Priority: {{expense.priority}}</p>
+            <p><strong>==============================</strong></p>
+            <p><strong>Name:</strong> {{expense.userOptionsId}}</p>
+            <p><strong>Amount:</strong> ${{expense.expenseAmount}}</p>
+            <p><strong>Frequency (Monthly):</strong> {{expense.expenseFrequency}}</p>
+            <p><strong>Ending:</strong> {{expense.expenseEnding}}</p>
+            <p><strong>Priority:</strong> {{expense.priority}}</p>
             <button type="button" id="delete" (click)="deleteExpense(expense.userOptionsId)">DELETE EXPENSE</button>
         </div>
     </div>
@@ -304,12 +304,12 @@
 
     <!-- Display list of user Incomes -->
     <div class="incomeList" *ngIf="myIncome">
-        <p><strong>Incomes:</strong></p>
+        <p class="getTitle"><strong>Incomes:</strong></p>
         <div *ngFor="let income of incomes">
-            <p>==============================</p>
-            <p>Name: {{income.incomeOptions}}</p>
-            <p>Amount${{income.incomeAmount}}</p>
-            <p>Paid Every {{income.paySchedule}} Week(s)</p>
+            <p><strong>==============================</strong></p>
+            <p><strong>Name:</strong> {{income.incomeOptions}}</p>
+            <p><strong>Amount:</strong> ${{income.incomeAmount}}</p>
+            <p>Paid every {{income.paySchedule}} week(s)</p>
             <button type="button" id="delete" (click)="deleteIncome(income.id)">DELETE INCOME</button>
         </div>
     </div>
@@ -322,13 +322,13 @@
 
     <!-- Display list of user Loans -->
     <div class="loanList" *ngIf="myLoan">
-        <p><strong>Loans:</strong></p>
+        <p class="getTitle"><strong>Loans:</strong></p>
         <div *ngFor="let loan of loans">
-            <p>==============================</p>
-            <p>Name: {{loan.loanName}}</p>
-            <p>Amount: ${{loan.loanAmount}}</p>
-            <p>Interest: {{loan.loanInterest}}</p>
-            <p>Monthly Payments: {{loan.monthlyPayments}}</p>
+            <p><strong>==============================</strong></p>
+            <p><strong>Name:</strong> {{loan.loanName}}</p>
+            <p><strong>Amount:</strong> ${{loan.loanAmount}}</p>
+            <p><strong>Interest:</strong> {{loan.loanInterest}}%</p>
+            <p><strong>Monthly Payment:</strong> ${{loan.monthlyPayments}}</p>
             <button type="button" id="delete" (click)="deleteLoan(loan.id)">DELETE LOAN</button>
         </div>
     </div>
@@ -341,13 +341,13 @@
 
     <!-- Display list of user Savings -->
     <div class="savingsList" *ngIf="mySavings">
-        <p><strong>Savings:</strong></p>
+        <p class="getTitle"><strong>Savings:</strong></p>
         <div *ngFor="let saving of savings">
-            <p>==============================</p>
-            <p>Name: {{saving.savingsName}}</p>
-            <p>Amount: ${{saving.savingsAmount}}</p>
-            <p>Interest: {{saving.savingsInterest}}</p>
-            <p>Added Monthly: {{saving.savingsAddedMonthly}}</p>
+            <p><strong>==============================</strong></p>
+            <p><strong>Name:</strong> {{saving.savingsName}}</p>
+            <p><strong>Amount:</strong> ${{saving.savingsAmount}}</p>
+            <p><strong>Interest:</strong> {{saving.savingsInterest}}%</p>
+            <p><strong>Added Monthly:</strong> ${{saving.savingsAddedMonthly}}</p>
             <button type="button" id="delete" (click)="deleteSavings(saving.id)">DELETE SAVINGS</button>
         </div>
     </div>

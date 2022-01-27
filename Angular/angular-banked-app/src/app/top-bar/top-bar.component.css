@@ -2,11 +2,25 @@
 {
     font-family: 'Fira Sans Condensed', sans-serif;
     font-size: 75px;
-    margin-top: -5px;
+    margin-top: -6px;
+    margin-left: -10px;
+    text-indent: 15px;
     -webkit-text-stroke: 1px lightgreen;
     -webkit-text-fill-color: rgb(20, 75, 20);
     background-color: rgb(20, 75, 20);
     position: fixed;
     top: 0;
     width: 100%;
+}
+
+.image
+{
+    height:100em;
+    background-size:cover;
+    width: 110%;
+    margin-left: -10px;
+    margin-top: -70px;
+    background-image: url("../../assets/images/BasicBackground.jpg");
+    position: fixed;
+    z-index: -1;
 }
