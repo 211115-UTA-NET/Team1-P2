@@ -45,8 +45,8 @@ namespace WebAPI.Logic
       SavingsService SSrv = new(_connectionString);
       List<Savings_Dto> LSave  = await SSrv.GetSavings(UserId);
 
-
-      return GraphCalculations.CalculateTotal(LExp, LIncome, LLoan, LSave);
+      GraphCalculations G = new();
+      return G.CalculateTotal(LExp, LIncome, LLoan, LSave);
       
     }
 
