@@ -5,7 +5,6 @@ using WebAPI.Models;
 using WebAPI.DataStorage;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc;
-
 namespace WebAPI.Logic
 {
     public class LoginService : IUserRepository
@@ -28,6 +27,28 @@ namespace WebAPI.Logic
                 //new Catalog {ItemID = 18, ItemName = "SuperPrint 1000", Location = "North St.", Price = 1000, quantity = 10}
             };
         }
+
+
+    public async Task<decimal[]> InformationCollectorLoop(int UserId)
+    {
+      //var logger = loggerFactory.CreateLogger();
+      //ILogger<ExpensesService> _logger =new();
+      ExpensesService ESrv = new(_connectionString);
+      List<Expenses_Dto> LExp = await ESrv.GetExpense(UserId);
+
+      IncomeService ISrv = new(_connectionString);
+      List<Income_Dto> LIncome = await ISrv.GetIncome(UserId);
+
+      LoanService LSrv = new(_connectionString);
+      List<Loans_Dto> LLoan = await LSrv.GetLoans(UserId);
+
+      SavingsService SSrv = new(_connectionString);
+      List<Savings_Dto> LSave  = await SSrv.GetSavings(UserId);
+
+
+      return GraphCalculations.CalculateTotal(LExp, LIncome, LLoan, LSave);
+      
+    }
 
 
     public async Task<ActionResult<int>> PostUser(User_Dto user)

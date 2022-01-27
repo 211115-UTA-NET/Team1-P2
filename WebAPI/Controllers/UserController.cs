@@ -33,7 +33,14 @@ namespace WebAPI.Controllers
 
     }
 
-    
+    [Route("Report")]
+    [HttpGet]
+    public async Task<decimal[]> GetUserReport(int UserId)
+    {
+      return await _repository.InformationCollectorLoop(UserId);
+    }
+
+
     [HttpPost]
     public async Task<ActionResult<int>> PostUser(User_Dto user)
     {

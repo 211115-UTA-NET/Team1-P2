@@ -4,6 +4,13 @@ namespace WebAPI.Logic
 {
     public class Calculations
     {
+
+    public BankedReport_Dto InformationCollectorLoop()
+    {
+      return null;
+    }
+      
+
         public List<WeeklySpendings_Dtos> InformationCollector()
         {
             List<Income_Dto> income = new();
@@ -137,7 +144,6 @@ namespace WebAPI.Logic
                     monthlyExpenses.Add(new(expenseWeekly, expenseWeekly, expenseWeekly, expenseWeekly));
                 }
             }
-
             return monthlyExpenses;
         }
 
@@ -171,7 +177,6 @@ namespace WebAPI.Logic
                 monthlyTotals[2] = record.Wk3Spendings;
                 monthlyTotals[3] = record.Wk4Spendings;
             }
-
             return monthlyTotals;
         }
     }

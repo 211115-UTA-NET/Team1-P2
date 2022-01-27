@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-import { Component, OnInit } from '@angular/core';
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
-
-=======
 import { Component, OnInit,Input } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpResponse } from '@angular/common/http';
@@ -15,25 +7,12 @@ import { BankedService } from '../banked.service';
 import { IUser_Dto } from '../userInfo';
 import { Router } from '@angular/router';
 import { UesrServiceService } from '../userservice.service';
->>>>>>> ShaulTestNew
 @Component({
   selector: 'app-signin-page',
   templateUrl: './signin-page.component.html',
   styleUrls: ['./signin-page.component.css']
 })
 
-<<<<<<< HEAD
-@Injectable()
-export class SigninPageComponent implements OnInit {
-
-  constructor(private http: HttpClient) { }
-
-  public show:boolean = false;
-
-  toggleForm()
-  {
-    this.show = !this.show;
-=======
 
 
 @Injectable()
@@ -58,15 +37,18 @@ export class SigninPageComponent implements OnInit {
   async CheckLogin(){
     this.user= await this.uesrServiceService.getUser(this.username,this.password);
     //alert(this.user.id);
-    if (this.user.id >0)      
-      this.router.navigateByUrl("/userpage");           
+    if (this.user.id >0)
+    {
+      localStorage.setItem('userid', this.user.id.toString());
+      this.router.navigateByUrl("/userpage"); 
+    }          
     else
     {  
       this.LoginMsg="User does not exists<br>try again."
 //      this.show=false;  
       }
 //    this.bankedService.getUser(this.username,this.password)
-  //    .subscribe(retObject => this.CheckLoginApi(retObject));  
+      //.subscribe(retObject => this.CheckLoginApi(retObject));  
   }
 
   async AddNewUser(){
@@ -81,7 +63,7 @@ export class SigninPageComponent implements OnInit {
     {
       localStorage.setItem('userid', this.user.id.toString());
       this.router.navigateByUrl("/userpage");           
-   //   var x = localStorage.getItem("userid");
+      var x = localStorage.getItem("userid");
     }
     else
     {
@@ -93,14 +75,8 @@ export class SigninPageComponent implements OnInit {
   {
     this.show = !this.show;
 
->>>>>>> ShaulTestNew
   }
   
   ngOnInit(): void {
   }
-
-<<<<<<< HEAD
-=======
-  
->>>>>>> ShaulTestNew
 }

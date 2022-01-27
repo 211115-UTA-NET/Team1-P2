@@ -13,6 +13,12 @@ namespace WebAPI.Logic
     private readonly string _connectionString;
     private readonly ILogger<IExpensesRepository> _logger;
 
+    public ExpensesService(string connectionString)
+    {
+      _connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));      
+    }
+
+
     public ExpensesService(string connectionString, ILogger<ExpensesService> logger)
     {
       _connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
@@ -83,6 +89,7 @@ namespace WebAPI.Logic
       }
       await reader.ReadAsync();      
       await connection.CloseAsync();
+      if (_logger is  not null)
       _logger.LogInformation("executed select statement for Expenses of user id {userId}", userId);
       return currentItem;
     }
