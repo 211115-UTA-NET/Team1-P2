@@ -15,7 +15,7 @@ namespace WebAPI.Logic
       return timeline;
         }
 
-        public static decimal[] CalculateTotal(List<Expenses_Dto> Expenses, List<Income_Dto> Income, List<Loans_Dto> Loans, List<Savings_Dto> Savings)
+        public static decimal[] CalculateTotal(IEnumerable<Expenses_Dto> Expenses, IEnumerable<Income_Dto> Income, IEnumerable<Loans_Dto> Loans, IEnumerable<Savings_Dto> Savings)
         {
             //Array to collect data. Savings goal and Dates calculated in client. 104 Values is 2 years
             decimal[] List = new decimal[105];
@@ -30,8 +30,8 @@ namespace WebAPI.Logic
 
                 while(i <= 104 || day < endDate)
                 {
-                    int T = CalculateTime(item.ExpenseFrequency);
-                    List[i] -= item.ExpenseAmount * T;
+                    int T = CalculateTime((int)item.ExpenseFrequency);
+                    List[i] -= (int)item.ExpenseAmount * T;
                     i++;
                     day=day.AddDays(7);
                 }
@@ -43,8 +43,8 @@ namespace WebAPI.Logic
             {
                 while(i <= 104)
                 {
-                    int T = CalculateTime(item.PaySchedule);
-                    List[i] += item.IncomeAmount * T;
+                    int T = CalculateTime((int)item.PaySchedule);
+                    List[i] += (int)item.IncomeAmount * T;
                     i++;
                 }
                 i = 0;
@@ -59,7 +59,7 @@ namespace WebAPI.Logic
               //  {
                     while(item.LoanAmount > 0 && i <= 104)
                     {
-                        decimal interest = ((item.LoanAmount * ((decimal)item.LoanInterest) / 100) - item.MonthlyPayments) / 4;
+                        decimal interest = (((decimal)item.LoanAmount * ((decimal)item.LoanInterest) / 100) - (decimal)item.MonthlyPayments) / 4;
 
                         List[i] += interest;
 
@@ -76,7 +76,7 @@ namespace WebAPI.Logic
             {
                 while(i <= 104)
                 {
-                    decimal interest = ((item.SavingsAmount * ((decimal)item.SavingsInterest) / 100) + item.SavingsAddedMonthly) / 4;
+                    decimal interest = (((decimal)item.SavingsAmount * ((decimal)item.SavingsInterest) / 100) + (decimal)item.SavingsAddedMonthly) / 4;
 
                     List[i] += interest;
 

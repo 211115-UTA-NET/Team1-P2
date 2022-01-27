@@ -36,31 +36,31 @@ namespace WebAPI.Logic
 
     
 
-    public async Task<List<ExpenseOptions_Dto>> GetExpenseOptions()
-    {
-      List<ExpenseOptions_Dto> currentItem = new();
+    //public async Task<List<ExpenseOptions_Dto>> GetExpenseOptions()
+    //{
+    //  List<ExpenseOptions_Dto> currentItem = new();
 
-      string sql = $"select * from ExpenseOptions"; //use userId to query for expense items
-      using SqlConnection connection = new(_connectionString);
-      await connection.OpenAsync();
-      using SqlCommand command = new SqlCommand(sql, connection);
-      using SqlDataReader reader = command.ExecuteReader();
-      while (reader.Read())
-      {
-        //set items in table to fields in the Dto to send back on the Get command
-        var item = new ExpenseOptions_Dto()
-        {
-          id = (int)reader["Id"],
-          ExpenseName = reader["ExpenseName"].ToString(),
-          Priority = (int)reader["priorityId"]
-        };
-        currentItem.Add(item);
-      }
-      await reader.ReadAsync();
-      await connection.CloseAsync();
-      _logger.LogInformation("executed select statement for Expense Options ");
-      return currentItem;
-    }
+    //  string sql = $"select * from ExpenseOptions"; //use userId to query for expense items
+    //  using SqlConnection connection = new(_connectionString);
+    //  await connection.OpenAsync();
+    //  using SqlCommand command = new SqlCommand(sql, connection);
+    //  using SqlDataReader reader = command.ExecuteReader();
+    //  while (reader.Read())
+    //  {
+    //    //set items in table to fields in the Dto to send back on the Get command
+    //    var item = new ExpenseOptions_Dto()
+    //    {
+    //      id = (int)reader["Id"],
+    //      ExpenseName = reader["ExpenseName"].ToString(),
+    //      Priority = (int)reader["priorityId"]
+    //    };
+    //    currentItem.Add(item);
+    //  }
+    //  await reader.ReadAsync();
+    //  await connection.CloseAsync();
+    //  _logger.LogInformation("executed select statement for Expense Options ");
+    //  return currentItem;
+    //}
 
 
     public async Task<List<Expenses_Dto>> GetExpense(int userId)

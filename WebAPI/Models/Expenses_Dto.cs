@@ -4,12 +4,12 @@ namespace WebAPI.Models
     {
 //<<<<<<< HEAD
         public int Id { get; set; }
-        public int UserPassId { get; set; }
-        public int UserOptionsId { get; set; }
-        public Decimal ExpenseAmount { get; set; }
-        public int ExpenseFrequency { get; set; }
+        public int? UserPassId { get; set; }
+        public int? UserOptionsId { get; set; }
+        public Decimal? ExpenseAmount { get; set; }
+        public int? ExpenseFrequency { get; set; }
         public Nullable<DateTime> ExpenseEnding { get; set; }
-        public int Priority { get; set; }
+        public int? Priority { get; set; }
 //=======
 /*
         int Id { get; set; }

@@ -10,22 +10,17 @@ namespace WebAPI.Controllers
     [ApiController]
     public class LoansController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
-//        public LoansController(IConfiguration configuration)
-  //      {
-    //        _configuration = configuration;
-      //  }
 
-      private readonly ILoanRepository _repository;
+      private readonly IRepositoryBank _repository;
 
-      public LoansController(ILoanRepository repository)
+      public LoansController(IRepositoryBank repository)
       {
         _repository = repository;
       }
 
     //Getting a specific customer from the database
         [HttpGet("{userId}")]
-        public async Task<List<Loans_Dto>> GetLoans(int userId)
+        public async Task<IEnumerable<Loans_Dto>> GetLoans(int userId)
         {
 
 //            string connect = _configuration.GetSection("ConnectionString").GetSection("BankedDB").Value;
@@ -35,15 +30,12 @@ namespace WebAPI.Controllers
 
 
         }
-        //Need to create list value to add as input parameter containing all data required for expense input
-        [HttpPost]
-        public async void PostLoan(List<Loans_Dto> loan)
-        {
-      //      string connect = _configuration.GetSection("ConnectionString").GetSection("PrintShopDB").Value;
-        //    await using SqlConnection connection = new(connect);
-            //LoanService.InputLoans(expense, connection);
-            await _repository.InputLoans(loan);
-      
-        }
+    //Need to create list value to add as input parameter containing all data required for expense input
+    [HttpPost]
+    public async Task PostLoan(List<Loans_Dto> loan)
+    {
+      await _repository.PostLoan(loan);
+
     }
+  }
 }

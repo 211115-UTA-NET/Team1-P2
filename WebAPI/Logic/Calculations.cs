@@ -11,141 +11,141 @@ namespace WebAPI.Logic
     }
       
 
-        public List<WeeklySpendings_Dtos> InformationCollector()
-        {
-            List<Income_Dto> income = new();
-            List<Loans_Dto> loans = new();
-            List<Savings_Dto> savings = new();
-            List<Expenses_Dto> expenses = new();
+        //public List<WeeklySpendings_Dtos> InformationCollector()
+        //{
+        //    List<Income_Dto> income = new();
+        //    List<Loans_Dto> loans = new();
+        //    List<Savings_Dto> savings = new();
+        //    List<Expenses_Dto> expenses = new();
             
-            try
-            {
-                //income = {Get user income info}
-                //loans = {Get user loan info}
-                //savings = {Get user savings info}
-                //expenses = {Get user expenses info}
-            }
-            catch
-            {
-                Console.WriteLine("Error: Could not pull information.");
-            }
+        //    try
+        //    {
+        //        //income = {Get user income info}
+        //        //loans = {Get user loan info}
+        //        //savings = {Get user savings info}
+        //        //expenses = {Get user expenses info}
+        //    }
+        //    catch
+        //    {
+        //        Console.WriteLine("Error: Could not pull information.");
+        //    }
 
-            List<WeeklySpendings_Dtos> monthlyIncome = new();
-            if (income != null)
-                monthlyIncome = IncomeCalculator(income);
+        //    List<WeeklySpendings_Dtos> monthlyIncome = new();
+        //    if (income != null)
+        //        monthlyIncome = IncomeCalculator(income);
 
-            List<WeeklySpendings_Dtos> monthlyLoans = new();
-            if (loans != null)
-                monthlyLoans = LoansCalculator(loans);
+        //    List<WeeklySpendings_Dtos> monthlyLoans = new();
+        //    if (loans != null)
+        //        monthlyLoans = LoansCalculator(loans);
 
-            List<WeeklySpendings_Dtos> monthlySavings = new();
-            if (savings != null)
-                monthlySavings = SavingsCalculator(savings);
+        //    List<WeeklySpendings_Dtos> monthlySavings = new();
+        //    if (savings != null)
+        //        monthlySavings = SavingsCalculator(savings);
 
-            List<WeeklySpendings_Dtos> monthlyExpenses = new();
-            if (expenses != null)
-                monthlyExpenses = ExpensesCalculator(expenses);
+        //    List<WeeklySpendings_Dtos> monthlyExpenses = new();
+        //    if (expenses != null)
+        //        monthlyExpenses = ExpensesCalculator(expenses);
 
-            List<WeeklySpendings_Dtos> finalWeeklySpendings = new();
-            finalWeeklySpendings = MonthlySpendingsCalculator(monthlyIncome, monthlyLoans, monthlySavings, monthlyExpenses);
+        //    List<WeeklySpendings_Dtos> finalWeeklySpendings = new();
+        //    finalWeeklySpendings = MonthlySpendingsCalculator(monthlyIncome, monthlyLoans, monthlySavings, monthlyExpenses);
 
-            return finalWeeklySpendings;
-        }
+        //    return finalWeeklySpendings;
+        //}
 
-        private List<WeeklySpendings_Dtos> IncomeCalculator(List<Income_Dto> income)
-        {
-            List<WeeklySpendings_Dtos> monthlyIncome = new();
+        //private List<WeeklySpendings_Dtos> IncomeCalculator(List<Income_Dto> income)
+        //{
+        //    List<WeeklySpendings_Dtos> monthlyIncome = new();
 
-            foreach (var record in income)
-            {
-                if (record.PaySchedule == 1)
-                {
-                    decimal incomeAmount = record.IncomeAmount;
-                    monthlyIncome.Add(new(incomeAmount, incomeAmount, incomeAmount, incomeAmount));
-                }
-                else if (record.PaySchedule == 2)
-                {
-                    decimal incomeAmount = record.IncomeAmount;
-                    monthlyIncome.Add(new(0, incomeAmount, 0, incomeAmount));
-                }
-            }
+        //    foreach (var record in income)
+        //    {
+        //        if (record.PaySchedule == 1)
+        //        {
+        //            decimal incomeAmount = record.IncomeAmount;
+        //            monthlyIncome.Add(new(incomeAmount, incomeAmount, incomeAmount, incomeAmount));
+        //        }
+        //        else if (record.PaySchedule == 2)
+        //        {
+        //            decimal incomeAmount = record.IncomeAmount;
+        //            monthlyIncome.Add(new(0, incomeAmount, 0, incomeAmount));
+        //        }
+        //    }
 
-            return monthlyIncome;
-        }
+        //    return monthlyIncome;
+        //}
 
-        private List<WeeklySpendings_Dtos> LoansCalculator(List<Loans_Dto> loans)
-        {
-            List<WeeklySpendings_Dtos> monthlyLoans = new();
+        //private List<WeeklySpendings_Dtos> LoansCalculator(List<Loans_Dto> loans)
+        //{
+        //    List<WeeklySpendings_Dtos> monthlyLoans = new();
 
-            foreach (var record in loans)
-            {
-                //Final loan amount after interest added and monthly payment payed | Implement later
-                //decimal loanIncrease = record.LoanAmount * record.LoanInterest;
-                //decimal loanAmount = record.LoanAmount + loanIncrease;
-                //decimal finalAmount = loanAmount - record.MonthlyPayments;
+        //    foreach (var record in loans)
+        //    {
+        //        //Final loan amount after interest added and monthly payment payed | Implement later
+        //        //decimal loanIncrease = record.LoanAmount * record.LoanInterest;
+        //        //decimal loanAmount = record.LoanAmount + loanIncrease;
+        //        //decimal finalAmount = loanAmount - record.MonthlyPayments;
 
-                decimal monthlyPayment = record.MonthlyPayments;
+        //        decimal monthlyPayment = record.MonthlyPayments;
 
-                monthlyLoans.Add(new(monthlyPayment, 0, 0, 0));
-            }
+        //        monthlyLoans.Add(new(monthlyPayment, 0, 0, 0));
+        //    }
 
-            return monthlyLoans;
-        }
+        //    return monthlyLoans;
+        //}
 
-        private List<WeeklySpendings_Dtos> SavingsCalculator(List<Savings_Dto> savings)
-        {
-            List<WeeklySpendings_Dtos> monthlySavings = new();
+        //private List<WeeklySpendings_Dtos> SavingsCalculator(List<Savings_Dto> savings)
+        //{
+        //    List<WeeklySpendings_Dtos> monthlySavings = new();
 
-            foreach (var record in savings)
-            {
-                //Final savings amount after interest added and monthly addition | Implement later
-                //decimal savingsIncrease = record.SavingsAmount * record.SavingsInterest;
-                //decimal savingsAmount = record.SavingsAmount + savingsIncrease;
-                //decimal finalAmount = savingsAmount + record.SavingsAddedMonthly;
+        //    foreach (var record in savings)
+        //    {
+        //        //Final savings amount after interest added and monthly addition | Implement later
+        //        //decimal savingsIncrease = record.SavingsAmount * record.SavingsInterest;
+        //        //decimal savingsAmount = record.SavingsAmount + savingsIncrease;
+        //        //decimal finalAmount = savingsAmount + record.SavingsAddedMonthly;
 
-                decimal monthlyAddition = record.SavingsAddedMonthly;
+        //        decimal monthlyAddition = record.SavingsAddedMonthly;
 
-                monthlySavings.Add(new(monthlyAddition, 0, 0, 0));
-            }
+        //        monthlySavings.Add(new(monthlyAddition, 0, 0, 0));
+        //    }
 
-            return monthlySavings;
-        }
+        //    return monthlySavings;
+        //}
 
-        private List<WeeklySpendings_Dtos> ExpensesCalculator(List<Expenses_Dto> expenses)
-        {
-            List<WeeklySpendings_Dtos> monthlyExpenses = new();
+        //private List<WeeklySpendings_Dtos> ExpensesCalculator(List<Expenses_Dto> expenses)
+        //{
+        //    List<WeeklySpendings_Dtos> monthlyExpenses = new();
 
-            foreach (var record in expenses)
-            {
-                if (record.ExpenseFrequency == 1)
-                {
-                    decimal expenseAmount = record.ExpenseAmount;
-                    monthlyExpenses.Add(new(expenseAmount, 0, 0, 0));
-                }
-                else if (record.ExpenseFrequency == 2)
-                {
-                    decimal expenseAmount = record.ExpenseAmount;
-                    monthlyExpenses.Add(new(expenseAmount, expenseAmount, 0, 0));
-                }
-                else if (record.ExpenseFrequency == 3)
-                {
-                    decimal expenseAmount = record.ExpenseAmount;
-                    monthlyExpenses.Add(new(expenseAmount, expenseAmount, expenseAmount, 0));
-                }
-                else if (record.ExpenseFrequency == 4)
-                {
-                    decimal expenseAmount = record.ExpenseAmount;
-                    monthlyExpenses.Add(new(expenseAmount, expenseAmount, expenseAmount, expenseAmount));
-                }
-                else
-                {
-                    decimal expenseTotal = record.ExpenseAmount * record.ExpenseFrequency;
-                    decimal expenseWeekly = expenseTotal / 4;
-                    monthlyExpenses.Add(new(expenseWeekly, expenseWeekly, expenseWeekly, expenseWeekly));
-                }
-            }
-            return monthlyExpenses;
-        }
+        //    foreach (var record in expenses)
+        //    {
+        //        if (record.ExpenseFrequency == 1)
+        //        {
+        //            decimal expenseAmount = record.ExpenseAmount;
+        //            monthlyExpenses.Add(new(expenseAmount, 0, 0, 0));
+        //        }
+        //        else if (record.ExpenseFrequency == 2)
+        //        {
+        //            decimal expenseAmount = record.ExpenseAmount;
+        //            monthlyExpenses.Add(new(expenseAmount, expenseAmount, 0, 0));
+        //        }
+        //        else if (record.ExpenseFrequency == 3)
+        //        {
+        //            decimal expenseAmount = record.ExpenseAmount;
+        //            monthlyExpenses.Add(new(expenseAmount, expenseAmount, expenseAmount, 0));
+        //        }
+        //        else if (record.ExpenseFrequency == 4)
+        //        {
+        //            decimal expenseAmount = record.ExpenseAmount;
+        //            monthlyExpenses.Add(new(expenseAmount, expenseAmount, expenseAmount, expenseAmount));
+        //        }
+        //        else
+        //        {
+        //            decimal expenseTotal = record.ExpenseAmount * record.ExpenseFrequency;
+        //            decimal expenseWeekly = expenseTotal / 4;
+        //            monthlyExpenses.Add(new(expenseWeekly, expenseWeekly, expenseWeekly, expenseWeekly));
+        //        }
+        //    }
+        //    return monthlyExpenses;
+        //}
 
         private List<WeeklySpendings_Dtos> MonthlySpendingsCalculator(List<WeeklySpendings_Dtos> income, List<WeeklySpendings_Dtos> loans, List<WeeklySpendings_Dtos> savings, List<WeeklySpendings_Dtos> expenses)
         {
