@@ -12,7 +12,7 @@
  export class InterceptorService implements HttpInterceptor{
   constructor() { }
   handleError(error: HttpErrorResponse){
-   alert(error.message);
+   //alert(error.message);
     console.log(error.message);
    return throwError(error);
   }

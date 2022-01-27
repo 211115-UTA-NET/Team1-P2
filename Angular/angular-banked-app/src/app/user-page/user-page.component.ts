@@ -17,8 +17,7 @@ export class UserPageComponent implements OnInit {
 
   userId: string | any = localStorage.getItem("userid"); //NEEDS TO BE RE-ADDED
   fName: string | any = localStorage.getItem("FirstName");
-  lName: string | any = localStorage.getItem("firstName");
-  //userId: number = 1;                                      //NEEDS TO BE DELETED
+  lName: string | any = localStorage.getItem("firstName");                                   //NEEDS TO BE DELETED
 
   createExpense: boolean = false;
   createLoan: boolean = false;
@@ -366,10 +365,10 @@ export class UserPageComponent implements OnInit {
       this.newSavings = {} as Savings;
       this.newSavings.id = 0;
       this.newSavings.userPassword = this.userId;
-      this.newSavings.savingsName = this.loanName;
-      this.newSavings.savingsAmount = this.loanAmount;
-      this.newSavings.savingsInterest = this.loanInterest;
-      this.newSavings.savingsAddedMonthly = this.monthlyPayments;
+      this.newSavings.savingsName = this.savingsName;
+      this.newSavings.savingsAmount = this.savingsAmount;
+      this.newSavings.savingsInterest = this.savingsInterest;
+      this.newSavings.savingsAddedMonthly = this.addedMonthly;
       if (!this.userId || !this.savingsName || !this.savingsAmount || !this.savingsInterest || !this.addedMonthly)
       { 
         this.savingsPostErrorForm = true;

@@ -12,7 +12,6 @@ import { GraphData } from '../GraphData';
 export class SavingsGraphComponent implements OnInit {
 
   data: any[] = [];
-  //graphData: number[] = []; //Remove once connection is complete
   goal!: number;
   savingsGoal: Goal[] = [];
   datetime!: string;
@@ -25,10 +24,7 @@ export class SavingsGraphComponent implements OnInit {
   constructor(private bankedService: BankedService) { }
 
   ngOnInit(): void {
-    //this.data = [100, 200, 404, 350, 620, 760, 865, 765, 985, 1000, 500];
-    //this.goal = 1000;
     this.datetime = "DateTime"
-    this.percents = [];
     this.getGraphData();
   }
 
@@ -37,7 +33,14 @@ export class SavingsGraphComponent implements OnInit {
     barIn.classList.add('bar-in');
     barIn.style.width = `${percents}%`;
     barIn.style.height = "100%";
-    barIn.style.background = "#3f9c47";
+    if(percents == 100)
+    {
+      barIn.style.background = "#39cc45";
+    }
+    else
+    {
+      barIn.style.background = "#3f9c47";
+    }
     barIn.style.boxShadow = "2px 2px 2px grey";
     barIn.innerText = "$" + data;
 
@@ -73,7 +76,14 @@ export class SavingsGraphComponent implements OnInit {
 
     for(let i=0; i<this.data.length; i++){
       var x = (this.data[i]/this.goal) * 100;
-      this.percents.push(x);
+      if(x > 100)
+      {
+        this.percents.push(100);
+      }
+      else
+      {
+        this.percents.push(x);
+      }
     }
 
     for(let i=0; i<this.data.length; i++){
