@@ -22,6 +22,7 @@ namespace WebAPI.DataStorage
     .Where(r => r.UserName == username && r.UserPassword1 == password)
     .FirstOrDefaultAsync();
 
+      _logger.LogInformation("function GetUser {username}", username);
 
       return new User_Dto(user.Id, user.UserName, user.UserPassword1, user.FirstName, user.LastName);
       //return user;
@@ -51,8 +52,10 @@ namespace WebAPI.DataStorage
           _context.UserPasswords.Add(newUser);
           await _context.SaveChangesAsync();
           id = newUser.Id;
+          _logger.LogInformation("create User function PostUser {username}", user.Username);
         }
       }
+      _logger.LogInformation("User Already exists function PostUser {username}", user.Username);
       return id;
     }
 
@@ -77,7 +80,7 @@ namespace WebAPI.DataStorage
         return v;
       });
 
-
+      _logger.LogInformation("function GetLoans user id {userId}", userId);
     }
 
     public async Task<IEnumerable<Savings_Dto>> GetSavings(int userId)
@@ -97,6 +100,8 @@ namespace WebAPI.DataStorage
         v.SavingsAddedMonthly = r.SavingsAddedMonthly;
         return v;
       });
+
+      _logger.LogInformation("function GetSavings user id {userId}", userId);
     }
 
     public async Task<IEnumerable<Income_Dto>> GetIncome(int userId)
@@ -116,6 +121,8 @@ namespace WebAPI.DataStorage
         v.PaySchedule = r.PaySchedule;
         return v;
       });
+
+      _logger.LogInformation("function GetIncome user id {userId}", userId);
     }
 
     public async Task<IEnumerable<Expenses_Dto>> GetExpense(int userId)
@@ -137,6 +144,7 @@ namespace WebAPI.DataStorage
 
                     }).ToListAsync();
 
+      _logger.LogInformation("function GetExpense user id {userId}", userId);
     }
 
 
@@ -152,7 +160,7 @@ namespace WebAPI.DataStorage
       });
 
 
-
+      _logger.LogInformation("function GetExpenseOptions ");
     }
 
 
@@ -169,8 +177,8 @@ namespace WebAPI.DataStorage
             };
     _context.Savings.Add(newSaving);
       await _context.SaveChangesAsync();
-
-  }
+      _logger.LogInformation("function PostSavings user id {userId}", savings[0].Id);
+    }
 
   public async Task PostLoan(List<Loans_Dto> loan)
     {
@@ -188,7 +196,7 @@ namespace WebAPI.DataStorage
       _context.Loans.Add(newLoan);
       await _context.SaveChangesAsync();
 
-
+      _logger.LogInformation("function PostLoan user id {userId}", loan[0].Id);
 
     }
 
@@ -203,18 +211,51 @@ namespace WebAPI.DataStorage
       };
         _context.Incomes.Add(newIncome);
         await _context.SaveChangesAsync();
-  }
+
+      _logger.LogInformation("function InputIncome user id {userId}", newIncome.Id);
+    }
 
 
+    public async Task DeleteSavings(int ID)
+    {
+
+      Saving Saving = new Saving() { Id = ID };
+      _context.Savings.Attach(Saving);
+      _context.Savings.Remove(Saving);
+      _context.SaveChanges();
+      _logger.LogInformation("function DeleteSavings user id {userId}", ID);
+    }
+
+    public async Task DeleteIncome(int ID)
+    {
+
+      Income Income = new Income() { Id = ID };
+  _context.Incomes.Attach(Income);
+      _context.Incomes.Remove(Income);
+      _context.SaveChanges();
+      _logger.LogInformation("function DeleteIncome user id {userId}", ID);
+    }
+
+    public async Task DeleteLoan(int ID)
+{
+
+  Loan Loan = new Loan() { Id = ID };
+  _context.Loans.Attach(Loan);
+  _context.Loans.Remove(Loan);
+  _context.SaveChanges();
+      _logger.LogInformation("function DeleteLoan user id {userId}", ID);
+
+    }
 
 
-    public async Task DeleteExpense(int ID)
+public async Task DeleteExpense(int ID)
     {
 
       Expense Expense = new Expense() { Id = ID };
       _context.Expenses.Attach(Expense);
       _context.Expenses.Remove(Expense);
       _context.SaveChanges();
+      _logger.LogInformation("function DeleteExpense user id {userId}", ID);
 
     }
 
@@ -231,7 +272,8 @@ namespace WebAPI.DataStorage
     };
        _context.Expenses.Add(newExpense);
         await _context.SaveChangesAsync();
-  }
+      _logger.LogInformation("function InputExpense user id {userId}", newExpense.Id);
+    }
 
 
     public async Task<decimal[]> GetUserReport(int UserId)
@@ -247,7 +289,7 @@ namespace WebAPI.DataStorage
 
       IEnumerable<Savings_Dto> LSave = await this.GetSavings(UserId);
 
-
+      _logger.LogInformation("function GetUserReport user id {userId}", UserId);
       return GraphCalculations.CalculateTotal(LExp, LIncome, LLoan, LSave);
 
     }

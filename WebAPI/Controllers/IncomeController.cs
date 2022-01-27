@@ -23,6 +23,14 @@ namespace WebAPI.Controllers
       _repository = repository;
     }
 
+    [HttpDelete("{ID}")]
+    public async Task DeleteIncome(int ID)
+    {
+
+
+      await _repository.DeleteIncome(ID);
+
+    }
 
     //Getting a specific customer from the database
     [HttpGet("{userId}")]

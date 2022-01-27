@@ -18,8 +18,20 @@ namespace WebAPI.Controllers
         _repository = repository;
       }
 
+    [HttpDelete("{ID}")]
+    public async Task DeleteLoan(int ID)
+    {
+
+
+      await _repository.DeleteLoan(ID);
+
+    }
+
+
+
+
     //Getting a specific customer from the database
-        [HttpGet("{userId}")]
+    [HttpGet("{userId}")]
         public async Task<IEnumerable<Loans_Dto>> GetLoans(int userId)
         {
 

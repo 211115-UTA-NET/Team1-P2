@@ -17,6 +17,16 @@ namespace WebAPI.Controllers
         _repository = repository;
       }
 
+    [HttpDelete("{ID}")]
+    public async Task DeleteSavings(int ID)
+    {
+
+
+      await _repository.DeleteSavings(ID);
+
+    }
+
+
 
     //Getting a specific customer from the database
     [HttpGet("{userId}")]
