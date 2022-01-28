@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  URLBase:`https://banked.azurewebsites.net/api/`
+  URLBase:`https://localhost:7106/api/`
 };
 
 /*

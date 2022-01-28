@@ -25,6 +25,7 @@ export class SigninPageComponent implements OnInit {
   
   user!: IUser_Dto;
   LoginMsg!: string;
+  createError: boolean = false;
 
   constructor(
     private bankedService: BankedService,
@@ -39,16 +40,19 @@ export class SigninPageComponent implements OnInit {
 //    if (userO.id !=0)      this.router.navigateByUrl("/userpage");     
 //  }
   async CheckLogin(){
+    this.createError = false;
     this.user = await this.uesrServiceService.getUser(this.username,this.password);
     //alert(this.user.id);
     if (this.user.id >0)
     {
+      localStorage.setItem('fName', this.user.firstName.toString());
+      localStorage.setItem('lName', this.user.firstName.toString());
       localStorage.setItem('userid', this.user.id.toString());
       this.router.navigateByUrl("/userpage"); 
     }          
     else
     {  
-      this.LoginMsg="User does not exists<br>try again."
+      //this.LoginMsg="User does not exists<br>try again."
 //      this.show=false;  
       }
 //    this.bankedService.getUser(this.username,this.password)
@@ -63,22 +67,20 @@ export class SigninPageComponent implements OnInit {
     this.user.lastName=this.lname;
     //debugger;
     this.user.id= await this.uesrServiceService.SaveUser(this.user);    
-    if (this.user.id>0)
+    if (this.user.id > 0 && this.user.username && this.user.password && this.user.firstName && this.user.lastName)
     {
-      localStorage.setItem('userid', this.user.id.toString());
-      this.router.navigateByUrl("/userpage");           
+      this.show = !this.show;
+      localStorage.setItem('userid', this.user.id.toString());          
       var x = localStorage.getItem("userid");
     }
     else
     {
-      this.LoginMsg="User Already exists<br>try again."
-      alert("User Already exists");
-    }    
+      this.createError = true;
+    }
   }
   toggleForm()
   {
     this.show = !this.show;
-
   }
   
   ngOnInit(): void {
