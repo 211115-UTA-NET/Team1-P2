@@ -90,7 +90,9 @@ namespace WebAPI.Logic
       await reader.ReadAsync();      
       await connection.CloseAsync();
       if (_logger is  not null)
+      {
       _logger.LogInformation("executed select statement for Expenses of user id {userId}", userId);
+      }
       return currentItem;
     }
 
