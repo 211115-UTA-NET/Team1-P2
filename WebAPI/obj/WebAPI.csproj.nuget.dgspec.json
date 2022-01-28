@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\shaul\\Revature\\Team1-P2\\WebAPI\\WebAPI.csproj": {}
+    "C:\\Users\\schwe\\Revature\\Team1-P2\\WebAPI\\WebAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\shaul\\Revature\\Team1-P2\\WebAPI\\WebAPI.csproj": {
+    "C:\\Users\\schwe\\Revature\\Team1-P2\\WebAPI\\WebAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\shaul\\Revature\\Team1-P2\\WebAPI\\WebAPI.csproj",
+        "projectUniqueName": "C:\\Users\\schwe\\Revature\\Team1-P2\\WebAPI\\WebAPI.csproj",
         "projectName": "WebAPI",
-        "projectPath": "C:\\Users\\shaul\\Revature\\Team1-P2\\WebAPI\\WebAPI.csproj",
-        "packagesPath": "C:\\Users\\shaul\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\shaul\\Revature\\Team1-P2\\WebAPI\\obj\\",
+        "projectPath": "C:\\Users\\schwe\\Revature\\Team1-P2\\WebAPI\\WebAPI.csproj",
+        "packagesPath": "C:\\Users\\schwe\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\schwe\\Revature\\Team1-P2\\WebAPI\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "F:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\shaul\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\schwe\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -44,6 +40,16 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            },
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
               "version": "[17.0.0, )"

@@ -126,5 +126,70 @@ namespace APITests
             Assert.Equal(3.00m, X.Wk3Spendings);
             Assert.Equal(4.00m, X.Wk4Spendings);
         }
+
+        [Fact]
+        public void TestLogic_GraphCalculations_Time()
+        {
+            GraphCalculations G = new();
+            decimal time = G.CalculateTime(20);
+
+            Assert.Equal(5, time);
+        }
+
+        [Fact]
+        public void TestLogic_GraphCalculations()
+        {
+            GraphCalculations G = new();
+
+            List<Expenses_Dto> E = new();
+            List<Income_Dto> I = new();
+            List<Savings_Dto> S = new();
+            List<Loans_Dto> L = new();
+
+            E.Add(new Expenses_Dto(){
+                ExpenseAmount = 40.00m,
+                ExpenseFrequency = 4,
+                ExpenseEnding = DateTime.Parse("2 18 2023")
+            });
+            E.Add(new Expenses_Dto(){
+                ExpenseAmount = 5.00m,
+                ExpenseFrequency = 4,
+                ExpenseEnding = DateTime.Parse("2 18 2024")
+            });
+
+            I.Add(new Income_Dto(){
+                IncomeAmount = 1000.00m,
+                PaySchedule = 1
+            });
+
+            decimal[] D = G.CalculateTotal(E,I,L,S);
+
+            Assert.Equal(205.00m, D[0]);
+            Assert.Equal(410.00m, D[1]);
+            Assert.Equal(820.00m, D[3]);
+        }
+
+        [Fact]
+        public void TestLogic_GraphCalculations_LoansAndSavings()
+        {
+            GraphCalculations G = new();
+
+            List<Expenses_Dto> E = new();
+            List<Income_Dto> I = new();
+            List<Savings_Dto> S = new();
+            List<Loans_Dto> L = new();
+
+
+            L.Add(new Loans_Dto(){
+                LoanAmount = 1000.00m,
+                LoanInterest = 4.0,
+                MonthlyPayments = 100.00m
+            });
+
+            decimal[] D = G.CalculateTotal(E,I,L,S);
+
+            Assert.Equal(-15.00m, D[3]);
+            Assert.Equal(-14.85m, D[7]);
+        }
     }
 }

@@ -10,5 +10,7 @@ namespace WebAPI.DataStorage
 
     Task<ActionResult<int>> PostUser(User_Dto user);
 
+    Task<decimal[]> InformationCollectorLoop(int UserId);
+
   }
 }

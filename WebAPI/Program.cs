@@ -2,6 +2,8 @@ using WebAPI.Interfaces;
 using WebAPI.Logic;
 using Microsoft.Extensions.Configuration;
 using WebAPI.DataStorage;
+using Microsoft.EntityFrameworkCore;
+using WebAPI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,14 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext<BankedDBContext>(options =>
+{
+  // logging to console is on by default
+  options.UseSqlServer(connectionString);
+});
+
+builder.Services.AddScoped<IRepositoryBank, EfRepository>();
 
 builder.Services.AddSingleton<IExpensesRepository>
   (sp => new ExpensesService(connectionString, sp.GetRequiredService<ILogger<ExpensesService>>()));

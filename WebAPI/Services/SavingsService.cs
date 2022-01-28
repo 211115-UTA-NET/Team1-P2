@@ -19,8 +19,13 @@ namespace WebAPI.Logic
         _logger = logger;
       }
 
+    public SavingsService(string connectionString)
+    {
+      _connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
+    }
 
-        static List<Savings_Dto> expenses { get; }
+
+    static List<Savings_Dto> expenses { get; }
         static SavingsService()
         {
             expenses = new List<Savings_Dto>
@@ -64,14 +69,48 @@ namespace WebAPI.Logic
 
 
         //Insert Expense to Database
-        public static void InputSavings(List<Savings_Dto> expense, SqlConnection connection)
-        {
-            string sql = $"--ENTER INSERT COMMAND--"; //expense.Id(0) for single object id input
+        public async Task InputSavings(List<Savings_Dto> Savings)
+    {
+            //string sql = $"--ENTER INSERT COMMAND--"; //expense.Id(0) for single object id input
 
-            connection.Open();
-            using SqlCommand command = new(sql, connection);
-            command.ExecuteNonQuery();
-            connection.Close();
+            //connection.Open();
+            //using SqlCommand command = new(sql, connection);
+            //command.ExecuteNonQuery();
+            //connection.Close();
+
+
+
+
+      if (Savings.Count > 0)
+      {
+        string sql = $"INSERT INTO dbo.Savings (UserPasswordsID,SavingsName,SavingsAmount,SavingsInterest,SavingsAddedMonthly) Values "; //income.Id(0) for single object id input
+        foreach (var record in Savings)
+        {
+          sql = sql + "(" +
+            record.UserPassword + "," +
+            "'" + record.SavingsName + "'," +
+            record.SavingsAmount + "," +
+            record.SavingsInterest + "," +
+            record.SavingsAddedMonthly +
+            ")";
         }
+
+
+        using SqlConnection connection = new(_connectionString);
+        await connection.OpenAsync();
+        using SqlCommand command = new(sql, connection);
+        command.ExecuteNonQuery();
+        await connection.CloseAsync();
+      }
+
+
+
+
+
+
+
+
+
+    }
     }
 }
