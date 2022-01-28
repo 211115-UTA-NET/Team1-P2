@@ -265,28 +265,104 @@ public async Task DeleteExpense(int ID)
     }
 
 
-    public async Task PutExpense(List<Expenses_Dto> expense)
+    public async Task PutLoan(Loans_Dto loan)
     {
 
+      Loan? Loan = await _context.Loans
+    .Where(r => r.Id == loan.Id)
+    .FirstOrDefaultAsync();
+
+      if (Loan is not null)
+      {
+        Loan.UserPasswordsId = loan.UserPasswordId;
+        Loan.LoanName = loan.LoanName;
+        Loan.LoanAmount = loan.LoanAmount;
+        Loan.LoanInterest = loan.LoanInterest;
+        Loan.MonthlyPayments = loan.MonthlyPayments;
+        await _context.SaveChangesAsync();
+        _logger.LogInformation("function PostLoan user id {userId}", loan.Id);
+
+      }
+      else
+      {
+        _logger.LogInformation("id not exists function PutLoan user id {userId}", loan.Id);
+
+      }
+    }
+
+
+    public async Task PutIncome(Income_Dto income)
+    {
+
+      Income? Income = await _context.Incomes
+    .Where(r => r.Id == income.Id)
+    .FirstOrDefaultAsync();
+
+
+        if (Income is not null)      
+        {
+          Income.UserPasswordsId = income.UserPasswordsId;
+          Income.IncomeOptionsId = income.IncomeOptions;
+          Income.IncomeAmount = income.IncomeAmount;
+          Income.PaySchedule = income.PaySchedule;
+          await _context.SaveChangesAsync();
+      }
+        else
+      {
+        _logger.LogInformation("id not exists function PutIncome user id {userId}", income.Id);
+      }
+
+      
+    }
+
+    public async Task PutSavings(Savings_Dto savings)
+    {
+
+      Saving? Saving = await _context.Savings
+      .Where(r => r.Id == savings.Id)
+      .FirstOrDefaultAsync();
+
+
+      if (Saving is not null)
+      {
+
+        Saving.UserPasswordsId = savings.UserPassword;
+        Saving.SavingsName = savings.SavingsName!;
+        Saving.SavingsAmount = savings.SavingsAmount;
+        Saving.SavingsInterest = savings.SavingsInterest;
+        Saving.SavingsAddedMonthly = savings.SavingsAddedMonthly;
+        await _context.SaveChangesAsync();
+        _logger.LogInformation("function PutSavings user id {userId}", savings.Id);
+
+      }
+      else
+      {
+        _logger.LogInformation("id not exists function PutSavings user id {userId}", savings.Id);
+      }
+    }
+
+    public async Task PutExpense(Expenses_Dto expense)
+    {
+
+
       Expense? Expense = await _context.Expenses
-      .Where(r => r.Id== expense[0].Id)
+      .Where(r => r.Id== expense.Id)
       .FirstOrDefaultAsync();
 
       if (Expense is not null)
       {
-        Expense.UserPasswordsId = expense[0].UserPassId;
-        Expense.ExpenseOptionsId = expense[0].UserOptionsId;
-        Expense.ExpenseAmount = expense[0].ExpenseAmount;
-        Expense.EspenseFrequency = expense[0].ExpenseFrequency;
-        Expense.ExpenseEnding = expense[0].ExpenseEnding;
-        Expense.SeverityOfNeed = expense[0].Priority;
-        _context.Expenses.Add(Expense);
+        Expense.UserPasswordsId = expense.UserPassId;
+        Expense.ExpenseOptionsId = expense.UserOptionsId;
+        Expense.ExpenseAmount = expense.ExpenseAmount;
+        Expense.EspenseFrequency = expense.ExpenseFrequency;
+        Expense.ExpenseEnding = expense.ExpenseEnding;
+        Expense.SeverityOfNeed = expense.Priority;
         await _context.SaveChangesAsync();
-        _logger.LogInformation("function PutExpense user id {userId}", expense[0].Id);
+        _logger.LogInformation("function PutExpense user id {userId}", expense.Id);
       }
       else
       {
-        _logger.LogInformation("id not exists function PutExpense user id {userId}", expense[0].Id);
+        _logger.LogInformation("id not exists function PutExpense user id {userId}", expense.Id);
       }
     }
 
