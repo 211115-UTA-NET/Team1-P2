@@ -5,4 +5,5 @@ export interface Income
     incomeOptions: number;
     incomeAmount: number;
     paySchedule: number;
+    incomeName: string;
 }

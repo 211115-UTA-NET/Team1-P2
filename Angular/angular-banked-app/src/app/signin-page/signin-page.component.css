@@ -37,3 +37,9 @@ input[type=submit]
 {
     cursor: pointer;
 }
+
+.Error
+{
+    font-size: 20px;
+    color: darkred;
+}

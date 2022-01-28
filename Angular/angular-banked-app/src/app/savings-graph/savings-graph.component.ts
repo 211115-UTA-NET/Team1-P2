@@ -42,7 +42,7 @@ export class SavingsGraphComponent implements OnInit {
     barIn.style.height = "100%";
     if(percents == 100)
     {
-      barIn.style.background = "#39cc45";
+      barIn.style.background = "#dfbb1d";
     }
     else
     {

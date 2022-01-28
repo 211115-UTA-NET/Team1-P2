@@ -16,6 +16,7 @@ import { Savings } from '../Savings';
 export class UserPageComponent implements OnInit {
 
   userId: string | any = localStorage.getItem("userid");
+  fName: string | any = localStorage.getItem("fName");
 
   createExpense: boolean = false;
   createLoan: boolean = false;

@@ -7,4 +7,5 @@ export interface Expense
     expenseFrequency: number;
     expenseEnding: string;
     priority: number;
+    expenseName: string;
 }

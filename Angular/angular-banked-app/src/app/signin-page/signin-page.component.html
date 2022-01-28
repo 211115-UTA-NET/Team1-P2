@@ -5,8 +5,6 @@
         savings planner!
     </p>
   
-    <!--<p><a [routerLink]="['/userpage']">UserPage</a></p> NEEDS TO BE DELETED-->
-  
     <form class="FormItems">
         <input type="text" id="username" name="username" placeholder="Username" minlength="5" [(ngModel)]="username">
         <br>
@@ -35,10 +33,18 @@
         <br>
         <input type="password" id="password" name="password" placeholder="Password (8+ Length)" minlength="8" [(ngModel)]="password">
         <br>
-        <input type="submit" id="newaccount" value="Create Account"  (click)="AddNewUser()">
-        <div  [innerHTML]="LoginMsg" ></div>    
+        <input type="submit" id="newaccount" value="Create Account" type="reset" (click)="AddNewUser()">
+           
     </form>
   
     <p>Return To <a class="clickableText" (click)="toggleForm()">Login Page</a></p>
+
+    <div class="Error" *ngIf="createError">
+        <p>Error creating account<br>
+        Please try again
+        </p>
+    </div> 
   </div>
+
+ 
 </body>

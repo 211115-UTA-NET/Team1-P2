@@ -53,7 +53,7 @@
     <!-- Sign out -->
     <div class="Display">
         <p>
-            Welcome!
+            Welcome, {{fName}}!
         </p>
 
         <div class="ManagerItems">
@@ -84,16 +84,16 @@
                 <label for="expenseName">Choose an income type:</label>
                 <br>
                 <select id="incomeName" name="incomeName" [(ngModel)]='incomeId'>
-                    <option value="1">Wages</option>
-                    <option value="2">Salary</option>
-                    <option value="3">Commission</option>
-                    <option value="4">Interest</option>
-                    <option value="5">Selling</option>
-                    <option value="6">Investments</option>
-                    <option value="7">Gifts</option>
-                    <option value="8">Pocket Money</option>
-                    <option value="9">Lottery</option>
-                    <option value="10">Government</option>
+                    <option value="3">Wages</option>
+                    <option value="4">Salary</option>
+                    <option value="5">Commission</option>
+                    <option value="6">Interest</option>
+                    <option value="7">Selling</option>
+                    <option value="8">Investments</option>
+                    <option value="9">Gifts</option>
+                    <option value="10">Pocket Money</option>
+                    <option value="11">Lottery</option>
+                    <option value="12">Government</option>
                 </select>
 
             </div>
@@ -106,9 +106,8 @@
             <div class="FormSubtext">
                 <br>How frequent do you<br>
                 receive this income monthly?<br>
-                (Enter '0' for one time pay)<br>
             </div>
-            <input type="number" id="paySchedule" name="paySchedule" placeholder="(Monthly)" min="0" [(ngModel)]='paySchedule'>
+            <input type="number" id="paySchedule" name="paySchedule" placeholder="(Monthly)" min="1" [(ngModel)]='paySchedule'>
             <br><br>
             <input type="submit" id="newIncome" value="Create income" type="reset" (click)='postIncome()'>
         </form>
@@ -229,16 +228,16 @@
                 <label for="expenseName">Choose an expense:</label>
                 <br>
                 <select id="expenseName" name="expenseName" [(ngModel)]='expenseId'>
-                    <option value="1">Housing/Rent</option>
-                    <option value="2">Gas/Travel</option>
-                    <option value="3">Insurance</option>
-                    <option value="4">Groceries</option>
-                    <option value="5">Utility</option>
-                    <option value="6">Phone</option>
-                    <option value="7">Pets</option>
-                    <option value="8">Personal</option>
-                    <option value="9">Memberships/Subscriptions</option>
-                    <option value="10">Internet</option>
+                    <option value="13">Housing/Rent</option>
+                    <option value="14">Gas/Travel</option>
+                    <option value="15">Insurance</option>
+                    <option value="16">Groceries</option>
+                    <option value="17">Utility</option>
+                    <option value="18">Phone</option>
+                    <option value="19">Pets</option>
+                    <option value="20">Personal</option>
+                    <option value="21">Memberships/Subscriptions</option>
+                    <option value="22">Internet</option>
                 </select>
 
             </div>
@@ -287,7 +286,7 @@
         <p class="getTitle"><strong>Expenses:</strong></p>
         <div *ngFor="let expense of expenses">
             <p><strong>==============================</strong></p>
-            <p><strong>Name:</strong> {{expense.userOptionsId}}</p>
+            <p><strong>Name:</strong> {{expense.expenseName}}</p>
             <p><strong>Amount:</strong> ${{expense.expenseAmount}}</p>
             <p><strong>Frequency (Monthly):</strong> {{expense.expenseFrequency}}</p>
             <p><strong>Ending:</strong> {{expense.expenseEnding}}</p>
@@ -307,7 +306,7 @@
         <p class="getTitle"><strong>Incomes:</strong></p>
         <div *ngFor="let income of incomes">
             <p><strong>==============================</strong></p>
-            <p><strong>Name:</strong> {{income.incomeOptions}}</p>
+            <p><strong>Name:</strong> {{income.incomeName}}</p>
             <p><strong>Amount:</strong> ${{income.incomeAmount}}</p>
             <p>Paid every {{income.paySchedule}} week(s)</p>
             <button type="button" id="delete" (click)="deleteIncome(income.id)">DELETE INCOME</button>
