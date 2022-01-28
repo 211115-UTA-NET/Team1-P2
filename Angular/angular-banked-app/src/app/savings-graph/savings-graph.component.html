@@ -6,6 +6,10 @@
             <input type="submit" id="creationButton" value="Generate!" (click)="displayBars()"><br>
         <!--</div>-->
     </form>
+    
+    <br><button [routerLink]="['/savingsgraph']" (click)="exit()">Reset</button>
+
+    <br><button id="returnButton" [routerLink]="['/userpage']">Return</button><br>
 
     <div id="chart-out">
         <div id="chart-in">
@@ -13,8 +17,4 @@
     </div>
 
     <link rel="stylesheet" href="savings-graph.component.css">
-
-    <br><button [routerLink]="['/savingsgraph']" (click)="exit()">Reset</button>
-
-    <br><button id="returnButton" [routerLink]="['/userpage']">Return</button><br>
 </body>
