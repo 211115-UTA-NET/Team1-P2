@@ -46,6 +46,11 @@ namespace WebAPI.Controllers
 
       await _repository.PostSavings(savings);
     }
+    [HttpPut]
+    public async Task PutSavings(Savings_Dto savings)
+    {
+      await _repository.PutSavings(savings);
+    }
 
 
   }

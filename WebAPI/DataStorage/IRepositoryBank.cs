@@ -12,7 +12,7 @@ namespace WebAPI.DataStorage
 
     Task InputExpense(List<Expenses_Dto> expense);
 
-    Task PutExpense(List<Expenses_Dto> expense);
+    Task PutExpense(Expenses_Dto expense);
     
     Task<IEnumerable<ExpenseOptions_Dto>> GetExpenseOptions();
 
@@ -20,6 +20,11 @@ namespace WebAPI.DataStorage
 
     Task InputIncome(List<Income_Dto> income);
 
+    Task PutIncome(Income_Dto income);
+
+    Task PutSavings(Savings_Dto savings);
+
+    Task PutLoan(Loans_Dto loan);
     Task<IEnumerable<Loans_Dto>> GetLoans(int userId);
     Task PostLoan(List<Loans_Dto> loan);
 
