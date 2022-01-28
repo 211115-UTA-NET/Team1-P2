@@ -11,25 +11,25 @@ namespace WebAPI.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
 
-        private readonly IUserRepository _repository;
+    private readonly IRepositoryBank _repository;
 
-        public UserController(IUserRepository repository)
-        {
-          _repository = repository;
-        }
+
+    public UserController(IRepositoryBank repository)
+    {
+      _repository = repository;
+    }
+
+
+
 
     //Getting a specific customer from the database
     [HttpGet("{username}/{password}")]
         public async Task<User_Dto> GetUser(string username,string password)
         {
 
-      //string connect = _configuration.GetSection("ConnectionString").GetSection("BankedDB").Value;
-      //using SqlConnection connection = new(connect);
-
-
       return await _repository.GetUser(username, password);
+      //return await _repository.GetUser(username, password);
 
     }
 
@@ -37,7 +37,7 @@ namespace WebAPI.Controllers
     [HttpGet]
     public async Task<decimal[]> GetUserReport(int UserId)
     {
-      return await _repository.InformationCollectorLoop(UserId);
+      return await _repository.GetUserReport(UserId);
     }
 
 
@@ -47,6 +47,21 @@ namespace WebAPI.Controllers
       return await _repository.PostUser(user);
 
     }
+
+    [Route("Info")]
+    [HttpGet]
+    public async Task<Decimal> GetUserInfo(int UserId)
+    {
+      return await _repository.GetUserInfo(UserId);
+    }
+
+    [Route("Info")]
+    [HttpPut]
+    public async Task PutUserInfo(int UserId,Decimal SavingsGoal)
+    {
+       await _repository.PutUserInfo(UserId, SavingsGoal);
+    }
+
 
 
   }

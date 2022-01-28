@@ -10,23 +10,31 @@ namespace WebAPI.Controllers
     [ApiController]
     public class IncomeController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
+      //  private readonly IConfiguration _configuration;
       //  public IncomeController(IConfiguration configuration)
 //        {
   //          _configuration = configuration;
     //    }
 
-    private readonly IIncomeRepository _repository;
+    private readonly IRepositoryBank _repository;
 
-    public IncomeController(IIncomeRepository repository)
+    public IncomeController(IRepositoryBank repository)
     {
       _repository = repository;
     }
 
+    [HttpDelete("{ID}")]
+    public async Task DeleteIncome(int ID)
+    {
+
+
+      await _repository.DeleteIncome(ID);
+
+    }
 
     //Getting a specific customer from the database
     [HttpGet("{userId}")]
-        public async Task<List<Income_Dto>> GetIncome(int userId)
+        public async Task<IEnumerable<Income_Dto>> GetIncome(int userId)
         {
 
         //    string connect = _configuration.GetSection("ConnectionStrings").GetSection("BankedDB").Value;
@@ -39,8 +47,6 @@ namespace WebAPI.Controllers
         [HttpPost]
         public async Task PostIncome(List<Income_Dto> income)
         {
-      //string connect = _configuration.GetSection("ConnectionStrings").GetSection("PrintShopDB").Value;
-      //await using SqlConnection connection = new(connect);
         await _repository.InputIncome(income);
       
         }
