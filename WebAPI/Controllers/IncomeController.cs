@@ -6,14 +6,14 @@ using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class IncomeController : ControllerBase
-    {
-      //  private readonly IConfiguration _configuration;
-      //  public IncomeController(IConfiguration configuration)
-//        {
-  //          _configuration = configuration;
+  [Route("api/[controller]")]
+  [ApiController]
+  public class IncomeController : ControllerBase
+  {
+    //  private readonly IConfiguration _configuration;
+    //  public IncomeController(IConfiguration configuration)
+    //        {
+    //          _configuration = configuration;
     //    }
 
     private readonly IRepositoryBank _repository;
@@ -34,21 +34,28 @@ namespace WebAPI.Controllers
 
     //Getting a specific customer from the database
     [HttpGet("{userId}")]
-        public async Task<IEnumerable<Income_Dto>> GetIncome(int userId)
-        {
+    public async Task<IEnumerable<Income_Dto>> GetIncome(int userId)
+    {
 
-        //    string connect = _configuration.GetSection("ConnectionStrings").GetSection("BankedDB").Value;
-          //  using SqlConnection connection = new(connect);
+      //    string connect = _configuration.GetSection("ConnectionStrings").GetSection("BankedDB").Value;
+      //  using SqlConnection connection = new(connect);
 
-            return await _repository.GetIncome(userId);
+      return await _repository.GetIncome(userId);
 
-        }
-        //Need to create list value to add as input parameter containing all data required for expense input
-        [HttpPost]
-        public async Task PostIncome(List<Income_Dto> income)
-        {
-        await _repository.InputIncome(income);
-      
-        }
     }
+    //Need to create list value to add as input parameter containing all data required for expense input
+    [HttpPost]
+    public async Task PostIncome(List<Income_Dto> income)
+    {
+      await _repository.InputIncome(income);
+
+    }
+
+    [HttpPut]
+    public async Task PutIncome(Income_Dto income)
+    {
+      await _repository.PutIncome(income);
+
+    }
+  }
 }

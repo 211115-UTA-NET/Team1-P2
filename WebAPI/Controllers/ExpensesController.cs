@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
 using WebAPI.DataStorage;
-using WebAPI.Interfaces;
+
 using WebAPI.Logic;
 using WebAPI.Models;
 
@@ -61,7 +61,7 @@ namespace WebAPI.Controllers
     }
 
     [HttpPut]
-    public async Task PutExpense(List<Expenses_Dto> expense)
+    public async Task PutExpense(Expenses_Dto expense)
     {
       await _repository.PutExpense(expense);
     }

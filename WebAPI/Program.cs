@@ -1,4 +1,3 @@
-using WebAPI.Interfaces;
 using WebAPI.Logic;
 using Microsoft.Extensions.Configuration;
 using WebAPI.DataStorage;
@@ -22,23 +21,6 @@ builder.Services.AddDbContext<BankedDBContext>(options =>
 });
 
 builder.Services.AddScoped<IRepositoryBank, EfRepository>();
-
-builder.Services.AddSingleton<IExpensesRepository>
-  (sp => new ExpensesService(connectionString, sp.GetRequiredService<ILogger<ExpensesService>>()));
-
-builder.Services.AddSingleton<IIncomeRepository>
-  (sp => new IncomeService(connectionString, sp.GetRequiredService<ILogger<IncomeService>>()));
-
-
-builder.Services.AddSingleton<ILoanRepository>
-  (sp => new LoanService(connectionString, sp.GetRequiredService<ILogger<LoanService>>()));
-
-builder.Services.AddSingleton<ISavingsRepository>
-  (sp => new SavingsService(connectionString, sp.GetRequiredService<ILogger<SavingsService>>()));
-
-builder.Services.AddSingleton<IUserRepository>
-  (sp => new LoginService(connectionString, sp.GetRequiredService<ILogger<LoginService>>()));
-
 
 
 builder.Services.AddCors(options =>

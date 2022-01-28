@@ -49,5 +49,13 @@ namespace WebAPI.Controllers
       await _repository.PostLoan(loan);
 
     }
+
+    [HttpPut]
+    public async Task PutLoan(Loans_Dto loan)
+    {
+      await _repository.PutLoan(loan);
+    }
+
+
   }
 }
