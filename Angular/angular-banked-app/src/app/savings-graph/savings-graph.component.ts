@@ -31,7 +31,14 @@ export class SavingsGraphComponent implements OnInit {
   addBar(data: string | number, percents: any, datetime: string): void {
     let barIn = document.createElement("div");
     barIn.classList.add('bar-in');
-    barIn.style.width = `${percents}%`;
+    if (data < 0)
+    {
+      barIn.style.width = `${0}%`;
+    }
+    else
+    {
+      barIn.style.width = `${percents}%`;
+    }
     barIn.style.height = "100%";
     if(percents == 100)
     {
