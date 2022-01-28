@@ -5,7 +5,7 @@ on:
       - main
 env:
   AZURE_WEBAPP_NAME: bankedapp
-  AZURE_WEBAPP_PACKAGE_PATH: './dist/angular/angular-banked-app'
+  AZURE_WEBAPP_PACKAGE_PATH: './angular/angular-banked-app/dist'
   NODE_VERSION: '16.x'
 
 jobs:
@@ -19,9 +19,11 @@ jobs:
       with:
         node-version: ${{ env.NODE_VERSION }}
     - name: Install dependencies
-      run: npm install
+      run: cd angular/angular-banked-app/
+           npm install
     - name: Build
-      run: npm run build -- --prod
+      run: cd angular/angular-banked-app/
+           npm run build -- --prod
     - name: 'Deploy to Azure WebApp'
       uses: azure/webapps-deploy@v1
       with:
