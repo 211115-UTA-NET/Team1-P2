@@ -65,7 +65,7 @@ namespace WebAPI.DataStorage
     public async Task<IEnumerable<Loans_Dto>> GetLoans(int userId)
     {
       IEnumerable<Loan> Loans = await _context.Loans
-        .Where(r => r.Id == userId)
+        .Where(r => r.UserPasswordsId == userId)
         .ToListAsync();
 
       return Loans.Select(r =>
@@ -87,7 +87,7 @@ namespace WebAPI.DataStorage
     public async Task<IEnumerable<Savings_Dto>> GetSavings(int userId)
     {
       IEnumerable<Saving> Savings = await _context.Savings
-        .Where(r => r.Id == userId)
+        .Where(r => r.UserPasswordsId == userId)
         .ToListAsync();
 
       return Savings.Select(r =>
@@ -108,9 +108,6 @@ namespace WebAPI.DataStorage
 
     public async Task<IEnumerable<Income_Dto>> GetIncome(int userId)
     {
-
-
-
 
       return await (from ic in _context.Incomes
                     join io in _context.IncomeOptions on ic.IncomeOptionsId equals io.Id
