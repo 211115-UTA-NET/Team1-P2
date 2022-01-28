@@ -1,257 +1,361 @@
-<!-- Income options (View or Create) -->
-<div class="Display" style="float: left">
-    <p>
-        Income Manager
-    </p>
+<body>
+<div style="float: left">
+    <!-- Income options (View or Create) -->
+    <div class="Display">
+        <p>
+            Income Manager
+        </p>
 
-    <div class="ManagerItems">
-        <input type="button" id="viewIncome" value="My Income" (click)="getIncomes()">
-        <input type="button" id="createIncome" value="New Income">
+        <div class="ManagerItems">
+            <input type="button" id="viewIncome" value="My Income" (click)="getIncomes()">
+            <input type="button" id="createIncome" value="New Income" (click)="showIncome()">
+        </div>
+    </div>
+
+    <!-- Loan options (View or Create) -->
+    <div class="Display">
+        <p>
+            Loan Manager
+        </p>
+
+        <div class="ManagerItems">
+            <input type="button" id="viewLoan" value="My Loans" (click)="getLoans()">
+            <input type="button" id="createLoan" value="New Loan" (click)="showLoan()">
+        </div>
+    </div>
+
+    <!-- Savings options (View or Create) -->
+    <div class="Display">
+        <p>
+            Savings Manager
+        </p>
+
+        <div class="ManagerItems">
+            <input type="button" id="viewSavings" value="My Savings" (click)="getSavings()">
+            <input type="button" id="createSavings" value="New Savings" (click)="showSavings()">
+        </div>
+    </div>
+
+    <!-- Expense options (View or Create) -->
+    <div class="Display">
+        <p>
+            Expense Manager
+        </p>
+
+        <div class="ManagerItems">
+            <input type="button" id="viewExpense" value="My Expenses" (click)="getExpenses()">
+            <input type="button" id="createExpense" value="New Expense" (click)="showExpense()">
+        </div>
     </div>
 </div>
 
-<!-- Create new income -->
-<div class="Display" style = "float: right">
-    <p>
-        Enter your new<br>
-        income information!
-    </p>
+<div style="float: right">
+    <!-- Sign out -->
+    <div class="Display">
+        <p>
+            Welcome! {{userId}}
+        </p>
 
-    <form class="FormItems">
-        <div class="FormSubtext">
-            <label for="expenseName">Choose an income:</label>
+        <div class="ManagerItems">
+            <input type="button" id="sign-out" value="Logout" (click)="clearUser()">
+        </div>
+    </div>
+
+    <!-- Graph path -->
+    <div class="Display">
+        <p>
+            Check your savings graph!
+        </p>
+
+        <div class="ManagerItems">
+            <input type="button" id="viewGraph" value="View Graph" [routerLink]="['/savingsgraph']">
+        </div>
+    </div>
+
+    <!-- Create new income -->
+    <div class="Display" *ngIf="createIncome">
+        <p>
+            Enter your new<br>
+            income information!
+        </p>
+
+        <form class="FormItems">
+            <div class="FormSubtext">
+                <label for="expenseName">Choose an income type:</label>
+                <br>
+                <select id="incomeName" name="incomeName" [(ngModel)]='incomeId'>
+                    <option value="1">Wages</option>
+                    <option value="2">Salary</option>
+                    <option value="3">Commission</option>
+                    <option value="4">Interest</option>
+                    <option value="5">Selling</option>
+                    <option value="6">Investments</option>
+                    <option value="7">Gifts</option>
+                    <option value="8">Pocket Money</option>
+                    <option value="9">Lottery</option>
+                    <option value="10">Government</option>
+                </select>
+
+            </div>
+            <div class="FormSubtext">
+                <br>How much will<br>
+                you receive?
+            </div>
+            <input type="number" id="incomeAmount" name="incomeAmount" placeholder="$" min="1" [(ngModel)]='incomeAmount'>
             <br>
-            <select id="incomeName" name="incomeName" [(ngModel)]='incomeId'>
-                <option>[Incomes]</option>
-                <option value="1">Wages</option>
-                <option value="2">Salary</option>
-                <option value="3">Commission</option>
-                <option value="4">Interest</option>
-                <option value="5">Selling</option>
-                <option value="6">Investments</option>
-                <option value="7">Gifts</option>
-                <option value="8">Pocket Money</option>
-                <option value="9">Lottery</option>
-                <option value="10">Government</option>
-            </select>
-
-        </div>
-        <div class="FormSubtext">
-            <br>How much do<br>
-            you receive?
-        </div>
-        <input type="number" id="incomeAmount" name="incomeAmount" placeholder="$" min="1" [(ngModel)]='incomeAmount'>
-        <br>
-        <div class="FormSubtext">
-            <br>How frequent do you<br>
-            receive this income?<br>
-            (Enter '0' for one time pay)<br>
-        </div>
-        <input type="number" id="paySchedule" name="paySchedule" placeholder="(Monthly)" min="0" [(ngModel)]='paySchedule'>
-        <br><br>
-        <input type="submit" id="newIncome" value="Create income" type="reset" (click)='postIncome()'>
-    </form>
-</div>
-
-<!-- Loan options (View or Create) -->
-<div class="Display" style="float: right">
-    <p>
-        Loan Manager
-    </p>
-
-    <div class="ManagerItems">
-        <input type="button" id="viewLoan" value="My Loans" (click)="getLoans()">
-        <input type="button" id="createLoan" value="New Loan">
+            <div class="FormSubtext">
+                <br>How frequent do you<br>
+                receive this income monthly?<br>
+                (Enter '0' for one time pay)<br>
+            </div>
+            <input type="number" id="paySchedule" name="paySchedule" placeholder="(Monthly)" min="0" [(ngModel)]='paySchedule'>
+            <br><br>
+            <input type="submit" id="newIncome" value="Create income" type="reset" (click)='postIncome()'>
+        </form>
+        <p class="Error" *ngIf="incomePostError">
+            There was an issue<br>
+            creating your income.<br>
+            Please try again later.
+        </p>
+        <p class="Error" *ngIf="incomePostErrorForm">
+            You didn't fill out<br>
+            some sections of the form.<br>
+            Please ensure all sections<br>
+            are filled out before submission.
+        </p>
     </div>
-</div>
 
-<!-- Create new loan -->
-<div class="Display" style = "float: right">
-    <p>
-        Enter your new<br>
-        loan information!
-    </p>
+    <!-- Create new loan -->
+    <div class="Display" *ngIf="createLoan">
+        <p>
+            Enter your new<br>
+            loan information!
+        </p>
 
-    <form class="FormItems">
-        <div class="FormSubtext">
-            <br>Enter the name<br>
-            of your loan:
-        </div>
-        <input type="text" id="loanName" name="loanName" placeholder="Loan Name" minlength="1" [(ngModel)]='loanName'>
-        <br>
-        <div class="FormSubtext">
-            <br>How much is<br>
-            the loan?
-        </div>
-        <input type="number" id="loanAmount" name="loanAmount" placeholder="$" min="1" [(ngModel)]='loanAmount'>
-        <br>
-        <div class="FormSubtext">
-            <br>How much interest does<br>
-            this loan collect (%)?<br>
-        </div>
-        <input type="number" id="loanInterest" name="loanInterest" placeholder="%" min="0" [(ngModel)]='loanInterest'>
-        <div class="FormSubtext">
-            <br>How much do you<br>
-            pay on this loan?<br>
-        </div>
-        <input type="number" id="monthlyPayments" name="monthlyPayments" placeholder="$" min="0" [(ngModel)]='monthlyPayments'>
-        <br><br>
-        <input type="submit" id="newLoan" value="Create loan" type="reset" (click)='postLoan()'>
-    </form>
-</div>
-
-<!-- Savings options (View or Create) -->
-<div class="Display" style="float: left">
-    <p>
-        Savings Manager
-    </p>
-
-    <div class="ManagerItems">
-        <input type="button" id="viewSavings" value="My Savings" (click)="getSavings()">
-        <input type="button" id="createSavings" value="New Savings">
-    </div>
-</div>
-
-<!-- Create new savings -->
-<div class="Display" style = "float: right">
-    <p>
-        Enter your new<br>
-        savings information!
-    </p>
-
-    <form class="FormItems">
-        <div class="FormSubtext">
-            <br>Enter the name<br>
-            of your savings:
-        </div>
-        <input type="text" id="savingsName" name="savingsName" placeholder="Savings Name" minlength="1" [(ngModel)]='savingsName'>
-        <br>
-        <div class="FormSubtext">
-            <br>How much is<br>
-            in your savings?
-        </div>
-        <input type="number" id="savingsAmount" name="savingsAmount" placeholder="$" min="1" [(ngModel)]='savingsAmount'>
-        <br>
-        <div class="FormSubtext">
-            <br>How much interest does<br>
-            this savings collect (%)?<br>
-        </div>
-        <input type="number" id="savingsInterest" name="savingsInterest" placeholder="%" min="0" [(ngModel)]='savingsInterest'>
-        <div class="FormSubtext">
-            <br>How much do you<br>
-            add on your savings?<br>
-        </div>
-        <input type="number" id="addedMonthly" name="addedMonthly" placeholder="$" min="0" [(ngModel)]='addedMonthly'>
-        <br><br>
-        <input type="submit" id="newSavings" value="Create savings" type="reset" (click)='postSavings()'>
-    </form>
-</div>
-
-<!-- Expense options (View or Create) -->
-<div class="Display" style="float: left">
-    <p>
-        Expense Manager
-    </p>
-
-    <div class="ManagerItems">
-        <input type="button" id="viewExpense" value="My Expenses" (click)="getExpenses()">
-        <input type="button" id="createExpense" value="New Expense">
-    </div>
-</div>
-
-<!-- Create new expense -->
-<div class="Display" style = "float: right">
-    <p>
-        Enter your new<br>
-        expense information!
-    </p>
-
-    <form class="FormItems">
-        <div class="FormSubtext">
-            <label for="expenseName">Choose an expense:</label>
+        <form class="FormItems">
+            <div class="FormSubtext">
+                <br>Enter the name<br>
+                of your loan:
+            </div>
+            <input type="text" id="loanName" name="loanName" placeholder="Loan Name" minlength="1" [(ngModel)]='loanName'>
             <br>
-            <select id="expenseName" name="expenseName" [(ngModel)]='expenseId'>
-                <option>[Expenses]</option>
-                <option value="1">Housing/Rent</option>
-                <option value="2">Gas/Travel</option>
-                <option value="3">Insurance</option>
-                <option value="4">Groceries</option>
-                <option value="5">Utility</option>
-                <option value="6">Phone</option>
-                <option value="7">Pets</option>
-                <option value="8">Personal</option>
-                <option value="9">Memberships/Subscriptions</option>
-                <option value="10">Internet</option>
-            </select>
+            <div class="FormSubtext">
+                <br>How much do<br>
+                you owe?
+            </div>
+            <input type="number" id="loanAmount" name="loanAmount" placeholder="$" min="1" [(ngModel)]='loanAmount'>
+            <br>
+            <div class="FormSubtext">
+                <br>How much interest does<br>
+                this loan collect (%)?<br>
+            </div>
+            <input type="number" id="loanInterest" name="loanInterest" placeholder="%" min="0" [(ngModel)]='loanInterest'>
+            <div class="FormSubtext">
+                <br>How much do you<br>
+                pay on this loan monthly?<br>
+            </div>
+            <input type="number" id="monthlyPayments" name="monthlyPayments" placeholder="$" min="0" [(ngModel)]='monthlyPayments'>
+            <br><br>
+            <input type="submit" id="newLoan" value="Create loan" type="reset" (click)='postLoan()'>
+        </form>
+        <p class="Error" *ngIf="loanPostError">
+            There was an issue<br>
+            creating your loan.<br>
+            Please try again later.
+        </p>
+        <p class="Error" *ngIf="loanPostErrorForm">
+            You didn't fill out<br>
+            some sections of the form.<br>
+            Please ensure all sections<br>
+            are filled out before submission.
+        </p>
+    </div>
 
-        </div>
-        <div class="FormSubtext">
-            <br>How much does<br>
-            this expense cost?
-        </div>
-        <input type="number" id="expenseAmount" name="expenseAmount" placeholder="$" min="1" [(ngModel)]='expenseAmount'>
-        <div class="FormSubtext">
-            <br>How frequent does<br>
-            this expense occur?
-        </div>
-        <input type="number" id="expenseFrequency" name="expenseFrequency" placeholder="(Monthy)" min="1" [(ngModel)]='expenseFrequency'>
-        <br>
-        <div class="FormSubtext">
-            <br>How important is<br>
-            this expense?<br>
-            [1<sub><small>Very</small></sub> - 5<sub><small>Slightly</small></sub>]
-        </div>
-        <input type="number" id="expenseSeverity" name="expenseSeverity" placeholder="[1 - 5]" min="1" max="5" [(ngModel)]='expenseSeverity'>
-        <div class="FormSubtext">
-            <br>When does this<br>
-            expense expire?
-        </div>
-        <input type="date" id="expenseDate" name="expenseDate" [(ngModel)]='expenseDate'>
-        <br><br>
-        <input type="submit" id="newExpense" value="Create expense" type="reset" (click)='postExpense()'>
-    </form>
+    <!-- Create new savings -->
+    <div class="Display" *ngIf="createSavings">
+        <p>
+            Enter your new<br>
+            savings information!
+        </p>
+
+        <form class="FormItems">
+            <div class="FormSubtext">
+                <br>Enter the name<br>
+                of your savings:
+            </div>
+            <input type="text" id="savingsName" name="savingsName" placeholder="Savings Name" minlength="1" [(ngModel)]='savingsName'>
+            <br>
+            <div class="FormSubtext">
+                <br>How much is currently<br>
+                in your savings?
+            </div>
+            <input type="number" id="savingsAmount" name="savingsAmount" placeholder="$" min="1" [(ngModel)]='savingsAmount'>
+            <br>
+            <div class="FormSubtext">
+                <br>How much interest does<br>
+                this savings collect (%)?<br>
+            </div>
+            <input type="number" id="savingsInterest" name="savingsInterest" placeholder="%" min="0" [(ngModel)]='savingsInterest'>
+            <div class="FormSubtext">
+                <br>How much do you<br>
+                add to your savings monthly?<br>
+            </div>
+            <input type="number" id="addedMonthly" name="addedMonthly" placeholder="$" min="0" [(ngModel)]='addedMonthly'>
+            <br><br>
+            <input type="submit" id="newSavings" value="Create savings" type="reset" (click)='postSavings()'>
+        </form>
+        <p class="Error" *ngIf="savingsPostError">
+            There was an issue<br>
+            creating your savings.<br>
+            Please try again later.
+        </p>
+        <p class="Error" *ngIf="savingsPostErrorForm">
+            You didn't fill out<br>
+            some sections of the form.<br>
+            Please ensure all sections<br>
+            are filled out before submission.
+        </p>
+    </div>
+
+    <!-- Create new expense -->
+    <div class="Display" *ngIf="createExpense">
+        <p>
+            Enter your new<br>
+            expense information!
+        </p>
+
+        <form class="FormItems">
+            <div class="FormSubtext">
+                <label for="expenseName">Choose an expense:</label>
+                <br>
+                <select id="expenseName" name="expenseName" [(ngModel)]='expenseId'>
+                    <option value="1">Housing/Rent</option>
+                    <option value="2">Gas/Travel</option>
+                    <option value="3">Insurance</option>
+                    <option value="4">Groceries</option>
+                    <option value="5">Utility</option>
+                    <option value="6">Phone</option>
+                    <option value="7">Pets</option>
+                    <option value="8">Personal</option>
+                    <option value="9">Memberships/Subscriptions</option>
+                    <option value="10">Internet</option>
+                </select>
+
+            </div>
+            <div class="FormSubtext">
+                <br>How much does<br>
+                this expense cost?
+            </div>
+            <input type="number" id="expenseAmount" name="expenseAmount" placeholder="$" min="1" [(ngModel)]='expenseAmount'>
+            <div class="FormSubtext">
+                <br>How frequent does<br>
+                this expense occur monthly?
+            </div>
+            <input type="number" id="expenseFrequency" name="expenseFrequency" placeholder="(Monthy)" min="1" [(ngModel)]='expenseFrequency'>
+            <br>
+            <div class="FormSubtext">
+                <br>How important is<br>
+                this expense?<br>
+                [1<sub><small>Very</small></sub> - 5<sub><small>Slightly</small></sub>]
+            </div>
+            <input type="number" id="expenseSeverity" name="expenseSeverity" placeholder="[1 - 5]" min="1" max="5" [(ngModel)]='expenseSeverity'>
+            <div class="FormSubtext">
+                <br>When does this<br>
+                expense expire?
+            </div>
+            <input type="date" id="expenseDate" name="expenseDate" [(ngModel)]='expenseDate'>
+            <br><br>
+            <input type="submit" id="newExpense" value="Create expense" type="reset" (click)='postExpense()'>
+        </form>
+        <p class="Error" *ngIf="expensePostError">
+            There was an issue<br>
+            creating your expense.<br>
+            Please try again later.
+        </p>
+        <p class="Error" *ngIf="expensePostErrorForm">
+            You didn't fill out<br>
+            some sections of the form.<br>
+            Please ensure all sections<br>
+            are filled out before submission.
+        </p>
+    </div>
 </div>
 
-<!-- Display list of user expenses -->
-<ul class="expenseList">
-    <li *ngFor="let expense of expenses">
-        <p>=========================</p>
-        <p>Name: {{expense.userOptionsId}}</p>
-        <p>Amount: {{expense.expenseAmount}}</p>
-        <p>Frequency: {{expense.expenseFrequency}}</p>
-        <p>Ending: {{expense.expenseEnding}}</p>
-        <p>Priority: {{expense.priority}}</p>
-    </li>
-</ul>
+<div class="GetDisplay" *ngIf="getDisplay">
+    <!-- Display list of user expenses -->
+    <div class="expenseList" *ngIf="myExpense">
+        <p class="getTitle"><strong>Expenses:</strong></p>
+        <div *ngFor="let expense of expenses">
+            <p><strong>==============================</strong></p>
+            <p><strong>Name:</strong> {{expense.userOptionsId}}</p>
+            <p><strong>Amount:</strong> ${{expense.expenseAmount}}</p>
+            <p><strong>Frequency (Monthly):</strong> {{expense.expenseFrequency}}</p>
+            <p><strong>Ending:</strong> {{expense.expenseEnding}}</p>
+            <p><strong>Priority:</strong> {{expense.priority}}</p>
+            <button type="button" id="delete" (click)="deleteExpense(expense.id)">DELETE EXPENSE</button>
+        </div>
+    </div>
 
-<!-- Display list of user Incomes -->
-<ul class="incomeList">
-    <li *ngFor="let income of incomes">
-        <p>=========================</p>
-        <p>Name: {{income.incomeOptions}}</p>
-        <p>Amount: {{income.incomeAmount}}</p>
-        <p>Pay Schedule: {{income.paySchedule}}</p>
-    </li>
-</ul>
+    <p class="Error" *ngIf="expenseGetError">
+        There was an error<br>
+        retrieving your expenses.<br>
+        Please try again later.
+    </p>
 
-<!-- Display list of user Loans -->
-<ul class="loanList">
-    <li *ngFor="let loan of loans">
-        <p>=========================</p>
-        <p>Name: {{loan.loanName}}</p>
-        <p>Amount: {{loan.loanAmount}}</p>
-        <p>Interest: {{loan.loanInterest}}</p>
-        <p>Monthly Payments: {{loan.monthlyPayments}}</p>
-    </li>
-</ul>
+    <!-- Display list of user Incomes -->
+    <div class="incomeList" *ngIf="myIncome">
+        <p class="getTitle"><strong>Incomes:</strong></p>
+        <div *ngFor="let income of incomes">
+            <p><strong>==============================</strong></p>
+            <p><strong>Name:</strong> {{income.incomeOptions}}</p>
+            <p><strong>Amount:</strong> ${{income.incomeAmount}}</p>
+            <p>Paid every {{income.paySchedule}} week(s)</p>
+            <button type="button" id="delete" (click)="deleteIncome(income.id)">DELETE INCOME</button>
+        </div>
+    </div>
 
-<!-- Display list of user Savings -->
-<ul class="savingsList">
-    <li *ngFor="let saving of savings">
-        <p>=========================</p>
-        <p>Name: {{saving.savingsName}}</p>
-        <p>Amount: {{saving.savingsAmount}}</p>
-        <p>Interest: {{saving.savingsInterest}}</p>
-        <p>Added Monthly: {{saving.savingsAddedMonthly}}</p>
-    </li>
-</ul>
+    <p class="Error" *ngIf="incomeGetError">
+        There was an error<br>
+        retrieving your incomes.<br>
+        Please try again later.
+    </p>
+
+    <!-- Display list of user Loans -->
+    <div class="loanList" *ngIf="myLoan">
+        <p class="getTitle"><strong>Loans:</strong></p>
+        <div *ngFor="let loan of loans">
+            <p><strong>==============================</strong></p>
+            <p><strong>Name:</strong> {{loan.loanName}}</p>
+            <p><strong>Amount:</strong> ${{loan.loanAmount}}</p>
+            <p><strong>Interest:</strong> {{loan.loanInterest}}%</p>
+            <p><strong>Monthly Payment:</strong> ${{loan.monthlyPayments}}</p>
+            <button type="button" id="delete" (click)="deleteLoan(loan.id)">DELETE LOAN</button>
+        </div>
+    </div>
+
+    <p class="Error" *ngIf="loanGetError">
+        There was an error<br>
+        retrieving your loans.<br>
+        Please try again later.
+    </p>
+
+    <!-- Display list of user Savings -->
+    <div class="savingsList" *ngIf="mySavings">
+        <p class="getTitle"><strong>Savings:</strong></p>
+        <div *ngFor="let saving of savings">
+            <p><strong>==============================</strong></p>
+            <p><strong>Name:</strong> {{saving.savingsName}}</p>
+            <p><strong>Amount:</strong> ${{saving.savingsAmount}}</p>
+            <p><strong>Interest:</strong> {{saving.savingsInterest}}%</p>
+            <p><strong>Added Monthly:</strong> ${{saving.savingsAddedMonthly}}</p>
+            <button type="button" id="delete" (click)="deleteSavings(saving.id)">DELETE SAVINGS</button>
+        </div>
+    </div>
+
+    <p class="Error" *ngIf="savingsGetError">
+        There was an error<br>
+        retrieving your savings.<br>
+        Please try again later.
+    </p>
+</div>
+</body>
