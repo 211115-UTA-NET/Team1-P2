@@ -115,7 +115,9 @@ namespace WebAPI.Logic
             }
             reader.Close();
       await connection.CloseAsync();
+      {
       _logger.LogInformation("executed select statement for Income of user id {username}", username);
+      }
       return user;
         }
     }
