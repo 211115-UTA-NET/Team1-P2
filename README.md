@@ -33,7 +33,8 @@ Development:
 Data Handling:
 	UserData will be passed through the API as Http inputs to the server. Stored user data will only be accessible through Single Factor Authentication through the client. Input validation will be handled on the client side. Logic operations will be performed in the API after successfully accessing the database.
 
-	The Database currently has 5-6 Tables in mind with one-many and many-many connections. User Password information and user financial information will be in separate tables from the user information.
+The Database currently has 5-6 Tables in mind with one-many and many-many connections. User Password information and user financial information will be in separate tables from the user information.
+
 Timeline:
 Initial Build (5 days)
 Testing Phase 1 ( 3 days)
