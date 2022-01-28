@@ -75,7 +75,7 @@ namespace WebAPI.Logic
             }
         }
 
-        public decimal[] CalculateTotal(List<Expenses_Dto> Expenses, List<Income_Dto> Income, List<Loans_Dto> Loans, List<Savings_Dto> Savings)
+        public decimal[] CalculateTotal(IEnumerable<Expenses_Dto> Expenses, IEnumerable<Income_Dto> Income, IEnumerable<Loans_Dto> Loans, IEnumerable<Savings_Dto> Savings)
         {
             Array.Clear(List, 0, List.Length);
 
