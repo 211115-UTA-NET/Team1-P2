@@ -104,6 +104,11 @@ namespace WebAPI.Logic
                 addSaving(item);
             }
 
+            for(int i = 0; i < List.Length; i++)
+            {
+                List[i] = Math.Round(List[i], 2);
+            }
+
             return List;
 
         }
