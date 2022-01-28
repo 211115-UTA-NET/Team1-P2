@@ -1,3 +1,8 @@
+body
+{
+    margin-top: 150px;
+}
+
 .Display
 {
     font-family: 'Heebo', sans-serif;
@@ -9,9 +14,9 @@
     width: 400px;
     padding: 20px;
     padding-top: 20px;
-    margin: 93px;
+    margin: 90px;
     margin-top: 25px;
-    margin-bottom: 93px;
+    margin-bottom: 100px;
 }
 
 .FormItems input
@@ -43,4 +48,31 @@ select
     text-align: center;
     width: 200px;
     font-size: 20px;
+}
+
+.Error
+{
+    font-size: 20px;
+    color: darkred;
+}
+
+.GetDisplay
+{
+    font-family: 'Heebo', sans-serif;
+    font-weight: normal;
+    font-size: 20px;
+    text-align: left;
+    background-color: lightgreen;
+    border-radius: 20px;
+    width: 400px;
+    padding: 20px;
+    padding-top: 20px;
+    margin: 90px;
+    margin-top: 25px;
+    float:right;
+}
+
+.getTitle
+{
+    font-size: 25px;
 }

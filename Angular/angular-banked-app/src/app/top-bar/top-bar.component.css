@@ -2,9 +2,26 @@
 {
     font-family: 'Fira Sans Condensed', sans-serif;
     font-size: 75px;
+    margin-top: -6px;
+    margin-left: -10px;
+    text-indent: 15px;
     -webkit-text-stroke: 1px lightgreen;
     -webkit-text-fill-color: rgb(20, 75, 20);
     background-color: rgb(20, 75, 20);
-    position: sticky;
-    top: 0px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 5;
+}
+
+.image
+{
+    height: 100%;
+    background-size:cover;
+    width: 100%;
+    margin-left: -10px;
+    margin-top: -70px;
+    background-image: url("../../assets/images/Banked_4.png");
+    position: fixed;
+    z-index: -1;
 }

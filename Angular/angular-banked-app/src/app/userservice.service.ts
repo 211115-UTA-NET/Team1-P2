@@ -12,7 +12,7 @@ export class UesrServiceService {
   constructor(private http: HttpClient) { }
 
   getUser(username: string,password: string): Promise<IUser_Dto>{
-    return lastValueFrom(this.http.get<IUser_Dto>(`https://localhost:7106/api/User/${username}/${password}`)
+    return lastValueFrom(this.http.get<IUser_Dto>(`https://banked.azurewebsites.net/api/User/${username}/${password}`)
 //    .pipe(
 //      catchError(this.handleError)
 //      )
@@ -20,7 +20,7 @@ export class UesrServiceService {
   }
   //this.http.post<Hero>(this.heroesUrl, hero, httpOptions)
   SaveUser(user: IUser_Dto): Promise<any>{
-    return lastValueFrom(this.http.post<any>(`https://localhost:7106/api/User`,user)
+    return lastValueFrom(this.http.post<any>(`https://banked.azurewebsites.net/api/User`,user)
 //    .pipe(
 //      catchError(this.handleError)
 //      )

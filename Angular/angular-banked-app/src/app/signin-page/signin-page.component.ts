@@ -18,15 +18,19 @@ import { UesrServiceService } from '../userservice.service';
 @Injectable()
 export class SigninPageComponent implements OnInit {
   //private http: HttpClient
-  @Input()username: string = '';
-  @Input()password: string = '';
-  @Input()fname: string = '';
-  @Input()lname: string = '';
+  @Input()username!: string;
+  @Input()password!: string;
+  @Input()fname!: string;
+  @Input()lname!: string;
   
   user!: IUser_Dto;
   LoginMsg!: string;
 
-  constructor(private bankedService: BankedService,private router: Router,private uesrServiceService: UesrServiceService) { }
+  constructor(
+    private bankedService: BankedService,
+    private router: Router,
+    private uesrServiceService: UesrServiceService
+    ) { }
 
   public show:boolean = false;
 
@@ -35,7 +39,7 @@ export class SigninPageComponent implements OnInit {
 //    if (userO.id !=0)      this.router.navigateByUrl("/userpage");     
 //  }
   async CheckLogin(){
-    this.user= await this.uesrServiceService.getUser(this.username,this.password);
+    this.user = await this.uesrServiceService.getUser(this.username,this.password);
     //alert(this.user.id);
     if (this.user.id >0)
     {

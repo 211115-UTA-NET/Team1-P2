@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { lastValueFrom, Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -10,6 +10,8 @@ import { IUser_Dto } from './userInfo';
 import { Income } from './Income';
 import { Loan } from './Loans';
 import { Savings } from './Savings';
+import { Goal } from './Goal';
+import { GraphData } from './GraphData';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +22,10 @@ export class BankedService {
   private incomeUrl = 'Income'
   private loanUrl = 'Loans'
   private savingsUrl = 'Savings'
+  private goalUrl = '';
+  private reportUrl = "User/Report";
+
+  graphInfo: number[] = [];
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -82,6 +88,37 @@ export class BankedService {
 //      )
     );    
   }
+
+  //GET graph array
+  getGraph(userId: any): Observable<any> {
+    let params = new HttpParams().set('UserId', userId);
+    return this.http.get(environment.URLBase + this.reportUrl, {params})
+  }
+
+  //GET savings goal
+  getGoal(userId: any): Observable<Goal[]> {
+    return this.http.get<Goal[]>(environment.URLBase + this.goalUrl + "/" + userId)
+  }
+
+  //DELETE expense
+  deleteExpense(expense: number): Observable<any> {
+    return this.http.delete<any>(environment.URLBase + this.expenseUrl + "/" + expense)
+  }
+
+    //DELETE income
+  deleteIncome(income: number): Observable<any> {
+    return this.http.delete<any>(environment.URLBase + this.incomeUrl + "/" + income)
+    }
+
+    //DELETE loan
+  deleteLoan(loan: number): Observable<any> {
+    return this.http.delete<any>(environment.URLBase + this.loanUrl + "/" + loan)
+    }
+
+    //DELETE savings
+  deleteSavings(savings: number): Observable<any> {
+    return this.http.delete<any>(environment.URLBase + this.savingsUrl + "/" + savings)
+    }
 
   getUser(username: string,password: string): Observable<IUser_Dto> {
     return this.http.get<IUser_Dto>(environment.URLBase + `User/${username}/${password}`)

@@ -10,12 +10,14 @@ import { SigninPageComponent } from './signin-page/signin-page.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorService } from './interceptor.service';
+import { SavingsGraphComponent } from './savings-graph/savings-graph.component';
 @NgModule({
   declarations: [
     AppComponent,
     UserPageComponent,
     SigninPageComponent,
-    TopBarComponent
+    TopBarComponent,
+    SavingsGraphComponent
   ],
   imports: [
     BrowserModule,
@@ -24,6 +26,7 @@ import { InterceptorService } from './interceptor.service';
     RouterModule.forRoot([
       { path: '', component: SigninPageComponent },
       { path: 'userpage', component: UserPageComponent },
+      { path: 'savingsgraph', component: SavingsGraphComponent}
     ])
   ],
   providers: [
@@ -31,7 +34,8 @@ import { InterceptorService } from './interceptor.service';
     provide: HTTP_INTERCEPTORS,
     useClass: InterceptorService,
     multi: true
-    }
+    },
+    HttpClientModule
   ],
   bootstrap: [AppComponent]
 })
