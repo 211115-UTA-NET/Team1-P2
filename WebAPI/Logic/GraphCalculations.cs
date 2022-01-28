@@ -7,87 +7,102 @@ namespace WebAPI.Logic
 
     public class GraphCalculations
     {
+        decimal[] List = new decimal[104];
 
-        public static decimal CalculateTime(decimal N)
+        public decimal[] list
         {
-            decimal timeline = N /4;//4weeks is 1 month
-
-        return timeline;
+            get { return List; }
+            set { List = value; }
+        }
+        
+        public decimal CalculateTime(int N)
+        {
+            decimal timeline = (decimal)N / 4.00m; //4weeks is 1 month
+            return timeline;
         }
 
-        public static decimal[] CalculateTotal(IEnumerable<Expenses_Dto> Expenses, IEnumerable<Income_Dto> Income, IEnumerable<Loans_Dto> Loans, IEnumerable<Savings_Dto> Savings)
+        public void addExpense(Expenses_Dto item)
         {
-            //Array to collect data. Savings goal and Dates calculated in client. 104 Values is 2 years
-            decimal[] List = new decimal[105];
+            var day = DateTime.Now;
+            var endDate = item.ExpenseEnding;
+            decimal T = CalculateTime(item.ExpenseFrequency);
 
-            //Foreach loops to collect info, adding and subtracting from total as needed.
-            //while loops to iterate through each array item
-            int i = 0;
-            foreach (var item in Expenses)
+            for(int i = 0; i < List.Length; i++)
             {
-                var day = DateTime.Now;
-                var endDate = item.ExpenseEnding;
 
-                while(i <= 104 || day < endDate)
+                if(day < endDate)
                 {
-                    decimal T = CalculateTime((decimal)item.ExpenseFrequency);
-                    List[i] -= (decimal)item.ExpenseAmount * T;
-                    i++;
-                    day=day.AddDays(7);
+                    List[i] -= (i+1) * (item.ExpenseAmount * T);
+                    day.AddDays(1);
                 }
-                i = 0;
             }
+        }
 
+        public void addIncome(Income_Dto item)
+        {
+            decimal T = CalculateTime(item.PaySchedule);
 
-            foreach (var item in Income)
+            for(int i = 0; i < List.Length; i++)
             {
-                while(i <= 104)
+                List[i] += (i+1) * (item.IncomeAmount * T);
+            }
+        }
+
+        public void addLoan(Loans_Dto item)
+        {
+            for(int i = 3; i < List.Length; i += 4)
+            {
+                if(item.LoanAmount > 0)
                 {
-                    decimal T = CalculateTime((decimal)item.PaySchedule);
-                    List[i] += (decimal)item.IncomeAmount * T;
-                    i++;
-                }
-                i = 0;
-            }
-
-
-            //Savings and Loans only opperate monthly and have interest. Stopping loans at end of items or loan zero'd out
-            i = 3;
-            foreach (var item in Loans)
-            {
-            //    while(i <= 104)
-              //  {
-                    while(item.LoanAmount > 0 && i <= 104)
-                    {
-                        decimal interest = (((decimal)item.LoanAmount * ((decimal)item.LoanInterest) / 100) - (decimal)item.MonthlyPayments) / 4;
-
-                        List[i] += interest;
-
-                        item.LoanAmount -= interest;
-                        i++;//i += 4;
-                    } 
-//                }
-                i = 0;
-            }
-
-
-            i = 3;
-            foreach (var item in Savings)
-            {
-                while(i <= 104)
-                {
-                    decimal interest = (((decimal)item.SavingsAmount * ((decimal)item.SavingsInterest) / 100) + (decimal)item.SavingsAddedMonthly) / 4;
+                    decimal interest = ((item.LoanAmount * ((decimal)item.LoanInterest) / 100) - item.MonthlyPayments) / 4;
 
                     List[i] += interest;
 
-                    item.SavingsAmount += interest;
-                    i++;//i += 4;
-                }
+                    item.LoanAmount -= interest;
+                } 
+            }
+        }
 
+        public void addSaving(Savings_Dto item)
+        {
+            for(int i = 3; i < List.Length; i += 4)
+            {
+                decimal interest = ((item.SavingsAmount * ((decimal)item.SavingsInterest) / 100) + item.SavingsAddedMonthly) / 4;
+
+                List[i] += interest;
+
+                item.SavingsAmount += interest;
+            }
+        }
+
+        public decimal[] CalculateTotal(List<Expenses_Dto> Expenses, List<Income_Dto> Income, List<Loans_Dto> Loans, List<Savings_Dto> Savings)
+        {
+            Array.Clear(List, 0, List.Length);
+
+            for(int i = 0; i < List.Length; i++)
+            {
+                List[i] = 0;
             }
 
-      for (i = 0; i < List.Length; i++)
-        List[i] = Math.Round(List[i]);
+            foreach (var item in Expenses)
+            {
+                addExpense(item);
+            }
+
+            foreach (var item in Income)
+            {
+                addIncome(item);
+            }
+
+            foreach (var item in Loans)
+            {
+                addLoan(item);
+            }
+
+            foreach (var item in Savings)
+            {
+                addSaving(item);
+            }
 
             for(int i = 0; i < List.Length; i++)
             {
@@ -95,10 +110,6 @@ namespace WebAPI.Logic
             }
 
             return List;
-            
-
-
-           
 
         }
 
