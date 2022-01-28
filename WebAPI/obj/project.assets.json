@@ -5813,11 +5813,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\shaul\\Revature\\shaulBranch\\Team1-P2\\WebAPI\\WebAPI.csproj",
+      "projectUniqueName": "C:\\Users\\shaul\\Revature\\shaulBrancNew\\Team1-P2\\WebAPI\\WebAPI.csproj",
       "projectName": "WebAPI",
-      "projectPath": "C:\\Users\\shaul\\Revature\\shaulBranch\\Team1-P2\\WebAPI\\WebAPI.csproj",
+      "projectPath": "C:\\Users\\shaul\\Revature\\shaulBrancNew\\Team1-P2\\WebAPI\\WebAPI.csproj",
       "packagesPath": "C:\\Users\\shaul\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\shaul\\Revature\\shaulBranch\\Team1-P2\\WebAPI\\obj\\",
+      "outputPath": "C:\\Users\\shaul\\Revature\\shaulBrancNew\\Team1-P2\\WebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "F:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
