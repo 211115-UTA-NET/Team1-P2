@@ -43,3 +43,8 @@ input[type=submit]
     font-size: 20px;
     color: darkred;
 }
+
+.Success
+{
+    font-size: 30px;
+}

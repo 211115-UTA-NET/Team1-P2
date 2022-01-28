@@ -26,6 +26,8 @@ export class SigninPageComponent implements OnInit {
   user!: IUser_Dto;
   LoginMsg!: string;
   createError: boolean = false;
+  loginError: boolean = false;
+  createSuccess: boolean = false;
 
   constructor(
     private bankedService: BankedService,
@@ -35,31 +37,27 @@ export class SigninPageComponent implements OnInit {
 
   public show:boolean = false;
 
-  //CheckLoginApi(userO: IUser_Dto)
-  //{
-//    if (userO.id !=0)      this.router.navigateByUrl("/userpage");     
-//  }
   async CheckLogin(){
+    this.loginError = false;
     this.createError = false;
     this.user = await this.uesrServiceService.getUser(this.username,this.password);
-    //alert(this.user.id);
-    if (this.user.id >0)
+    if (this.user.id > 0 && this.username && this.password)
     {
       localStorage.setItem('fName', this.user.firstName.toString());
       localStorage.setItem('lName', this.user.firstName.toString());
       localStorage.setItem('userid', this.user.id.toString());
-      this.router.navigateByUrl("/userpage"); 
+      this.router.navigateByUrl("/userpage");
     }          
     else
     {  
-      //this.LoginMsg="User does not exists<br>try again."
-//      this.show=false;  
-      }
-//    this.bankedService.getUser(this.username,this.password)
-      //.subscribe(retObject => this.CheckLoginApi(retObject));  
+      this.loginError = true; 
+      this.createError = false;
+    }
   }
 
   async AddNewUser(){
+    this.createError = false;
+    this.createSuccess = false;
     this.user= {} as IUser_Dto;
     this.user.username=this.username;
     this.user.password=this.password;
@@ -72,6 +70,7 @@ export class SigninPageComponent implements OnInit {
       this.show = !this.show;
       localStorage.setItem('userid', this.user.id.toString());          
       var x = localStorage.getItem("userid");
+      this.createSuccess = true;
     }
     else
     {
