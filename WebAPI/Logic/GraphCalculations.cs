@@ -7,7 +7,7 @@ namespace WebAPI.Logic
 
     public class GraphCalculations
     {
-        private decimal[] List = new decimal[104];
+        decimal[] List = new decimal[104];
 
         public decimal[] list
         {
@@ -77,6 +77,7 @@ namespace WebAPI.Logic
 
         public decimal[] CalculateTotal(List<Expenses_Dto> Expenses, List<Income_Dto> Income, List<Loans_Dto> Loans, List<Savings_Dto> Savings)
         {
+            Array.Clear(List, 0, List.Length);
 
             for(int i = 0; i < List.Length; i++)
             {
