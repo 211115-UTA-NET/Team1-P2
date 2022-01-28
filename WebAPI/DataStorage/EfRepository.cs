@@ -75,9 +75,9 @@ namespace WebAPI.DataStorage
         v.Id = r.Id;
         v.UserPasswordId = r.UserPasswordsId;
         v.LoanName = r.LoanName;
-        v.LoanAmount = r.LoanAmount;
-        v.LoanInterest = r.LoanInterest;
-        v.MonthlyPayments = r.MonthlyPayments;
+        v.LoanAmount = (decimal)r.LoanAmount;
+        v.LoanInterest = (double)r.LoanInterest;
+        v.MonthlyPayments = (decimal)r.MonthlyPayments;
         return v;
       });
 
@@ -97,9 +97,9 @@ namespace WebAPI.DataStorage
         v.Id = r.Id;
         v.UserPassword = r.UserPasswordsId;
         v.SavingsName = r.SavingsName;
-        v.SavingsAmount = r.SavingsAmount;
-        v.SavingsInterest = r.SavingsInterest;
-        v.SavingsAddedMonthly = r.SavingsAddedMonthly;
+        v.SavingsAmount = (decimal)r.SavingsAmount;
+        v.SavingsInterest = (double)r.SavingsInterest;
+        v.SavingsAddedMonthly = (decimal)r.SavingsAddedMonthly;
         return v;
       });
 
@@ -120,8 +120,8 @@ namespace WebAPI.DataStorage
                       Id = ic.Id,
                       UserPasswordsId = ic.UserPasswordsId,
                       IncomeOptions = ic.IncomeOptionsId,
-                      IncomeAmount = ic.IncomeAmount,
-                      PaySchedule = ic.PaySchedule,
+                      IncomeAmount = (decimal)ic.IncomeAmount,
+                      PaySchedule = (int)ic.PaySchedule,
                       IncomeName = io.IncomeName,
                     }).ToListAsync();
 
@@ -142,8 +142,8 @@ namespace WebAPI.DataStorage
                       Id = ex.Id,
                       UserPassId = ex.UserPasswordsId,
                       UserOptionsId = ex.ExpenseOptionsId,
-                      ExpenseAmount = ex.ExpenseAmount,
-                      ExpenseFrequency = ex.EspenseFrequency,
+                      ExpenseAmount = (decimal)ex.ExpenseAmount,
+                      ExpenseFrequency = (int)ex.EspenseFrequency,
                       ExpenseEnding = ex.ExpenseEnding,
                       Priority = ex.SeverityOfNeed,
                       ExpenseName= eo.ExpenseName
@@ -322,7 +322,9 @@ public async Task DeleteExpense(int ID)
       IEnumerable<Savings_Dto> LSave = await this.GetSavings(UserId);
 
       _logger.LogInformation("function GetUserReport user id {userId}", UserId);
-      return GraphCalculations.CalculateTotal(LExp, LIncome, LLoan, LSave);
+
+      GraphCalculations G = new();
+      return G.CalculateTotal(LExp, LIncome, LLoan, LSave);
 
     }
 

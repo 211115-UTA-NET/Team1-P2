@@ -5807,24 +5807,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\shaul\\.nuget\\packages\\": {},
-    "F:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\schwe\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\shaul\\Revature\\shaulBrancNew\\Team1-P2\\WebAPI\\WebAPI.csproj",
+      "projectUniqueName": "C:\\Users\\schwe\\Revature\\Team1-P2\\WebAPI\\WebAPI.csproj",
       "projectName": "WebAPI",
-      "projectPath": "C:\\Users\\shaul\\Revature\\shaulBrancNew\\Team1-P2\\WebAPI\\WebAPI.csproj",
-      "packagesPath": "C:\\Users\\shaul\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\shaul\\Revature\\shaulBrancNew\\Team1-P2\\WebAPI\\obj\\",
+      "projectPath": "C:\\Users\\schwe\\Revature\\Team1-P2\\WebAPI\\WebAPI.csproj",
+      "packagesPath": "C:\\Users\\schwe\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\schwe\\Revature\\Team1-P2\\WebAPI\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "F:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\shaul\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\schwe\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

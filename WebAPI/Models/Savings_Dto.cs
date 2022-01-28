@@ -5,8 +5,8 @@ namespace WebAPI.Models
         public int Id { get; set; }
         public int? UserPassword { get; set; }
         public string? SavingsName { get; set; }
-        public decimal? SavingsAmount { get; set; }
-        public double? SavingsInterest { get; set; }
-        public decimal? SavingsAddedMonthly { get; set; }
+        public decimal SavingsAmount { get; set; }
+        public double SavingsInterest { get; set; }
+        public decimal SavingsAddedMonthly { get; set; }
     }
 }
