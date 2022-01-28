@@ -10,36 +10,43 @@ namespace WebAPI.Controllers
     [ApiController]
     public class SavingsController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
-        //public SavingsController(IConfiguration configuration)
-        //{
-        //    _configuration = configuration;
-        //}
-      private readonly ISavingsRepository _repository;
+      private readonly IRepositoryBank  _repository;
 
-      public SavingsController(ISavingsRepository repository)
+      public SavingsController(IRepositoryBank repository)
       {
         _repository = repository;
       }
 
+    [HttpDelete("{ID}")]
+    public async Task DeleteSavings(int ID)
+    {
+
+
+      await _repository.DeleteSavings(ID);
+
+    }
+
+
 
     //Getting a specific customer from the database
     [HttpGet("{userId}")]
-        public async Task<List<Savings_Dto>> GetSavings(int userId)
+        public async Task<IEnumerable<Savings_Dto>> GetSavings(int userId)
         {
 
 
             return await _repository.GetSavings(userId);
 
         }
-        //Need to create list value to add as input parameter containing all data required for expense input
-        [HttpPost]
-        public async Task PostSavings(List<Savings_Dto> savings)
-        {
+    //Need to create list value to add as input parameter containing all data required for expense input
+    [HttpPost]
+    public async Task PostSavings(List<Savings_Dto> savings)
+    {
       //      string connect = _configuration.GetSection("ConnectionString").GetSection("PrintShopDB").Value;
       // await using SqlConnection connection = new(connect);
 
-      await _repository.InputSavings(savings);
+      await _repository.PostSavings(savings);
     }
-    }
+
+
+  }
 }
