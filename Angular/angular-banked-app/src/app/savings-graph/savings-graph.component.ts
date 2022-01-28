@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Goal } from '../Goal';
 import { BankedService } from '../banked.service';
-import { GraphData } from '../GraphData';
 
 
 @Component({
@@ -13,7 +11,6 @@ export class SavingsGraphComponent implements OnInit {
 
   data: any[] = [];
   goal!: number;
-  savingsGoal: Goal[] = [];
   datetime!: string;
   datetimeArr: any[] = [];
   percents: any[] = [];

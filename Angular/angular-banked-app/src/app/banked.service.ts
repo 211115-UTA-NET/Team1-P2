@@ -10,7 +10,6 @@ import { IUser_Dto } from './userInfo';
 import { Income } from './Income';
 import { Loan } from './Loans';
 import { Savings } from './Savings';
-import { Goal } from './Goal';
 import { GraphData } from './GraphData';
 
 @Injectable({
@@ -93,11 +92,6 @@ export class BankedService {
   getGraph(userId: any): Observable<any> {
     let params = new HttpParams().set('UserId', userId);
     return this.http.get(environment.URLBase + this.reportUrl, {params})
-  }
-
-  //GET savings goal
-  getGoal(userId: any): Observable<Goal[]> {
-    return this.http.get<Goal[]>(environment.URLBase + this.goalUrl + "/" + userId)
   }
 
   //DELETE expense
